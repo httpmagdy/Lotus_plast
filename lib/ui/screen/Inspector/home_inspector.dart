@@ -1,0 +1,330 @@
+import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:lotus/Bloc/Controllers/Inspector/home_inspector_provider.dart';
+import 'package:lotus/Bloc/Controllers/slider_adds_controller.dart';
+import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/globalWidget/NoSomethingYet.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
+import 'package:lotus/ui/screen/Drawer/drawer_screen/drawer_screen.dart';
+import 'package:lotus/ui/screen/Inspector/ReportPreview_inspector.dart';
+import 'package:lotus/ui/widget/custom_appBar.dart';
+import 'package:lotus/ui/widget/custom_text.dart';
+import 'package:lotus/ui/widget/slider_adds.dart';
+import 'package:lotus/utils/constants.dart';
+import 'package:get/get.dart';
+import 'card_inspector.dart';
+import 'details_inspector_preview.dart';
+
+
+// class InspectBox extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       margin: const EdgeInsets.only(left: 5, right: 5, bottom: 10, top: 10),
+//       padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 17),
+//       // width: ScreenHelper.screenSize(context).width,
+//       decoration: BoxDecoration(
+//         borderRadius: BorderRadius.circular(8),
+//         color: ConstColors.WHITE,
+//         // border: Border.all(width: 0.8, color: Colors.grey.shade300),
+//         boxShadow: [
+//           BoxShadow(
+//             blurRadius: 8.0,
+//             spreadRadius: 0.4,
+//             offset: Offset(0.1, 2.4),
+//             color: ConstColors.GREY_COLOR.withOpacity(0.5),
+//           ),
+//         ],
+//       ),
+//       child: Column(
+//         children: [
+//           Row(
+//             children: [
+//               Image.asset(
+//                 'assets/img/ccc1.png', // ccc1
+//                 width: ScreenHelper.screenWidth(context, 60),
+//                 height: ScreenHelper.screenHeight(context, 60),
+//               ),
+//               CustomText(
+//                 padding: EdgeInsets.only(
+//                     right: ScreenHelper.screenWidth(context, 8)),
+//                 text: 'معاينه اليوم',
+//                 fontSize: ScreenHelper.screenFont(context, 20),
+//                 fontW: FW.bold,
+//               ),
+//             ],
+//           ),
+//           Padding(
+//             padding:
+//             EdgeInsets.only(right: ScreenHelper.screenWidth(context, 64)),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 CustomText(
+//                   padding: EdgeInsets.only(
+//                       bottom: ScreenHelper.screenWidth(context, 5),
+//                       top: ScreenHelper.screenWidth(context, 5)),
+//                   text: 'معلومات العميل',
+//                   fontSize: ScreenHelper.screenFont(context,  12.5),
+//                   fontW: FW.bold,
+//                   color: ConstColors.TEXT_GREY2,
+//                 ),
+//                 Row(
+//                   children: [
+//                     RowIconText(
+//                       text: 'يوسف علي',
+//                       textColor: ConstColors.TEXT_GREY2,
+//                     ),
+//                     SizedBox(width: ScreenHelper.screenWidth(context, 50)),
+//                     RowIconText(
+//                       text: '0122555222',
+//                       textColor: ConstColors.TEXT_GREY2,
+//                     ),
+//                   ],
+//                 ),
+//                 CustomText(
+//                   padding: EdgeInsets.only(
+//                       bottom: ScreenHelper.screenWidth(context, 5),
+//                       top: ScreenHelper.screenWidth(context, 10)),
+//                   text: 'معلومات السباك',
+//                   fontSize: ScreenHelper.screenFont(context,  12.5),
+//                   fontW: FW.bold,
+//                   color: ConstColors.TEXT_GREY2,
+//                 ),
+//                 Row(
+//                   children: [
+//                     RowIconText(
+//                       text: 'يوسف علي',
+//                       textColor: ConstColors.TEXT_GREY2,
+//                     ),
+//                     SizedBox(width: ScreenHelper.screenWidth(context, 50)),
+//                     RowIconText(
+//                       text: '0122555222',
+//                       textColor: ConstColors.TEXT_GREY2,
+//                     ),
+//                   ],
+//                 ),
+//               ],
+//             ),
+//           ),
+//           Spacer(),
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               RowIconText(
+//                 text: '9:00 ص',
+//                 textColor: ConstColors.TEXT_GREY2,
+//               ),
+//
+//               RowIconText(
+//                 text: '20/1/2020',
+//                 textColor: ConstColors.TEXT_GREY2,
+//               ),
+//               InkWell(
+//                 onTap: () {
+//                   Get.to(OpenLocationOnMsp());
+//                 },
+//                 child: Container(
+//                   height: 40,
+//                   width: 40,
+//                   decoration: BoxDecoration(
+//                     color: ConstColors.GREEN_COLOR,
+//                     borderRadius: BorderRadius.circular(10),
+//                   ),
+//                   child: Icon(
+//                     Icons.location_pin,
+//                     color: ConstColors.WHITE,
+//                     size: 20,
+//                   ),
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+class HomeInspector extends StatefulWidget {
+  @override
+  _HomeInspectorState createState() => _HomeInspectorState();
+}
+
+class _HomeInspectorState extends State<HomeInspector>
+    with SingleTickerProviderStateMixin {
+
+  final SliderAddsController _sliderAddsController =
+  Get.put(SliderAddsController());
+
+  final HomeInspectorProvider _home =
+  Get.put(HomeInspectorProvider());
+
+
+  final List<Widget> myTabs = [
+    Tab(
+      child: CustomText(
+        text: 'معاينات حالبه',
+      ),
+    ),
+    Tab(
+      child: CustomText(
+        text: 'معاينات مكتمله',
+      ),
+    ),
+  ];
+
+  TabController _tabController;
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+
+  // PushNotificationManger  _pushNotificationManger = PushNotificationManger();
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 2, vsync: this);
+    _tabController.addListener(_handleTabSelection);
+
+    // _pushNotificationManger.configureCallback();
+
+    super.initState();
+  }
+
+  _handleTabSelection() {
+    if (_tabController.indexIsChanging) {
+      setState(() {});
+    }
+  }
+
+  GetStorage _box = GetStorage();
+
+  @override
+  Widget build(BuildContext context) {
+
+    String _userName = _box.read('name');
+    return Scaffold(
+      drawer: EndDrawer(),
+      appBar: customAppBar(context: context),
+      body: GetX<HomeInspectorProvider>(
+          // init: HomeInspectorProvider(),
+          // initState: (state) => HomeCategoryCustomerProvider().homeCustomerProvider(),
+          builder: (controller){
+            print(' controller.homeLoading.value  ;;;;;;;;  ${controller.homeLoading.value}');
+            return controller.homeLoading.value
+                ? CustomLoading(bg: ConstColors.WHITE)
+                : ListView(
+              physics: BouncingScrollPhysics(),
+              children: <Widget>[
+                const SizedBox(height: 15),
+                CustomText(
+                  text: 'مرحبا !',
+                  padding: EdgeInsets.only(right: 15),
+                  fontSize: ScreenHelper.screenFont(context, 16),
+                ),
+                CustomText(
+                  text: '$_userName',
+                  fontW: FW.bold,
+                  fontSize: ScreenHelper.screenFont(context, 20),
+                  padding: EdgeInsets.only(right: 15, bottom: 15),
+                ),
+                // InspectBox(
+                //   onTap: () {
+                //     // Get.to(DetailsPreview()); /////////////
+                //   },
+                // ),
+                // const SizedBox(height: 10),
+                Padding(
+                  padding: const EdgeInsets.only(top: 15, bottom: 20),
+                  child: SliderAdds(
+                    slider: _sliderAddsController.sliderElement,
+                  ),
+                ),
+
+                // Container(
+                //   padding: EdgeInsets.symmetric(horizontal:  ScreenHelper.screenWidth(context, 10)),
+                //   height:  ScreenHelper.screenHeight(context, 285),
+                //   child: PageView(
+                //     scrollDirection: Axis.horizontal,
+                //     children: [
+                //       InkWell(
+                //         onTap: () {
+                //           Get.to(ReportPreviewInspector());
+                //         },
+                //         child: InspectBox(),
+                //       ),
+                //       InkWell(
+                //         onTap: () {
+                //           Get.to(ReportPreviewInspector());
+                //         },
+                //         child: InspectBox(),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+
+                const SizedBox(height: 20),
+                Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    TabBar(
+                      unselectedLabelColor: Colors.black,
+                      indicatorSize: TabBarIndicatorSize.label,
+                      indicatorColor: ConstColors.GREEN_COLOR,
+                      tabs: myTabs,
+                      controller: _tabController,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 0.6),
+                      child: Container(
+                        width: double.infinity,
+                        height: 1,
+                        color: ConstColors.GREY_COLOR.withOpacity(0.4),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: [
+                    controller.stillPreviews.length == 0 ?  NoSomethingYet(title: 'لا يوجد لديك معاينات حاليه!'):   ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => CardInspector(
+                        onTap: () {
+                          Get.to(ReportPreviewInspector(controller.stillPreviews[index]));
+                        },
+                        data: controller.stillPreviews[index],
+                      ),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10),
+                      itemCount: controller.stillPreviews.length,
+                    ),
+                    controller.completePreview.length == 0 ?  NoSomethingYet(title: 'لم تقم بأتمام اي معاينه بعد!'):  ListView.separated(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => CardInspector(
+                        onTap: () {
+                          Get.to(DetailsInspectorPreview(controller.completePreview[index]));
+                        },
+                        data: controller.completePreview[index],
+                      ),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 10),
+                      itemCount: controller.completePreview.length,
+                    ),
+                  ][_tabController.index],
+                ),
+                const SizedBox(height: 10),
+              ],
+            );
+          }
+      ),
+    );
+  }
+}

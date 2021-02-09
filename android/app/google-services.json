@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32464356823",
+    "project_id": "lutas-52df5",
+    "storage_bucket": "lutas-52df5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32464356823:android:4b92908904e4b7e4ad7792",
+        "android_client_info": {
+          "package_name": "com.creazyidea.lotus_plast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32464356823-uq5d97b2stgelbk3nbehv1s34266ghjt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIDM7Lh0JosVxMedIpteZw0XWGuFPJF3I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32464356823-uq5d97b2stgelbk3nbehv1s34266ghjt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
