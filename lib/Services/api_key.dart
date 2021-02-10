@@ -22,4 +22,7 @@ class ApiKey {
   static const String scanCouponQrURL = 'scan_coupon_qr';
   static const String createPlumberAccountURL = 'create_plumber_account';
   static const String sendRatePreviewURL = 'send_rate_preview';
+  static const String aboutURL = 'about';
+  static const String privacyURL = 'privacy';
+  static const String callusURL = 'callus';
 }

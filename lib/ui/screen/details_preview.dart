@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lotus/Bloc/Controllers/Inspector/send_rate_preview_preview.dart';
 import 'package:lotus/Bloc/models/home_customer_tabs_model.dart';
 import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
+import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
 import 'package:lotus/ui/globalWidget/rating_bar_w.dart';
 import 'package:lotus/ui/widget/custom_appBar.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/utils/constants.dart';
 import '../widget/custom_button.dart';
+import 'Inspector/details_inspector_preview.dart';
 
 class DetailsPreview extends StatelessWidget {
   final Allprview data;
-  DetailsPreview(this.data);
+  final onTapRate;
+  DetailsPreview({this.data, this.onTapRate});
+  final SendRatePreviewProvider _sendRatePreviewProvider = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +46,6 @@ class DetailsPreview extends StatelessWidget {
               //   name: '${data.date}',
               // ),
 
-
-
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -49,31 +54,54 @@ class DetailsPreview extends StatelessWidget {
                     title: 'اسم السباك',
                     name: '${data.pulmberName}',
                   ),
-
-                  data.isRating
-                      ? RatingBarWidget(
-                    rate: data.rate,
-                  )  : Container(),
-
+                  data.statusActive == 2
+                      ? data.isRating
+                          ? RatingBarWidget(
+                              rate: data.rate,
+                            )
+                          : SimpleCustomButton(
+                              text: "تقييم المعاينه",
+                              onTap: () {
+                                Get.dialog(
+                                  RatingDialog(
+                                      rating: (rating) {
+                                        print("RRRRRRRRRRRR  ::::   $rating");
+                                        _sendRatePreviewProvider.rate.value =
+                                            rating;
+                                      },
+                                      onTap: onTapRate),
+                                );
+                              },
+                              width: 95,
+                              height: 25,
+                              fontSize: ScreenHelper.screenFont(context, 11.0),
+                            )
+                      : Container(),
                 ],
               ),
               RowTextAndText(
                 title: 'رقم الهاتف',
                 name: '${data.pulmberPhone}',
               ),
-              data.customerName == null ? Container() : RowTextAndText(
-                title: 'اسم السباك',
-                name: '${data.customerName}',
-              ),
-              data.customerName == null ? Container() :     RowTextAndText(
-                title: 'رقم الهاتف',
-                name: '${data.customerPhone}',
-              ),
+              data.customerName == null
+                  ? Container()
+                  : RowTextAndText(
+                      title: 'اسم السباك',
+                      name: '${data.customerName}',
+                    ),
+              data.customerName == null
+                  ? Container()
+                  : RowTextAndText(
+                      title: 'رقم الهاتف',
+                      name: '${data.customerPhone}',
+                    ),
 
-              data.customerPhone2 == null ? Container() : RowTextAndText(
-                title: 'رقم الهاتف',
-                name: '${data.customerPhone2}',
-              ),
+              data.customerPhone2 == null
+                  ? Container()
+                  : RowTextAndText(
+                      title: 'رقم الهاتف',
+                      name: '${data.customerPhone2}',
+                    ),
 
               RowTextAndText(
                 title: 'تاريخ الاضافه',
@@ -102,22 +130,27 @@ class DetailsPreview extends StatelessWidget {
 
               RowTextAndText(
                 title: 'حاله الطلب',
-                name: '${data.statusActive != 0 ? data.statusActive == 1 ? "تم تحديد الموعد" : "تمت بنجاح" : "قيد التقديم"}',
+                name:
+                    '${data.statusActive != 0 ? data.statusActive == 1 ? "تم تحديد الموعد" : "تمت بنجاح" : "قيد التقديم"}',
               ),
 
               // Text("${data.statusActive}  ;;;; "),
 
-              data.message == null ? Container():  CustomText(
-                padding: EdgeInsets.only(left: 15, top: 20, bottom: 8),
-                text: 'وصف المعاينه',
-                fontW: FW.bold,
-                fontSize: ScreenHelper.screenFont(context, 13),
-              ),
-              data.message == null ? Container():         CustomText(
-                padding: EdgeInsets.only(left: 15),
-                text: '${data.message}',
-                fontSize: ScreenHelper.screenFont(context, 13),
-              ),
+              data.message == null
+                  ? Container()
+                  : CustomText(
+                      padding: EdgeInsets.only(left: 15, top: 20, bottom: 8),
+                      text: 'وصف المعاينه',
+                      fontW: FW.bold,
+                      fontSize: ScreenHelper.screenFont(context, 13),
+                    ),
+              data.message == null
+                  ? Container()
+                  : CustomText(
+                      padding: EdgeInsets.only(left: 15),
+                      text: '${data.message}',
+                      fontSize: ScreenHelper.screenFont(context, 13),
+                    ),
             ],
           ),
         ),
@@ -173,23 +206,22 @@ class RowTextAndText extends StatelessWidget {
               fontSize: ScreenHelper.screenFont(context, 13),
             ),
           ),
-
-        !isAddress ?  CustomText(
-            text: name,
-            fontSize: ScreenHelper.screenFont(context, 13),
-          ):
-
-          Column(
-            children: [
-              SizedBox(
-                width: ScreenHelper.screenSize(context).width *.65,
-                child:  CustomText(
+          !isAddress
+              ? CustomText(
                   text: name,
                   fontSize: ScreenHelper.screenFont(context, 13),
+                )
+              : Column(
+                  children: [
+                    SizedBox(
+                      width: ScreenHelper.screenSize(context).width * .65,
+                      child: CustomText(
+                        text: name,
+                        fontSize: ScreenHelper.screenFont(context, 13),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ],
       ),
     );

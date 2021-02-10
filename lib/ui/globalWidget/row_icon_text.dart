@@ -4,19 +4,21 @@ import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/utils/constants.dart';
 
 class RowIconText extends StatelessWidget {
-  final String text,iconName;
+  final String text, iconName;
   final textColor;
   final double textSize;
 
-  RowIconText({this.text, this.textColor,this.iconName, this.textSize});
+  RowIconText({this.text, this.textColor, this.iconName, this.textSize});
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Image.asset(
-          iconName != null ? 'assets/img/icons/$iconName.png': 'assets/img/icons/prof.png',
-          width: ScreenHelper.screenWidth(context, 15),
-          height: ScreenHelper.screenHeight(context, 15),
+          iconName != null
+              ? 'assets/img/icons/$iconName.png'
+              : 'assets/img/icons/prof.png',
+          width: ScreenHelper.screenWidth(context, 12),
+          height: ScreenHelper.screenHeight(context, 12),
         ),
         CustomText(
           padding: EdgeInsets.only(right: 5),

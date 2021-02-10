@@ -1,14 +1,17 @@
 import 'dart:io';
+import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' as getX;
 import 'package:get_storage/get_storage.dart';
 import 'package:lotus/ui/widget/custom_dialog.dart';
+import 'package:lotus/utils/internete_connectivty.dart';
 import 'api_key.dart';
 
 class NetworkService {
-  GetStorage _getStorage = GetStorage();
+  NWConnectivty _nWConnectivty = getX.Get.put(NWConnectivty());
 
+  GetStorage _getStorage = GetStorage();
 
   Dio dio = Dio();
 
@@ -22,35 +25,36 @@ class NetworkService {
     Map headers,
     bool hasHeader = false,
   }) async {
+    var result = await Connectivity().checkConnectivity();
+    bool isConnected = _nWConnectivty.showConnectivty(result);
 
-    var userToken = await _getStorage.read('apiToken');
-    print("userToken get >>>>>>>>>>>  $userToken");
+    if (isConnected) {
+      var userToken = await _getStorage.read('apiToken');
+      print("userToken get >>>>>>>>>>>  $userToken");
 
-    var response;
-    try {
+      var response;
+      try {
+        dio.options.baseUrl = ApiKey.baseURL;
+        response = await dio.get(
+          url,
+          options: Options(
+            headers:
+                hasHeader ? {'Authorization': 'Bearer $userToken'} : headers,
+          ),
+        );
+        print('response statusCode =============  ${response.statusCode}');
+      } on SocketException catch (error) {
+        print('not connected SocketException ............ ::: $error');
+      } on DioError catch (e) {
+        print('DioError <<:::>> $e');
 
-      dio.options.baseUrl = ApiKey.baseURL;
-      response = await dio.get(
-        url,
-        options: Options(
-          headers: hasHeader ? {
-            'Authorization':
-            'Bearer $userToken'
-          } : headers,
-        ),
-      );
-      print('response statusCode =============  ${response.statusCode}');
-    } on SocketException catch (error) {
-      print('not connected SocketException ............ ::: $error');
-    } on DioError catch (e) {
-      print('DioError <<:::>> $e');
-
-      if (e.response != null) {
-        response = e.response;
+        if (e.response != null) {
+          response = e.response;
+        }
       }
-    }
 
-    return handleResponse(response);
+      return handleResponse(response);
+    }
   }
 
   Future<Response> post({
@@ -60,37 +64,38 @@ class NetworkService {
     encoding,
     bool hasHeader = false,
   }) async {
-    var userToken = await _getStorage.read('apiToken');
-    print("userToken >>>> POST >>>>>>>  $userToken");
-    var response;
-    dio.options.baseUrl = ApiKey.baseURL;
-    try {
+    var result = await Connectivity().checkConnectivity();
+    bool isConnected = _nWConnectivty.showConnectivty(result);
 
-      response = await dio.post(
-        url,
-        data: body,
-        options: Options(
-          headers: hasHeader ? {
-            'Authorization':
-            'Bearer $userToken'
-          } : headers,
-          requestEncoder: encoding,
-        ),
-      );
+    if (isConnected) {
+      var userToken = await _getStorage.read('apiToken');
+      print("userToken >>>> POST >>>>>>>  $userToken");
+      var response;
+      dio.options.baseUrl = ApiKey.baseURL;
+      try {
+        response = await dio.post(
+          url,
+          data: body,
+          options: Options(
+            headers:
+                hasHeader ? {'Authorization': 'Bearer $userToken'} : headers,
+            requestEncoder: encoding,
+          ),
+        );
 
-      print('response statusCode =============  ${response.statusCode}');
+        print('response statusCode =============  ${response.statusCode}');
+      } on DioError catch (e) {
+        print('DioError <<:: 2 ::>> $e');
 
-    } on DioError catch (e) {
-      print('DioError <<:: 2 ::>> $e');
-
-      if (e.response != null) {
-        response = e.response;
+        if (e.response != null) {
+          response = e.response;
+        }
+      } on SocketException catch (error) {
+        print('not connected ::: $error');
       }
-    } on SocketException catch (error) {
-      print('not connected ::: $error');
-    }
 
-    return handleResponse(response);
+      return handleResponse(response);
+    }
   }
 
   Response handleResponse(Response response) {

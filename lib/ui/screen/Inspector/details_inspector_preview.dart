@@ -15,12 +15,11 @@ import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/utils/constants.dart';
 
 class DetailsInspectorPreview extends StatelessWidget {
+  // final SendRatePreviewProvider _sendRatePreviewProvider =
+  //     Get.put(SendRatePreviewProvider());
 
-  final SendRatePreviewProvider _sendRatePreviewProvider =
-      Get.put(SendRatePreviewProvider());
-
-  final HomeInspectorProvider _homeInspectorProvider =
-      Get.put(HomeInspectorProvider());
+  // final HomeInspectorProvider _homeInspectorProvider =
+  //     Get.put(HomeInspectorProvider());
 
   final Complete data;
   DetailsInspectorPreview(this.data);
@@ -52,53 +51,19 @@ class DetailsInspectorPreview extends StatelessWidget {
               //   name: '${data.date}',
               // ),
 
-
-
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-
                   RowTextAndText(
                     title: 'اسم السباك',
                     name: '${data.pulmberPhone}',
                   ),
-
                   data.isRating
                       ? RatingBarWidget(
-                    rate: data.rate,
-                  )
-                      : SimpleCustomButton(
-                    text: "تقييم المعاينه",
-                    onTap: () {
-                      Get.dialog(
-                        RatingDialog(
-                          rating: (rating) {
-                            print("RRRRRRRRRRRR  ::::   $rating");
-
-                            _sendRatePreviewProvider.rate.value = rating;
-                          },
-                          onTap: () async {
-                            Get.dialog(CustomLoading(loadingText: "جار ارسال تقييمك"));
-                            await _sendRatePreviewProvider
-                                .sendRatePreview(data.id)
-                                .then((value) {
-                              _homeInspectorProvider.homeInspector().whenComplete(() {
-                                Get.back();
-                                Get.back();
-                                Get.back();
-                                customSnackBar(title: "تقييم المعاينه",
-                                  body: "تم تقييم المعاينه بنجاح",);
-                              });
-                            });
-                          },
-                        ),
-                      );
-                    },
-                    width: 95,
-                    height: 25,
-                    fontSize: ScreenHelper.screenFont(context, 11.0),
-                  ),
+                          rate: data.rate,
+                        )
+                      : Container(),
                 ],
               ),
 
@@ -106,21 +71,24 @@ class DetailsInspectorPreview extends StatelessWidget {
                 title: 'رقم السباك',
                 name: '${data.pulmberPhone}',
               ),
-              data.customerName== null?  Container():RowTextAndText(
-                title: 'اسم العميل',
-                name: '${data.customerName}',
-              ),
-              data.customerName== null?  Container(): RowTextAndText(
-                title: 'رقم الهاتف',
-                name: '${data.customerPhone}',
-              ),
-              data.customerPhone2 == null?  Container(): RowTextAndText(
-                title: 'رقم الهاتف 2',
-                name: '${data.customerPhone2}',
-              ),
-
-
-
+              data.customerName == null
+                  ? Container()
+                  : RowTextAndText(
+                      title: 'اسم العميل',
+                      name: '${data.customerName}',
+                    ),
+              data.customerName == null
+                  ? Container()
+                  : RowTextAndText(
+                      title: 'رقم الهاتف',
+                      name: '${data.customerPhone}',
+                    ),
+              data.customerPhone2 == null
+                  ? Container()
+                  : RowTextAndText(
+                      title: 'رقم الهاتف 2',
+                      name: '${data.customerPhone2}',
+                    ),
 
               // Row(
               //   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -152,7 +120,7 @@ class DetailsInspectorPreview extends StatelessWidget {
               RowTextAndText(
                 title: 'تاريخ الاضافه',
                 name: '${data.addedDate}',
-              ) ,
+              ),
               RowTextAndText(
                 title: 'وقت الاضافه',
                 name: '${data.time}',
@@ -166,7 +134,6 @@ class DetailsInspectorPreview extends StatelessWidget {
                 name: '${data.addedTime}',
               ),
 
-
               RowTextAndText(
                 isAddress: true,
                 title: 'العنوان',
@@ -175,7 +142,8 @@ class DetailsInspectorPreview extends StatelessWidget {
 
               RowTextAndText(
                 title: 'حاله الطلب',
-                name: '${data.statusActive == 0 ? "قيد التقديم" : "تم الاصلاح"}',
+                name:
+                    '${data.statusActive == 0 ? "قيد التقديم" : "تم الاصلاح"}',
               ),
 
               CustomText(
@@ -225,29 +193,27 @@ class RowTextAndText extends StatelessWidget {
               fontSize: ScreenHelper.screenFont(context, 13),
             ),
           ),
-
-          !isAddress ?  CustomText(
-            text: name,
-            fontSize: ScreenHelper.screenFont(context, 13),
-          ):
-
-          Column(
-            children: [
-              SizedBox(
-                width: ScreenHelper.screenSize(context).width *.65,
-                child:  CustomText(
+          !isAddress
+              ? CustomText(
                   text: name,
                   fontSize: ScreenHelper.screenFont(context, 13),
+                )
+              : Column(
+                  children: [
+                    SizedBox(
+                      width: ScreenHelper.screenSize(context).width * .65,
+                      child: CustomText(
+                        text: name,
+                        fontSize: ScreenHelper.screenFont(context, 13),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ],
       ),
     );
   }
 }
-
 
 class RatingDialog extends StatelessWidget {
   final onTap;

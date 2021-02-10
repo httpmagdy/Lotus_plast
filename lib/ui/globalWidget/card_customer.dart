@@ -39,12 +39,10 @@ class CardCustomer extends StatelessWidget {
     //   }
     // }
 
-
-
     Widget activationStatus() {
       if (activation == 0) {
         return StatusW(activation);
-      } else if(activation == 2) {
+      } else if (activation == 2) {
         if (data.isRating) {
           return RatingBarWidget(
             rate: data.rate,
@@ -52,7 +50,7 @@ class CardCustomer extends StatelessWidget {
         } else {
           return StatusW(activation);
         }
-      }else if(activation == 1){
+      } else if (activation == 1) {
         return Container(
           decoration: BoxDecoration(
             // color: ConstColors.GREY_COLOR.withOpacity(0.16),
@@ -62,15 +60,13 @@ class CardCustomer extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 1.5, horizontal: 8),
           child: CustomText(
             padding: EdgeInsets.only(right: 5),
-            text: "تم تحديد الموعد" ,
-            color:   ConstColors.MAIN_COLOR,
+            text: "تم تحديد الموعد",
+            color: ConstColors.MAIN_COLOR,
             fontSize: ScreenHelper.screenFont(context, 11),
           ),
         );
       }
     }
-
-
 
     return GestureDetector(
       onTap: onTap,
@@ -117,7 +113,6 @@ class CardCustomer extends StatelessWidget {
                     ],
                   ),
                   // const SizedBox(width: 80),
-
 
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,

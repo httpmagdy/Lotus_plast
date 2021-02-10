@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/widget/custom_appBar.dart';
@@ -9,7 +6,7 @@ import 'package:lotus/utils/constants.dart';
 import '../../Bloc/models/home_customer_tabs_model.dart';
 
 class DetailsMaintenance extends StatelessWidget {
-  final  data;
+  final Allprview data;
   DetailsMaintenance(this.data);
 
   @override

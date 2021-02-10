@@ -58,9 +58,10 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
   Widget build(BuildContext context) {
     _inspectorProvider.previewId.value = widget.data.id;
 
+    var node = FocusScope.of(context);
 
-
-    print("::::::::::: widget.data.pulmberName :::::: ${widget.data.customerPhone}");
+    print(
+        "::::::::::: widget.data.pulmberName :::::: ${widget.data.customerPhone}");
 
     return Scaffold(
       appBar: customAppBar(
@@ -98,14 +99,14 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        widget.data.customerName == null ? Container() : WidgetDetals(
-                          typeNamed: "العميل",
-                          name: "${widget.data.customerName}",
-                          phone: "${widget.data.customerPhone}",
-                        ),
-
-
-                         WidgetDetals(
+                        widget.data.customerName == null
+                            ? Container()
+                            : WidgetDetals(
+                                typeNamed: "العميل",
+                                name: "${widget.data.customerName}",
+                                phone: "${widget.data.customerPhone}",
+                              ),
+                        WidgetDetals(
                           haveEdit: true,
                           onEdit: () {
                             Get.to(EditDataInfoPlumber());
@@ -114,11 +115,10 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
                           name: "${widget.data.pulmberName}",
                           phone: "${widget.data.pulmberPhone}",
                         ),
-
-                        RowTextW(title: "التاريخ",body: "${widget.data.date}"),
-                        RowTextW(title: "الوقت",body: "${widget.data.time}"),
-                        RowTextW(title: "العنوان",body: "${widget.data.address}"),
-
+                        RowTextW(title: "التاريخ", body: "${widget.data.date}"),
+                        RowTextW(title: "الوقت", body: "${widget.data.time}"),
+                        RowTextW(
+                            title: "العنوان", body: "${widget.data.address}"),
                         const SizedBox(height: 20),
                         SizedBox(
                           width: ScreenHelper.screenSize(context).width - 50,
@@ -177,61 +177,57 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
               SizedBox(
                 height: ScreenHelper.screenHeight(context, 15),
               ),
-
-
               AnimatedSwitcher(
-                duration: Duration(milliseconds:600),
-
-                child: !checkedValue ? Container(
-                  key: UniqueKey(),
-                ) : Column(
-                  key: UniqueKey(),
-
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Stack(
-                      children: [
-                        Form(
-                          key: desKey,
-                          child: CustomTextField(
-                            horizentalPadding: 25,
-                            maxLines: 2,
-                            verticalPadding: 14,
-                            hint: "وصف المعاينه",
-                            controller: _inspectorProvider.desController,
-                            errorMessage: "يجب ادخال وصف للمعاينه",
+                duration: Duration(milliseconds: 600),
+                child: !checkedValue
+                    ? Container(
+                        key: UniqueKey(),
+                      )
+                    : Column(
+                        key: UniqueKey(),
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Form(
+                                key: desKey,
+                                child: CustomTextField(
+                                  horizentalPadding: 25,
+                                  maxLines: 2,
+                                  verticalPadding: 14,
+                                  hint: "وصف المعاينه",
+                                  controller: _inspectorProvider.desController,
+                                  errorMessage: "يجب ادخال وصف للمعاينه",
+                                ),
+                              ),
+                              Positioned(
+                                top: ScreenHelper.screenHeight(context, 12),
+                                left: ScreenHelper.screenWidth(context, 12),
+                                child: InkWell(
+                                  onTap: getImage,
+                                  child: _image == null
+                                      ? Icon(
+                                          Icons.camera_alt_outlined,
+                                          size: ScreenHelper.screenSize(context)
+                                                  .width *
+                                              0.060,
+                                          color: ConstColors.FORM_COLOR,
+                                        )
+                                      : SelectedCameraImage(image: _image),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Positioned(
-                          top: ScreenHelper.screenHeight(context, 12),
-                          left: ScreenHelper.screenWidth(context, 12),
-                          child: InkWell(
-                            onTap: getImage,
-                            child: _image == null
-                                ? Icon(
-                              Icons.camera_alt_outlined,
-                              size: ScreenHelper.screenSize(context)
-                                  .width *
-                                  0.060,
-                              color: ConstColors.FORM_COLOR,
-                            )
-                                : SelectedCameraImage(image: _image),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                        ],
+                      ),
               ),
-
-
-
               SizedBox(
                 height: ScreenHelper.screenHeight(context, 25),
               ),
               SimpleCustomButton(
                 text: "ارسل التقرير",
                 onTap: () async {
+                  node.unfocus();
                   if (checkedValue == false) {
                     customSnackBar(
                         title: "اتمام المعاينه",
@@ -281,7 +277,6 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
   }
 }
 
-
 class RowTextW extends StatelessWidget {
   final body, title;
 
@@ -304,7 +299,7 @@ class RowTextW extends StatelessWidget {
                 ),
               ),
               Container(
-                width: ScreenHelper.screenSize(context).width *.65,
+                width: ScreenHelper.screenSize(context).width * .65,
                 child: CustomText(
                   text: "$body",
                   fontSize: ScreenHelper.screenFont(context, 12),
@@ -319,7 +314,6 @@ class RowTextW extends StatelessWidget {
     );
   }
 }
-
 
 class WidgetDetals extends StatelessWidget {
   final String typeNamed, name, phone;
@@ -343,7 +337,6 @@ class WidgetDetals extends StatelessWidget {
             children: [
               SizedBox(
                 width: 75,
-
                 child: CustomText(
                   text: "اسم $typeNamed",
                   fontSize: ScreenHelper.screenFont(context, 12),
@@ -373,7 +366,6 @@ class WidgetDetals extends StatelessWidget {
             children: [
               SizedBox(
                 width: 75,
-
                 child: CustomText(
                   text: "رقم الهاتف",
                   fontSize: ScreenHelper.screenFont(context, 12),
@@ -388,7 +380,6 @@ class WidgetDetals extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 15),
-
         ],
       ),
     );

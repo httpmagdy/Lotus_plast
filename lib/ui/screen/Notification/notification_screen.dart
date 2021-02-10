@@ -43,17 +43,20 @@ class NotificationCard extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: ScreenHelper.screenHeight(context, 15),
-              vertical: ScreenHelper.screenWidth(context, 15),
-            ),            child: Row(
+              horizontal: 15,
+              vertical: 15,
+            ),
+            child: Row(
               children: [
-
                 CircleAvatar(
                   backgroundColor: ConstColors.WHITE.withOpacity(.8),
                   // backgroundImage: AssetImage("assets/img/tab4.png"),
-                  child:  Icon(Icons.notifications_none_sharp, size: 24, color: ConstColors.ORANGE_COLOR,),
+                  child: Icon(
+                    Icons.notifications_none_sharp,
+                    size: 24,
+                    color: ConstColors.ORANGE_COLOR,
+                  ),
                 ),
-
                 SizedBox(
                   width: ScreenHelper.screenWidth(context, 12),
                 ),
@@ -61,7 +64,7 @@ class NotificationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: ScreenHelper.screenSize(context).width *.7,
+                      width: ScreenHelper.screenSize(context).width * .65,
                       child: CustomText(
                         text: "اشعار جديد",
                         fontW: FW.semibold,
@@ -69,19 +72,17 @@ class NotificationCard extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      width: ScreenHelper.screenSize(context).width *.7,
+                      width: ScreenHelper.screenSize(context).width * .65,
                       padding: EdgeInsets.only(bottom: 8),
                       child: CustomText(
-                        text: "يوجد  معاينة جديدة في منمعاينة جديدة ف جديدة ف جديدة في منمعاينة جمنمعاينة جديدة في منطقة قريبة منك ",
+                        text:
+                            "يوجد  معاينة جديدة في منم عاينة جديدة ف جديدة ف جديدة في منمع اينة جمنم عاينة جديدة في منطقة قريبة منك ",
                         // fontSize: 12,
                         color: ConstColors.TEXT_GREY2,
                       ),
-
                     ),
-
                   ],
                 ),
-
               ],
             ),
           ),
@@ -92,7 +93,7 @@ class NotificationCard extends StatelessWidget {
             ),
             child: CustomText(
               text: " 09:20 AM ",
-               color: ConstColors.TEXT_GREY2.withOpacity(.5),
+              color: ConstColors.TEXT_GREY2.withOpacity(.5),
               fontSize: 10,
             ),
           ),

@@ -61,7 +61,7 @@ class EndDrawer extends StatelessWidget {
                       icon: "assets/img/icons/aicon3.png",
                       text: "اتصل بنا",
                       sizePadding: 53,
-                      press: () => Get.to(CallUs(),
+                      press: () => Get.to(CallUsScreen(),
                           transition: Transition.leftToRight,
                           duration: Duration(milliseconds: 100)),
                     ),

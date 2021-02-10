@@ -14,9 +14,6 @@ import 'ui/screen/auth_Screens/welcome_screen.dart';
 import 'Bloc/Controllers/firebase_notifications.dart';
 import 'utils/constants.dart';
 
-
-
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -57,7 +54,8 @@ app(box, logged) async {
 }
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
+
 // app()async{
 //   var _seen =  await box.read("onBoarding");
 //   print("BOOOOOOOOOOOOOOOOOOOOOOOX :: $_seen");
@@ -74,25 +72,34 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
-
-
-
-
-
-
   final PushNotificationManger _pushNotificationManger =
       PushNotificationManger();
+  // StreamSubscription subscription;
 
   @override
   void initState() {
-
-
     _pushNotificationManger.configureCallback();
     _pushNotificationManger.localNotification();
+    // subscription = Connectivity().onConnectivityChanged.listen(showConnectivty);
+
     super.initState();
   }
 
+  // showConnectivty(ConnectivityResult result) {
+  //   bool hasIntenet = result != ConnectivityResult.none;
+
+  //   if (hasIntenet) {
+  //     return 'u have internet';
+  //   } else {
+  //     return 'u have no internet';
+  //   }
+  // }
+
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  //   subscription.cancel();
+  // }
   @override
   Widget build(BuildContext context) {
     // print("BOOOOOOOOOOOOOOOOOOOOOOOX :: ${box.read("onBoarding")}");
@@ -128,30 +135,26 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-
-
-
-//
 // class ConnectivtyPage extends StatefulWidget {
 //   @override
 //   _ConnectivtyPageState createState() => _ConnectivtyPageState();
 // }
-//
+
 // class _ConnectivtyPageState extends State<ConnectivtyPage> {
 //   StreamSubscription subscription;
-//
+
 //   @override
 //   void initState() {
 //     super.initState();
 //     subscription = Connectivity().onConnectivityChanged.listen(showConnectivty);
 //   }
-//
+
 //   @override
 //   void dispose() {
 //     super.dispose();
 //     subscription.cancel();
 //   }
-//
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -159,16 +162,17 @@ class _MyAppState extends State<MyApp> {
 //         child: FlatButton(
 //             onPressed: () async {
 //               var result = await Connectivity().checkConnectivity();
-//               showConnectivty(result);
+//               var f = showConnectivty(result);
+//               print(f);
 //             },
 //             child: Text('Connectivty')),
 //       ),
 //     );
 //   }
-//
+
 //   showConnectivty(ConnectivityResult result) {
 //     bool hasIntenet = result != ConnectivityResult.none;
-//
+
 //     if (hasIntenet) {
 //       return 'u have internet';
 //     } else {
