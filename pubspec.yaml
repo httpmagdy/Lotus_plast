@@ -41,7 +41,11 @@ dependencies:
   firebase_analytics:
   connectivity:
   flutter_local_notifications:
-
+  firebase_auth:
+  sms_autofill:
+  firebase_core:
+  pin_code_fields:
+  flare_flutter:
 dev_dependencies:
   flutter_native_splash:
   flutter_test:

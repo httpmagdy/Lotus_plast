@@ -1,12 +1,23 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_verification_code/flutter_verification_code.dart';
+import 'package:get/get.dart';
 import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
 import 'package:lotus/ui/widget/custom_button.dart';
 import 'package:lotus/utils/constants.dart';
 
 import '../../ui/widget/header.dart';
 
 class VerifyScreen extends StatefulWidget {
+final  String phone;
+final  Function onSuccess;
+final String validationCode;
+final User user;
+
+  VerifyScreen(
+      {this.phone, this.onSuccess, this.validationCode, this.user});
+
   @override
   _VerifyScreenState createState() => _VerifyScreenState();
 }
@@ -16,8 +27,11 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   TextEditingController _phoneController;
   bool passwordSecure = false;
-  String currentText;
-  bool isVerify = false;
+  String code;
+  bool onEditing = false;
+  bool isFinished = false;
+  Function onSuccess;
+  bool isVerify = true;
 
   @override
   void initState() {
@@ -84,39 +98,8 @@ class _VerifyScreenState extends State<VerifyScreen> {
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 50),
                         ),
-//                        PinCodeTextField(
-//                          length: 6,
-//                          obscureText: true,
-//                          animationType: AnimationType.fade,
-//                          pinTheme: PinTheme(
-//                            shape: PinCodeFieldShape.box,
-//                            borderRadius: BorderRadius.circular(5),
-//                            fieldHeight: 50,
-//                            fieldWidth: 40,
-//                            activeFillColor: Colors.white,
-//                          ),
-//                          animationDuration: Duration(milliseconds: 300),
-//                          backgroundColor: Colors.blue.shade50,
-//                          enableActiveFill: true,
-////                          errorAnimationController: errorController,
-////                          controller: textEditingController,
-//                          onCompleted: (v) {
-//                            print("Completed");
-//                          },
-//                          onChanged: (value) {
-//                            print(value);
-//                            setState(() {
-//                              currentText = value;
-//                            });
-//                          },
-//                          beforeTextPaste: (text) {
-//                            print("Allowing to paste $text");
-//                            //if you return true then it will show the paste confirmation dialog. Otherwise if false, then nothing will happen.
-//                            //but you can show anything you want here, like your pop up saying wrong paste format or etc
-//                            return true;
-//                          },
-//                        ),
-                        PhoneVerify(context),
+//
+                        phoneVerify(context),
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 50),
                         ),
@@ -141,55 +124,93 @@ class _VerifyScreenState extends State<VerifyScreen> {
     );
   }
 
-  void submit() {
+  Widget phoneVerify(BuildContext context) {
+
+    return VerificationCode(
+
+      textStyle: Theme.of(context).textTheme.headline2.copyWith(
+          fontSize: ScreenHelper.screenFont(context, 25),
+
+          color: isVerify ? ConstColors.MAIN_COLOR : Colors.red),
+
+      keyboardType: TextInputType.number,
+
+      autofocus: true,
+
+      length: 6,
+      // clearAll is NOT required, you can delete it
+      // takes any widget, so you can implement your design
+      clearAll: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          'clear all',
+          style: TextStyle(
+              fontSize: 14.0,
+              decoration: TextDecoration.underline,
+              color: Colors.blue[700]),
+        ),
+      ),
+
+      onCompleted: (String value) {
+        setState(() {
+          code = value;
+        });
+      },
+
+      onEditing: (bool value) {
+        setState(() {
+          onEditing = value;
+        });
+      },
+
+    );
+  }
+
+  void submit(BuildContext context) async {
     if (_globalKey.currentState.validate()) {
       _globalKey.currentState.save();
 
-      print("user name or phonr is >> ${_phoneController.text}");
-    }
-  }
+      // storedEmail = _emailController.text.trim();
+      print('validate success');
+      print('field1 is ${code}');
 
-  Widget PhoneVerify(BuildContext context) {
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: VerificationCode(
-        autofocus: true,
-        textStyle: Theme.of(context).textTheme.headline1.copyWith(
-            fontSize: ScreenHelper.screenFont(context, 25),
-            color: isVerify ? ConstColors.BLACK_COLOR : ConstColors.MAIN_COLOR),
-//      keyboardType: TextInputType.number,
-//      itemDecoration: BoxDecoration(
-//          border: Border(
-//              bottom: BorderSide(
-//                  width: 2, color: isVerify ? ConstColors.MAIN_COLOR : Colors.red))),
-        length: 6,
-        underlineColor: ConstColors.MAIN_COLOR,
-        itemSize: ScreenHelper.screenWidth(context, 45),
+      setState(() {
+        isVerify = false;
+        isFinished = true;
+      });
 
-        // clearAll is NOT required, you can delete it
-        // takes any widget, so you can implement your design
-        clearAll: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            'clear all',
-            style: TextStyle(
-                fontSize: 14.0,
-                decoration: TextDecoration.underline,
-                color: Colors.blue[100],
-            ),
-          ),
-        ),
-        onCompleted: (String value) {
-          setState(() {
-            currentText = value;
-          });
-        },
-        onEditing: (bool value) {
-          setState(() {
-            isVerify = value;
-          });
-        },
-      ),
-    );
+      Get.dialog(CustomLoading());
+
+      try {
+        await widget.onSuccess(widget.validationCode, code);
+      } catch (e) {
+        Get.back();
+        print(e);
+      }
+
+      // TODO handel login method
+    } else {}
   }
 }
+
+
+
+
+//
+// return PinFieldAutoFill(
+// // decoration: // UnderlineDecoration, BoxLooseDecoration or BoxTightDecoration see https://github.com/TinoGuo/pin_input_text_field for more info,
+// currentCode: currentText ,// prefill with a code
+// onCodeSubmitted: (String value) {
+// setState(() {
+// currentText = value;
+// });
+// },
+// // onCodeChanged: (value) {
+// //     setState(() {
+// //       isVerify = value;
+// //     });
+// //   },
+// // onCodeSubmitted: //code submitted callback
+// // onCodeChanged: //code changed callback
+// // codeLength: //code length, default 6
+// );

@@ -1,22 +1,23 @@
-import 'dart:async';
-import 'package:connectivity/connectivity.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'Bloc/Controllers/Auth_Controllers/Phone_Auth/vreify.dart';
 import 'ui/onboarding/onboarding_screen.dart';
 import 'ui/screen/Customer/home_customer.dart';
 import 'ui/screen/Inspector/home_inspector.dart';
 import 'ui/screen/Plumber/home_screen.dart';
 import 'ui/screen/auth_Screens/welcome_screen.dart';
 import 'Bloc/Controllers/firebase_notifications.dart';
+import 'ui/screen/verify_screen.dart';
 import 'utils/constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp();
   GetStorage box = GetStorage("onBoarding");
   GetStorage logged = GetStorage();
 
@@ -128,8 +129,8 @@ class _MyAppState extends State<MyApp> {
       // home: NavigationScreen(),
       // home: VerifyScreen(),
       // home: ReportDamageScreen(),
-      home: homeScreen,
-      // home: ConnectivtyPage(),
+      // home: homeScreen,
+      home:PhoneVerificationScreen("+20 01092341428"),
       // home: CustomLoading(),
     );
   }
@@ -180,3 +181,6 @@ class _MyAppState extends State<MyApp> {
 //     }
 //   }
 // }
+
+
+
