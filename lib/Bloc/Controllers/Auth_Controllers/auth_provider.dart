@@ -9,43 +9,35 @@ class AuthProvider{
 
   final GetStorage userInfoStorage = GetStorage();
 
-
   final GetStorage howToOpen = GetStorage();
 
+  void getUserType(int type, int isActive){
 
-  // app()async{
-  //   var _seen = await  howToOpen.read("typeUser");
-  //
-  //   if(_seen == null){
-  //
-  //
-  //
-  //     return  WelcomeScreen();
-  //
-  //   }else if(_seen == true){
-  //
-  //
-  //     return OnBoardingScreen();
-  //
-  //
-  //
-  //   }
-  //
-  //
-  // }
-
-  void getUserType(int type){
     print('dataResponse.typeUser ::::: ${type}');
 
-    if(type == 0){
-      Get.offAll(HomeScreenPlumber());
-    }else if(type == 1){
-      Get.offAll(HomeCustomer());
-    }else if(type == 2){
-      Get.offAll(HomeInspector());
+    print('isActive... $isActive');
+
+
+    if(isActive == 0){
+
+      print('Is Not Active ::::: Please Verify your Phone... $isActive'  );
+
     }else{
 
+      print('Verify Phone Successful... $isActive');
+
+      if(type == 0){
+        Get.offAll(HomeScreenPlumber());
+      }else if(type == 1){
+        Get.offAll(HomeCustomer());
+      }else if(type == 2){
+        Get.offAll(HomeInspector());
+      }else{
+
+      }
     }
+
+
   }
 
    void saveUserInfoStorage(UserInfo userInfo){

@@ -30,7 +30,7 @@ class LoginProvider extends GetxController {
       print('dataResponse.typeUser ::::: ${dataResponse}');
 
       if (dataResponse != null) {
-        _authProvider.getUserType(dataResponse.typeUser);
+        _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
         _authProvider.saveUserInfoStorage(dataResponse);
         passwordController.clear();
         usernameController.clear();

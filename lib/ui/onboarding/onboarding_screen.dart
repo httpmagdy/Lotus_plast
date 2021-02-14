@@ -18,28 +18,10 @@ class OnBoardingScreen extends StatefulWidget {
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   int _currentPage = 0;
-  // int _currentScreen = 0;
+
   final PageController _pageController = PageController(initialPage: 0);
 
   GetStorage box = GetStorage("onBoarding");
-
-  @override
-  void initState() {
-    super.initState();
-//    Timer.periodic(Duration(seconds: 3), (Timer timer) {
-//      if (_currentPage < 2) {
-//        _currentPage++;
-//      } else {
-//        _currentPage=0;
-//      }
-//
-//      _pageController.animateToPage(
-//        _currentPage,
-//        duration: Duration(milliseconds: 300),
-//        curve: Curves.easeIn,
-//      );
-//    });
-  }
 
   @override
   void dispose() {
@@ -69,70 +51,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               index: i,
             ),
           ),
-//          Padding(
-//            padding: EdgeInsets.only(
-//              bottom: ScreenHelper.screenHeight(context, 200),
-//            ),
-//            child: Align(
-//              alignment: Alignment.bottomCenter,
-//              child: Row(
-//                mainAxisAlignment: MainAxisAlignment.center,
-//                children: [
-//                  for (int i = 0; i < 4; i++)
-//                    Padding(
-//                      padding: EdgeInsets.symmetric(
-//                          horizontal: ScreenHelper.screenWidth(context, 2.5)),
-//                      child: OnBoardingDot(
-//                        isActive: i == _currentPage,
-//                      ),
-//                    ),
-//                ],
-//              ),
-//            ),
-//          ),
-//          Padding(
-//            padding: EdgeInsets.only(
-//              bottom: ScreenHelper.screenHeight(context, 37),
-//            ),
-//            child: Padding(
-//              padding: EdgeInsets.symmetric(
-//                  horizontal: ScreenHelper.screenWidth(context, 86)),
-//              child: Align(
-//                alignment: Alignment.bottomCenter,
-//                child: Container(
-//                  height: ScreenHelper.screenHeight(context, 100),
-//                  child: Column(
-//                    children: [
-//                      SizedBox(
-//                        height: ScreenHelper.screenHeight(context, 16),
-//                      ),
-//                      GestureDetector(
-//                        onTap: () {
-//                          if (_currentPage < 3) {
-//                            _pageController.animateToPage(
-//                              3,
-//                              duration: Duration(milliseconds: 500),
-//                              curve: Curves.easeIn,
-//                            );
-//                          } else {
-////                            Get.offAll(SignUpScreen());
-//                          }
-//                        },
-//                        child: Text(
-//                          _currentPage < 3
-//                              ? "Skip for now"
-//                              : "register new account",
-//                          style: Theme.of(context).textTheme.caption.copyWith(
-//                              color: GREY_COLOR,
-//                              fontSize: ScreenHelper.screenFont(context, 14)),
-//                        ),
-//                      )
-//                    ],
-//                  ),
-//                ),
-//              ),
-//            ),
-//          ),
+
           Padding(
             padding: EdgeInsets.symmetric(
                 vertical: ScreenHelper.screenHeight(context, 30),

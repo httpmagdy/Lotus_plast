@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lotus/Bloc/Controllers/Auth_Controllers/Phone_Verify_Provider/phone_auth_provider.dart';
+import 'file:///D:/CI_PROJECTS/lotus_plast/lib/ui/screen/auth_Screens/vreify_phone_screen.dart';
 import 'package:lotus/Bloc/Controllers/Auth_Controllers/register.dart';
 import 'package:lotus/Bloc/Controllers/get_status.dart';
 import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
 import 'package:lotus/ui/widget/circle_button.dart';
 import 'package:lotus/ui/widget/custom_text_field.dart';
 import 'package:lotus/ui/widget/state_area.dart';
@@ -31,8 +34,7 @@ List<UserType> types = [
 class SignUpScreen extends StatelessWidget {
   final RegisterProvider _registerProvider = Get.put(RegisterProvider());
   final StatusProvider _statusProvider = Get.put(StatusProvider());
-
-  final bool _keyboardState = false;
+  final PhoneVerifyPhoneProvider _verifyPhoneProvider = Get.put(PhoneVerifyPhoneProvider());
 
   @override
   Widget build(BuildContext context) {
@@ -286,6 +288,7 @@ class SignUpScreen extends StatelessWidget {
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 25),
                         ),
+
                         CustomTextField(
                           hint: "رقم البطاقة",
                           controller:
@@ -294,6 +297,7 @@ class SignUpScreen extends StatelessWidget {
                             node.unfocus();
                           },
                         ),
+
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 100),
                         ),
@@ -339,11 +343,7 @@ class SignUpScreen extends StatelessWidget {
               ],
             ),
           ),
-          _keyboardState
-              ? SizedBox(
-                  height: 0,
-                )
-              : Padding(
+          Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: ScreenHelper.screenWidth(context, 25),
                       vertical: ScreenHelper.screenHeight(context, 50)),
@@ -353,10 +353,42 @@ class SignUpScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CircleButton(
-                          onTap: () {
+                          onTap: () async {
+
                             node.unfocus();
-                            _registerProvider.register();
-                            // Get.offAll(LayoutPage ());
+
+
+                      await _registerProvider.register().then((value) {
+
+                              if(value != null){
+
+                                print("MAKE => Verify !!!");
+
+                                 _verifyPhoneProvider.verifyPhoneNumber(_registerProvider.phoneController.text).then((val) {
+
+                                   print("VALue => Id :::: $val");
+
+                                      if (val != null ) {
+
+                                        print("SEND Code Is Done !!!");
+
+                                        Get.to(PhoneVerificationScreen("${_registerProvider.phoneController.text}"));
+
+                                      }
+
+                                });
+
+                              }else{
+                                print("NOT => Sign Up !!!");
+
+                              }
+
+                            });
+
+
+
+
+
                           },
                         ),
                       ],

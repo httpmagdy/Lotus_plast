@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:lotus/Bloc/models/user_info.dart';
 import 'package:lotus/Bloc/repository/register_repo.dart';
 import 'package:lotus/ui/globalWidget/custom_loading.dart';
-
 import 'auth_provider.dart';
 
 class RegisterProvider extends GetxController {
@@ -25,7 +24,7 @@ class RegisterProvider extends GetxController {
 
   final RegisterRepo registerRepo = RegisterRepo();
 
-  void register() async {
+  Future register() async {
 
     print('${nameController.text}');
     print('${passwordController.text}');
@@ -57,9 +56,13 @@ class RegisterProvider extends GetxController {
       );
 
       if (dataResponse != null) {
-        _authProvider.getUserType(dataResponse.typeUser);
-        _authProvider.saveUserInfoStorage(dataResponse);;
+
+         _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
+        _authProvider.saveUserInfoStorage(dataResponse);
+
       }
+
+      return dataResponse;
 
     }
 

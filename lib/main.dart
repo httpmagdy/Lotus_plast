@@ -5,7 +5,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'Bloc/Controllers/Auth_Controllers/Phone_Auth/vreify.dart';
+import 'ui/screen/auth_Screens/vreify_phone_screen.dart';
 import 'ui/onboarding/onboarding_screen.dart';
 import 'ui/screen/Customer/home_customer.dart';
 import 'ui/screen/Inspector/home_inspector.dart';
@@ -31,21 +31,38 @@ var homeScreen;
 app(box, logged) async {
   var _seen = await box.read("onBoarding");
   var _logged = await logged.read("typeUser");
+  var _isVerify = await logged.read("phoneVerify");
 
   print("Sen On Boarding :: $_seen");
   print("Is Logged :: $_logged");
 
   if (_seen == null) {
     homeScreen = OnBoardingScreen();
+
   } else if (_seen == true) {
+
     if (_logged != null) {
-      if (_logged == 0) {
-        homeScreen = HomeScreenPlumber();
-      } else if (_logged == 1) {
-        homeScreen = HomeCustomer();
-      } else if (_logged == 2) {
-        homeScreen = HomeInspector();
-      } else {}
+
+      print("(main) verify is $_isVerify ");
+
+      if(_isVerify == 0){
+
+        homeScreen = WelcomeScreen();
+
+        print(" In file (main) verify is No $_isVerify ");
+
+      }else{
+
+        if (_logged == 0) {
+          homeScreen = HomeScreenPlumber();
+        } else if (_logged == 1) {
+          homeScreen = HomeCustomer();
+        } else if (_logged == 2) {
+          homeScreen = HomeInspector();
+        } else {}
+
+      }
+
     } else {
       print(
           'NOT AUTH ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ $_logged');
@@ -129,8 +146,8 @@ class _MyAppState extends State<MyApp> {
       // home: NavigationScreen(),
       // home: VerifyScreen(),
       // home: ReportDamageScreen(),
-      // home: homeScreen,
-      home:PhoneVerificationScreen("+20 01092341428"),
+      home: homeScreen,
+      // home:PhoneVerificationScreen("+20 01092341428"),
       // home: CustomLoading(),
     );
   }
