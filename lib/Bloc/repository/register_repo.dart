@@ -13,6 +13,7 @@ class RegisterRepo extends NetworkService {
       'identification_number': register.identificationNumber,
       'type_user': register.typeUser,
       'city_id': register.cityId,
+      'device_token': register.deviceToken,
     });
 
     print('REGISTER => statusCode : ${_request.statusCode}');
@@ -36,8 +37,9 @@ class RegisterModel {
       password,
       stateId,
       cityId,
-      identificationNumber
-      ;
+      identificationNumber, deviceToken;
+
+
   int typeUser;
 
   RegisterModel({
@@ -48,6 +50,7 @@ class RegisterModel {
     this.cityId,
     this.identificationNumber,
     this.typeUser,
+    this.deviceToken,
 
   });
 }

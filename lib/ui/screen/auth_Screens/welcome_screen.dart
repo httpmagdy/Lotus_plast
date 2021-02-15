@@ -61,7 +61,7 @@ class WelcomeScreen extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.only(
-              bottom: ScreenHelper.screenHeight(context, 50),
+              bottom: 30,
               left: ScreenHelper.screenWidth(context, 30),
               right: ScreenHelper.screenWidth(context, 30),
             ),

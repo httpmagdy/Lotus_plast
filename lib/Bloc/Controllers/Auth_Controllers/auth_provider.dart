@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lotus/Bloc/models/user_info.dart';
@@ -11,14 +12,54 @@ class AuthProvider{
 
   final GetStorage howToOpen = GetStorage();
 
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+
+  // RxString deviceToken = "".obs;
+
+  Future<String> getDeviceToken()async{
+
+    String _token = await _firebaseMessaging.getToken();
+
+    // deviceToken.value = _token;
+    // update();
+
+    print("=======(device token)========> $_token");
+
+    return _token;
+
+  }
+
+
+  getUserTypeVerified(){
+
+    var  typeUser = userInfoStorage.read("typeUser");
+
+    print('typeUser Verified ::::: $typeUser');
+
+
+    if(typeUser == 0){
+      Get.offAll(HomeScreenPlumber());
+    }else if(typeUser == 1){
+      Get.offAll(HomeCustomer());
+    }else if(typeUser == 2){
+      Get.offAll(HomeInspector());
+
+    }else{
+
+    }
+
+  }
+
   void getUserType(int type, int isActive){
 
     print('dataResponse.typeUser ::::: ${type}');
 
     print('isActive... $isActive');
 
+    var  phoneVerify = userInfoStorage.read("phoneVerify");
 
-    if(isActive == 0){
+    if(isActive == 0 && phoneVerify == 0){
 
       print('Is Not Active ::::: Please Verify your Phone... $isActive'  );
 

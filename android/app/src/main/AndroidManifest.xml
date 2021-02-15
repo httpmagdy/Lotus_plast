@@ -9,11 +9,25 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+<!--    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <!-- has been added .Application for FCB firebase -->
     <application
         android:name=".Application"
         android:label="lotus_plast"
         android:icon="@mipmap/ic_launcher">
+        <provider
+            android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
+            android:authorities="${applicationId}.flutter_downloader.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCAJyGep7H7biytZ9_YgRLa0eb0d5sQ7OY"/>
         <activity

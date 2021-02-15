@@ -17,15 +17,23 @@ class LoginProvider extends GetxController {
   final LoginRepo loginRepo = LoginRepo();
 
   Future login() async {
+    String dToken = await _authProvider.getDeviceToken();
+
+    print('dToken In Login ::::: ${dToken}');
+
     if (!globalKeyLogin.currentState.validate()) {
     } else {
+
       Get.dialog(
         CustomLoading(),
       );
 
+
+
+
       globalKeyLogin.currentState.save();
       var dataResponse = await loginRepo.loginRepo(
-        LoginModel(usernameController.text, passwordController.text),
+        LoginModel(usernameController.text, passwordController.text, dToken),
       );
       print('dataResponse.typeUser ::::: ${dataResponse}');
 

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/widget/custom_appBar.dart';
 import 'package:lotus/ui/widget/custom_button.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 class ShowProductsScreen extends StatelessWidget {
   final bool haveAppbar;
@@ -41,7 +44,25 @@ class ShowProductsScreen extends StatelessWidget {
             ),
             SimpleCustomButton(
               text: 'تنزيل الملف',
-              onTap: () {},
+              onTap: () async{
+
+                final status = await Permission.storage.request();
+                if(status.isGranted){
+                  final externalDir = await getExternalStorageDirectory();
+
+                  final id = await FlutterDownloader.enqueue(
+                    url:
+                    "https://firebasestorage.googleapis.com/v0/b/storage-3cff8.appspot.com/o/2020-05-29%2007-18-34.mp4?alt=media&token=841fffde-2b83-430c-87c3-2d2fd658fd41",
+                    savedDir: externalDir.path,
+                    fileName: "download",
+                    showNotification: true,
+                    openFileFromNotification: true,
+                  );
+
+                }
+
+
+              },
               // bgColor: ConstColors.GREEN_COLOR,
             ),
           ],

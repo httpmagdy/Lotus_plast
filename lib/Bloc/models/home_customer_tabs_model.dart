@@ -8,11 +8,7 @@ HomeCustomerModel homeCustomerModelFromJson(String str) =>
     HomeCustomerModel.fromJson(json.decode(str));
 
 class HomeCustomerModel {
-  HomeCustomerModel({
-    this.prviewToday,
-    this.allprview,
-    this.alldamages,p
-  });
+  HomeCustomerModel({this.prviewToday, this.allprview, this.alldamages, p});
 
   final List<dynamic> prviewToday;
   final List<Allprview> allprview;
@@ -53,7 +49,7 @@ class Allprview {
     this.statusActive,
     this.isRating,
     this.addedDate,
-this.addedTime,
+    this.addedTime,
   });
 
   final int id;
@@ -75,7 +71,6 @@ this.addedTime,
   final String addedDate;
   final String addedTime;
 
-
   factory Allprview.fromJson(Map<dynamic, dynamic> json) => Allprview(
         id: json["id"] == null ? null : json["id"],
         customerName:
@@ -89,15 +84,16 @@ this.addedTime,
             json["pulmber_phone"] == null ? null : json["pulmber_phone"],
         date: json["date"] == null ? null : json["date"],
         time: json["time"] == null ? null : json["time"],
-        rate: json["rate"] == null ? null : double.parse(json["rate"].toString()),
+        rate:
+            json["rate"] == null ? null : double.parse(json["rate"].toString()),
         description: json["description"] == null ? null : json["description"],
         image: json["image"] == null ? null : json["image"],
         statusActive:
             json["status_active"] == null ? null : json["status_active"],
         isRating: json["is_rating"] == null ? null : json["is_rating"],
-    addedDate: json["added_date"] == null ? null : json["added_date"],
-    addedTime: json["added_time"] == null ? null : json["added_time"],
-    message: json["message"] == null ? null : json["message"],
-    damageType: json["damage_type"] == null ? null : json["damage_type"],
+        addedDate: json["added_date"] == null ? null : json["added_date"],
+        addedTime: json["added_time"] == null ? null : json["added_time"],
+        message: json["message"] == null ? null : json["message"],
+        damageType: json["damage_type"] == null ? null : json["damage_type"],
       );
 }

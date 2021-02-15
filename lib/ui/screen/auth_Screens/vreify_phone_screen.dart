@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus/Bloc/Controllers/Auth_Controllers/Phone_Verify_Provider/phone_auth_provider.dart';
 import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
 import 'package:lotus/ui/widget/custom_button.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/ui/widget/header.dart';
@@ -21,8 +22,8 @@ class PhoneVerificationScreen extends StatefulWidget {
 
 class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
   var onTapRecognizer;
-  // PhoneVerifyPhoneProvider _verifyPhoneProvider = Get.put(PhoneVerifyPhoneProvider());
-  TextEditingController textEditingController = TextEditingController();
+  PhoneVerifyPhoneProvider _verifyPhoneProvider = Get.find();
+  // TextEditingController textEditingController = TextEditingController();
 
   // ..text = "123456";
 
@@ -70,7 +71,6 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
               //   //   fit: BoxFit.fitHeight,
               //   //   alignment: Alignment.center,
               //   // ),
-              //
               // ),
               Header(),
 
@@ -110,6 +110,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                         color: Colors.green.shade600,
                         fontWeight: FontWeight.bold,
                       ),
+
                       length: 6,
                       obscureText: false,
                       obscuringCharacter: '*',
@@ -143,7 +144,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       backgroundColor: ConstColors.WHITE,
                       enableActiveFill: true,
                       errorAnimationController: errorController,
-                      controller: textEditingController,
+                      controller: _verifyPhoneProvider.smsController,
                       keyboardType: TextInputType.number,
                       // boxShadows: [
                       //   BoxShadow(
@@ -195,7 +196,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       fontW: FW.bold,
                     ),
                     onPressed: () {
-                      textEditingController.clear();
+                      _verifyPhoneProvider.smsController.clear();
                     },
                   ),
                   FlatButton(
@@ -204,7 +205,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       fontW: FW.bold,
                     ),
                     onPressed: () {
-                      textEditingController.text = "123456";
+                      _verifyPhoneProvider.smsController.text = "123456";
                     },
                   ),
                 ],
@@ -220,31 +221,40 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
               width: ScreenHelper.screenSize(context).width,
               bgColor: ConstColors.GREEN_COLOR,
               text: "التالي",
-              onTap: () {
-                formKey.currentState.validate();
-                // conditions for validating
-                if (currentText.length != 6 || currentText != "towtow") {
-                  errorController.add(
-                    ErrorAnimationType.shake,
-                  ); // Triggering error shake animation
+              onTap: () async{
+                if(!formKey.currentState.validate()){
 
-                  setState(() {
-                    hasError = true;
-                  });
+                }else{
+                  formKey.currentState.save();
+                  print("SMS typing => ${_verifyPhoneProvider.smsController.text}");
 
-                } else {
 
-                  setState(() {
-                    hasError = false;
+                  if (currentText.length != 6) {
 
-                    // scaffoldKey.currentState.showSnackBar(SnackBar(
-                    //   content: Text("Aye!!"),
-                    //   duration: Duration(seconds: 2),
-                    // ));
+                    errorController.add(
+                      ErrorAnimationType.shake,
+                    ); // Triggering error shake animation
 
-                  });
+                    setState(() {
+                      hasError = true;
+                    });
 
+                  } else {
+
+                    Get.dialog(CustomLoading());
+
+                    setState(() {
+                      hasError = false;
+                    });
+
+                    await _verifyPhoneProvider.verifyDonning();
+                    Get.back();
+
+
+
+                  }
                 }
+
               },
             ),
           ),

@@ -14,10 +14,14 @@ import 'ui/screen/auth_Screens/welcome_screen.dart';
 import 'Bloc/Controllers/firebase_notifications.dart';
 import 'ui/screen/verify_screen.dart';
 import 'utils/constants.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await FlutterDownloader.initialize(
+      debug: true // optional: set false to disable printing logs to console
+  );
   GetStorage box = GetStorage("onBoarding");
   GetStorage logged = GetStorage();
 

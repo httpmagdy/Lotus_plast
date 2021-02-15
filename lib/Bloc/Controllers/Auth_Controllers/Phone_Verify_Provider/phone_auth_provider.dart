@@ -1,14 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:lotus/Bloc/repository/verify_phone_repo.dart';
+import 'package:lotus/Services/api_key.dart';
+import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
+
+import '../auth_provider.dart';
 
 class PhoneVerifyPhoneProvider extends GetxController{
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  AuthProvider _authProvider = AuthProvider();
+  VerifyPhoneRepo _verifyPhoneRepo = VerifyPhoneRepo();
+
+
 
   // final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController _smsController = TextEditingController();
+  final TextEditingController smsController = TextEditingController();
   RxString _verificationId= "".obs;
 
   Future verifyPhoneNumber(String phoneNumber) async {
@@ -64,18 +73,35 @@ class PhoneVerifyPhoneProvider extends GetxController{
   }
 
 
-
-  void signInWithPhoneNumber() async {
+  Future verifyDonning() async {
     try {
+
+
+      print(" smsController => ${smsController.text} ");
       final AuthCredential credential = PhoneAuthProvider.credential(
         verificationId: _verificationId.value,
-        smsCode: _smsController.text,
+        smsCode: smsController.text,
       );
 
       final User user = (await _auth.signInWithCredential(credential)).user;
 
 
-       print("Successfully signed in UID: ${user.uid}");
+       if(user.uid != null){
+         Get.back();
+         print("Successfully signed in UID: ${user.uid}");
+         _authProvider.getUserTypeVerified();
+         _verifyPhoneRepo.verifyCodeRepo();
+
+       }else{
+
+         Get.back();
+         customSnackBar(title: "الرمز خاطئ",body:  "لرمز الذي ادخلته غير صحيح");
+
+         print("Failed signed in UID: ${user.uid}");
+       }
+
+       // return user.uid;
+
     } catch (e) {
        print("Failed to sign in: " + e.toString());
     }

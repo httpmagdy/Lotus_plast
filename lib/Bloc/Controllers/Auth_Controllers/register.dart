@@ -26,6 +26,10 @@ class RegisterProvider extends GetxController {
 
   Future register() async {
 
+    String dToken = await _authProvider.getDeviceToken();
+
+    print('dToken In Register ::::: $dToken');
+
     print('${nameController.text}');
     print('${passwordController.text}');
     print('${phoneController.text}');
@@ -52,12 +56,13 @@ class RegisterProvider extends GetxController {
           stateId: stateController.text,
           identificationNumber: identificationController.text,
           typeUser: typeId.value,
+          deviceToken: dToken,
         ),
       );
 
       if (dataResponse != null) {
 
-         _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
+         // _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
         _authProvider.saveUserInfoStorage(dataResponse);
 
       }

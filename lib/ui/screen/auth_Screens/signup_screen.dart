@@ -366,6 +366,7 @@ class SignUpScreen extends StatelessWidget {
 
                                  _verifyPhoneProvider.verifyPhoneNumber(_registerProvider.phoneController.text).then((val) {
 
+
                                    print("VALue => Id :::: $val");
 
                                       if (val != null ) {
@@ -376,7 +377,10 @@ class SignUpScreen extends StatelessWidget {
 
                                       }
 
+
                                 });
+
+
 
                               }else{
                                 print("NOT => Sign Up !!!");

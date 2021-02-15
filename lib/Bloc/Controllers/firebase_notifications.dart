@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
+import 'package:lotus/Bloc/models/home_customer_tabs_model.dart';
 import '../../ui/widget/custom_dialog.dart';
 import 'dart:io';
 
@@ -70,12 +73,20 @@ Future onSelectNotification(String payload) {
       _firebaseMessaging.requestNotificationPermissions(IosNotificationSettings());
     }
     _firebaseMessaging.configure(
+
         onMessage: (Map<String, dynamic> message)async{   // If APP Is Opend.
-          print('onMessage ==== ? $message');
 
 
-          showNotification(body: "اشعار جديد", title: "معلش معلش معلش معلش...");
+          print('onMessage ==== ? ${message["data"]["body"]["address"]}');
 
+
+          // var data = json.decode("$message");
+          // Allprview ddd = Allprview.fromJson(message["data"]["body"]);
+          //
+          // print("DECODING DATA ::::::::::::::::::::::::::::::::::::: ${ddd.address}");
+
+
+          showNotification(body: "اشعار جديد", title: "onMessage");
 
           // Get.dialog(OkDialog(title: "On Message", body: "on Message..",onTapOk: (){
           //   Get.back();
@@ -88,19 +99,27 @@ Future onSelectNotification(String payload) {
 
           print('onResume ==== ? $message');
           print('onResume =============================');
-          Get.dialog(OkDialog(title: "On Resume", body: "on Resume Message..",onTapOk: (){
-            Get.back();
-          },) );
+
+          showNotification(body: "اشعار جديد", title: "onResume");
+
+          // Get.dialog(OkDialog(title: "On Resume", body: "on Resume Message..",onTapOk: (){
+          //   Get.back();
+          // },) );
 
         },
 
         onLaunch: (Map<String, dynamic> message)async {
           print('onLaunch ==== ? $message');
-          Get.dialog(OkDialog(title: "On Launch", body: "on Launch Message..",onTapOk: (){
-            Get.back();
 
-          }));
+          showNotification(body: "اشعار جديد", title: "onLaunch");
+
+          // Get.dialog(OkDialog(title: "On Launch", body: "on Launch Message..",onTapOk: (){
+          //
+          //   Get.back();
+          //
+          // }));
         },
+
 
     );
 

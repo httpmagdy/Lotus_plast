@@ -9,6 +9,7 @@ import 'package:lotus/Services/network_services.dart';
     var _request = await post(url: ApiKey.loginURL, body: {
       'phone': login.username,
       'password': login.password,
+      'device_token': login.deviceToken,
     });
 
     print('LOGIN => statusCode : ${_request.statusCode}');
@@ -27,5 +28,6 @@ import 'package:lotus/Services/network_services.dart';
 class LoginModel{
    final String username;
    final String password;
-   LoginModel(this.username, this.password);
+   final String deviceToken;
+   LoginModel(this.username, this.password, this.deviceToken);
 }

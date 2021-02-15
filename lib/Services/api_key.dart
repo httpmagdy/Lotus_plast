@@ -25,4 +25,5 @@ class ApiKey {
   static const String aboutURL = 'about';
   static const String privacyURL = 'privacy';
   static const String callusURL = 'callus';
+  static const String verifyPhoneURL = 'verify_phone';
 }
