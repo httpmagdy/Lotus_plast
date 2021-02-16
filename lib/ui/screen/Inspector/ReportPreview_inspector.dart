@@ -16,8 +16,6 @@ import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/ui/widget/custom_text_field.dart';
 import 'package:lotus/utils/constants.dart';
 import 'dart:io';
-
-import '../details_preview.dart';
 import 'edit_info_plumber.dart';
 
 class ReportPreviewInspector extends StatefulWidget {
@@ -39,7 +37,6 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
   // QrProvider _qrProvider = Get.put(QrProvider());
   bool checkedValue = false;
 
-  File _image;
   final picker = ImagePicker();
 
   Future getImage() async {
@@ -47,7 +44,7 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
 
     setState(() {
       if (image != null) {
-        _image = File(image.path);
+        _inspectorProvider.image = File(image.path);
       } else {
         print('No image selected.');
       }
@@ -205,7 +202,7 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
                                 left: ScreenHelper.screenWidth(context, 12),
                                 child: InkWell(
                                   onTap: getImage,
-                                  child: _image == null
+                                  child: _inspectorProvider.image == null
                                       ? Icon(
                                           Icons.camera_alt_outlined,
                                           size: ScreenHelper.screenSize(context)
@@ -213,7 +210,8 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
                                               0.060,
                                           color: ConstColors.FORM_COLOR,
                                         )
-                                      : SelectedCameraImage(image: _image),
+                                      : SelectedCameraImage(
+                                          image: _inspectorProvider.image),
                                 ),
                               ),
                             ],

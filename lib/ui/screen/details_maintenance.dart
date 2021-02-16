@@ -95,8 +95,10 @@ class DetailsMaintenance extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-                              strokeWidth: 1.6,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                    ConstColors.ORANGE_COLOR,
+                                  ),
+                                  strokeWidth: 2,
                               value: loadingProgress.expectedTotalBytes != null
                                   ? loadingProgress.cumulativeBytesLoaded /
                                       loadingProgress.expectedTotalBytes

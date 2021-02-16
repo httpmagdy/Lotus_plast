@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus/Bloc/Controllers/Auth_Controllers/Phone_Verify_Provider/phone_auth_provider.dart';
-import 'file:///D:/CI_PROJECTS/lotus_plast/lib/ui/screen/auth_Screens/vreify_phone_screen.dart';
+import '../auth_Screens/vreify_phone_screen.dart';
 import 'package:lotus/Bloc/Controllers/Auth_Controllers/register.dart';
 import 'package:lotus/Bloc/Controllers/get_status.dart';
 import 'package:lotus/helpers/screen_helper.dart';
@@ -34,7 +34,8 @@ List<UserType> types = [
 class SignUpScreen extends StatelessWidget {
   final RegisterProvider _registerProvider = Get.put(RegisterProvider());
   final StatusProvider _statusProvider = Get.put(StatusProvider());
-  final PhoneVerifyPhoneProvider _verifyPhoneProvider = Get.put(PhoneVerifyPhoneProvider());
+  final PhoneVerifyPhoneProvider _verifyPhoneProvider =
+      Get.put(PhoneVerifyPhoneProvider());
 
   @override
   Widget build(BuildContext context) {
@@ -67,8 +68,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         CustomTextField(
                           hint: "اسم المستخدم",
-                          errorMessage:
-                          "يجب ادخال اسم المستخمدم",
+                          errorMessage: "يجب ادخال اسم المستخمدم",
                           controller: _registerProvider.nameController,
                           onComplete: () {
                             node.nextFocus();
@@ -93,7 +93,6 @@ class SignUpScreen extends StatelessWidget {
                           height: ScreenHelper.screenHeight(context, 18),
                         ),
                         CustomTextField(
-
                           hint: "كلمة المرور",
                           suffixIcon: _registerProvider.passwordSecure.value
                               ? Icons.visibility_off
@@ -104,7 +103,8 @@ class SignUpScreen extends StatelessWidget {
                           },
                           isSecure: _registerProvider.passwordSecure.value,
                           controller: _registerProvider.passwordController,
-                          shortMessage: "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
+                          shortMessage:
+                              "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
                           shortCondition: 6,
                           errorMessage: "يجب ادخال كلمة السر",
 //                          prefixIcon: "assets/img/person.png",
@@ -234,9 +234,7 @@ class SignUpScreen extends StatelessWidget {
                                 ],
                               ),
                               SizedBox(
-                                width:
-                                ScreenHelper.screenWidth(context, 15)
-                              ),
+                                  width: ScreenHelper.screenWidth(context, 15)),
                               Row(
                                 children: [
                                   Radio(
@@ -254,7 +252,8 @@ class SignUpScreen extends StatelessWidget {
                                     width: ScreenHelper.screenWidth(context, 1),
                                   ),
                                   Image(
-                                    image: AssetImage("assets/img/customer.png"),
+                                    image:
+                                        AssetImage("assets/img/customer.png"),
                                     width:
                                         ScreenHelper.screenWidth(context, 20),
                                     height:
@@ -293,7 +292,6 @@ class SignUpScreen extends StatelessWidget {
 
                         CustomTextField(
                           hint: "رقم البطاقة",
-
                           controller:
                               _registerProvider.identificationController,
                           onComplete: () {
@@ -347,64 +345,46 @@ class SignUpScreen extends StatelessWidget {
             ),
           ),
           Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: ScreenHelper.screenWidth(context, 25),
-                      vertical: ScreenHelper.screenHeight(context, 50)),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        CircleButton(
-                          onTap: () async {
-
-                            node.unfocus();
-
+            padding: EdgeInsets.symmetric(
+                horizontal: ScreenHelper.screenWidth(context, 25),
+                vertical: ScreenHelper.screenHeight(context, 50)),
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  CircleButton(
+                    onTap: () async {
+                      node.unfocus();
 
                       await _registerProvider.register().then((value) {
+                        if (value != null) {
+                          print("MAKE => Verify !!!");
 
-                              if(value != null){
+                          _verifyPhoneProvider
+                              .verifyPhoneNumber(
+                                  _registerProvider.phoneController.text)
+                              .then((val) {
+                            print("VALue => Id :::: $val");
 
+                            if (val != null) {
+                              print("SEND Code Is Done !!!");
+                              Get.back();
 
-                                print("MAKE => Verify !!!");
-
-                                 _verifyPhoneProvider.verifyPhoneNumber(_registerProvider.phoneController.text).then((val) {
-
-
-                                   print("VALue => Id :::: $val");
-
-                                      if (val != null ) {
-
-                                        print("SEND Code Is Done !!!");
-                                        Get.back();
-
-
-                                        Get.to(PhoneVerificationScreen("${_registerProvider.phoneController.text}"));
-
-                                      }
-
-
-                                });
-
-
-
-                              }else{
-                                print("NOT => Sign Up !!!");
-
-                              }
-
-                            });
-
-
-
-
-
-                          },
-                        ),
-                      ],
-                    ),
+                              Get.to(PhoneVerificationScreen(
+                                  "${_registerProvider.phoneController.text}"));
+                            }
+                          });
+                        } else {
+                          print("NOT => Sign Up !!!");
+                        }
+                      });
+                    },
                   ),
-                ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

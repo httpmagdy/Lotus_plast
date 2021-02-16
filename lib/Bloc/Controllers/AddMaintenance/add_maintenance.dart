@@ -1,15 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:lotus/Bloc/repository/maintenance_repo.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
 import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
 
-
 class AddMaintenanceProvider extends GetxController {
-  // var allDamageTypes = List<Datum>();
-
   @override
   void onInit() {
     messageController = TextEditingController();
@@ -29,38 +24,28 @@ class AddMaintenanceProvider extends GetxController {
   final MaintenanceRepo _maintenanceRepo = MaintenanceRepo();
 
   Future<void> addMaintenance() async {
-
     if (idTypeSelected.value == 0) {
       customSnackBar(
         title: 'نوع العطل',
         body: 'من فضلك اختر نوع العطل',
       );
-
     } else {
       // globalKeyMaintenance.currentState.save();
 
-      if(image == null){
-
+      if (image == null) {
         await _maintenanceRepo.addMaintenanceRepo(
           damageId: idTypeSelected.value,
           message: messageController.text,
         );
-
-      }else{
-
+      } else {
         await _maintenanceRepo.addMaintenanceWithImageRepo(
           damageId: idTypeSelected.value,
           message: messageController.text,
           image: image,
         );
-
       }
-
-
-
     }
   }
-
 
   @override
   void dispose() {

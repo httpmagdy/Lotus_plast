@@ -152,6 +152,48 @@ class DetailsPreview extends StatelessWidget {
                       fontSize: ScreenHelper.screenFont(context, 13),
                     ),
 
+              data.image == null
+                  ? Container()
+                  : CustomText(
+                      padding: EdgeInsets.only(left: 15, top: 20, bottom: 16),
+                      text: 'صوره للمعاينه',
+                      fontW: FW.bold,
+                      fontSize: ScreenHelper.screenFont(context, 13),
+                    ),
+
+              data.image == null
+                  ? Container()
+                  : ClipRRect(
+                      child: Image.network(
+                        data.image,
+                        loadingBuilder: (BuildContext context, Widget child,
+                            ImageChunkEvent loadingProgress) {
+                          if (loadingProgress == null) return child;
+                          return Container(
+                            color: ConstColors.ULTRA_GREY_COLOR,
+                            width: ScreenHelper.screenSize(context).width,
+                            height: 200,
+                            child: Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    ConstColors.ORANGE_COLOR,
+                                  ),
+                                  strokeWidth: 2,
+                                  value: loadingProgress.expectedTotalBytes !=
+                                          null
+                                      ? loadingProgress.cumulativeBytesLoaded /
+                                          loadingProgress.expectedTotalBytes
+                                      : null,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
 
               // Image.network(data.image),
             ],
