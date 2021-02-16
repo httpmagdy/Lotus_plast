@@ -151,6 +151,9 @@ class DetailsPreview extends StatelessWidget {
                       text: '${data.message}',
                       fontSize: ScreenHelper.screenFont(context, 13),
                     ),
+
+
+              // Image.network(data.image),
             ],
           ),
         ),

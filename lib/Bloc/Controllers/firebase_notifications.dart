@@ -77,7 +77,15 @@ Future onSelectNotification(String payload) {
         onMessage: (Map<String, dynamic> message)async{   // If APP Is Opend.
 
 
-          print('onMessage ==== ? ${message["data"]["body"]["address"]}');
+          print('onMessage ==== ? ${message}');
+
+          // print('onMessage ==== ? ${message["data"]["body"]}');
+
+          Allprview extractData = Allprview.fromJson(message["data"]["body"]);
+
+         print("on Messa==== ?>>> ${extractData.address}");
+
+          // print('onMessage ==== 222222? ${message["data"]["body"]["pulmber_phone"]}');
 
 
           // var data = json.decode("$message");

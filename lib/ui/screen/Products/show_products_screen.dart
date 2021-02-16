@@ -60,8 +60,6 @@ class ShowProductsScreen extends StatelessWidget {
                   );
 
                 }
-
-
               },
               // bgColor: ConstColors.GREEN_COLOR,
             ),

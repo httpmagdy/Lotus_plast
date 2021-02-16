@@ -3,7 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:lotus/Bloc/repository/verify_phone_repo.dart';
 import 'package:lotus/Services/api_key.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
 import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
+import 'package:lotus/ui/widget/custom_dialog.dart';
 
 import '../auth_provider.dart';
 
@@ -12,12 +14,24 @@ class PhoneVerifyPhoneProvider extends GetxController{
   AuthProvider _authProvider = AuthProvider();
   VerifyPhoneRepo _verifyPhoneRepo = VerifyPhoneRepo();
 
+   TextEditingController smsController = TextEditingController();
 
+  @override
+  void onInit() {
+    smsController = TextEditingController();
+    super.onInit();
+  }
 
+  // @override
+  // void onClose() {
+  //
+  //   smsController.dispose();
+  //   super.onClose();
+  // }
   // final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   // final TextEditingController _phoneNumberController = TextEditingController();
-  final TextEditingController smsController = TextEditingController();
+
   RxString _verificationId= "".obs;
 
   Future verifyPhoneNumber(String phoneNumber) async {
@@ -26,7 +40,8 @@ class PhoneVerifyPhoneProvider extends GetxController{
     PhoneVerificationCompleted verificationCompleted =
         (PhoneAuthCredential phoneAuthCredential) async {
 
-      await _auth.signInWithCredential(phoneAuthCredential);
+           await _auth.signInWithCredential(phoneAuthCredential);
+
 
       print("Phone number automatically verified and user signed in: ${_auth.currentUser.uid}");
     };
@@ -36,6 +51,16 @@ class PhoneVerifyPhoneProvider extends GetxController{
         (FirebaseAuthException authException) {
 
       print('Phone number verification failed. Code: ${authException.code}. Message: ${authException.message}');
+
+
+      if(authException.code == "too-many-requests"){
+
+        Get.dialog(OkDialog(title: "خطأ", body: "لقد حظرنا جميع الطلبات الواردة من هذا الجهاز بسبب نشاط غير عادي. حاول مرة أخرى في وقت لاحق.",onTapOk: (){
+Get.back();
+        },), );
+
+      }
+
     };
 
 //Callback for when the code is sent
@@ -77,33 +102,60 @@ class PhoneVerifyPhoneProvider extends GetxController{
     try {
 
 
-      print(" smsController => ${smsController.text} ");
+      print(" smsController => ${smsController.text}");
+
       final AuthCredential credential = PhoneAuthProvider.credential(
         verificationId: _verificationId.value,
         smsCode: smsController.text,
       );
 
-      final User user = (await _auth.signInWithCredential(credential)).user;
+
+      print(":::::::::::::::::::::::::::: >>>>>>>>>>>>>>>>>> ${credential.token}");
 
 
-       if(user.uid != null){
-         Get.back();
-         print("Successfully signed in UID: ${user.uid}");
-         _authProvider.getUserTypeVerified();
-         _verifyPhoneRepo.verifyCodeRepo();
+        // Get.dialog(CustomLoading());
 
-       }else{
 
-         Get.back();
-         customSnackBar(title: "الرمز خاطئ",body:  "لرمز الذي ادخلته غير صحيح");
+        final User user = (await _auth.signInWithCredential(credential)).user;
 
-         print("Failed signed in UID: ${user.uid}");
-       }
+
+
+
+        if(user.uid == null){
+
+          customSnackBar(title: "الرمز خاطئ",body:  "لرمز الذي ادخلته غير صحيح");
+
+        }
+
+        if(user.uid != null){
+
+          print("Successfully signed in UID: ${user.uid}");
+          _authProvider.getUserTypeVerified();
+          _verifyPhoneRepo.verifyCodeRepo();
+
+
+          // Get.back();
+
+        }else{
+          // Get.back();
+
+
+
+        }
+
+
+
+      print("Failed signed in UID==========: ${user.uid}");
+      print("Failed signed in UID==========: ${user.uid}");
 
        // return user.uid;
+      // Get.back();
 
     } catch (e) {
+
+
        print("Failed to sign in: " + e.toString());
+       // print("Failed to sign in: " + user);
     }
   }
 

@@ -49,10 +49,13 @@ class LoginScreen extends StatelessWidget {
                             height: ScreenHelper.screenHeight(context, 18),
                           ),
                           CustomTextField(
-                            hint: "اسم المستخدم او رقم الهاتف",
+                            hint: "رقم الهاتف",
                             controller: _loginProvider.usernameController,
-                            errorMessage: "يجب ادخال اسم المستخدم او رقم الهاتف",
-//                          prefixIcon: "assets/img/person.png",
+                            errorMessage: "يجب ادخال رقم الهاتف",
+                            // shortMessage: "يجب ادخال رقم هاتف صحيح",
+                            // validPhoneMessage: "يجب ادخال رقم هاتف صحيح",
+                            keyboardType: TextInputType.phone,
+
                             onComplete: () {
                               node.nextFocus();
                             },
@@ -132,6 +135,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   CircleButton(
                     onTap: () async{
+
                       node.unfocus();
                      await _loginProvider.login();
                       // Get.back();

@@ -42,7 +42,7 @@ class _ReportDamageState extends State<ReportDamage> {
   String selectError;
 
   //
-  File _image;
+  // File _image;
   final picker = ImagePicker();
 
   Future getImage() async {
@@ -50,11 +50,12 @@ class _ReportDamageState extends State<ReportDamage> {
 
     setState(() {
       if (image != null) {
-        _image = File(image.path);
+        _addMaintenanceProvider.image = File(image.path);
       } else {
         print('No image selected.');
       }
     });
+
   }
 
   @override
@@ -182,7 +183,7 @@ class _ReportDamageState extends State<ReportDamage> {
                           left: ScreenHelper.screenWidth(context, 12),
                           child: InkWell(
                             onTap: getImage,
-                            child: _image == null
+                            child:  _addMaintenanceProvider.image == null
                                 ? Icon(
                                     Icons.camera_alt_outlined,
                                     size:
@@ -190,7 +191,7 @@ class _ReportDamageState extends State<ReportDamage> {
                                             0.060,
                                     color: ConstColors.FORM_COLOR,
                                   )
-                                : SelectedCameraImage(image: _image),
+                                : SelectedCameraImage(image:  _addMaintenanceProvider.image),
                           ),
                         ),
                       ],

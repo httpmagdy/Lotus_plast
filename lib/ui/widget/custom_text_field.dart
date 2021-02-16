@@ -31,6 +31,7 @@ class CustomTextField extends StatefulWidget {
   final Function onComplete;
   final String suffixIconImage;
   final String prefixIcon;
+  final String validPhoneMessage;
   final int maxLines;
   final double verticalPadding;
   final double horizentalPadding;
@@ -61,6 +62,7 @@ class CustomTextField extends StatefulWidget {
         this.horizentalPadding = 15.0,
         this.verticalPadding = 0.0,
         this.colorFocused,
+        this.validPhoneMessage,
       });
 
   @override
@@ -110,6 +112,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
         if (value.isEmpty) return widget.errorMessage;
         if (value.length < widget.shortCondition)
           return widget.shortMessage;
+        if (value.length != widget.shortCondition)
+          return widget.validPhoneMessage;
+        if (value[0] != "0" || value[1] != "1")
+          return widget.validPhoneMessage;
         return null;
       },
       textDirection: TextDirection.rtl,

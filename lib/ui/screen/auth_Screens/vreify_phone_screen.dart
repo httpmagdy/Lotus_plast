@@ -29,6 +29,8 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
 
   StreamController<ErrorAnimationType> errorController;
 
+
+
   bool hasError = false;
   String currentText = "";
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -45,11 +47,11 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    errorController.close();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   errorController.close();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -199,15 +201,15 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       _verifyPhoneProvider.smsController.clear();
                     },
                   ),
-                  FlatButton(
-                    child: CustomText(
-                      text: "لصق",
-                      fontW: FW.bold,
-                    ),
-                    onPressed: () {
-                      _verifyPhoneProvider.smsController.text = "123456";
-                    },
-                  ),
+                  // FlatButton(
+                  //   child: CustomText(
+                  //     text: "لصق",
+                  //     fontW: FW.bold,
+                  //   ),
+                  //   onPressed: () {
+                  //     _verifyPhoneProvider.smsController.text = "123456";
+                  //   },
+                  // ),
                 ],
               ),
               SizedBox(
@@ -241,16 +243,14 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
 
                   } else {
 
-                    Get.dialog(CustomLoading());
 
                     setState(() {
                       hasError = false;
                     });
 
                     await _verifyPhoneProvider.verifyDonning();
-                    Get.back();
 
-
+                    // Get.back();
 
                   }
                 }

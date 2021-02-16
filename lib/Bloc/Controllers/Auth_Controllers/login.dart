@@ -3,9 +3,14 @@ import 'package:get/get.dart';
 import 'package:lotus/Bloc/models/user_info.dart';
 import 'package:lotus/Bloc/repository/login_repo.dart';
 import 'package:lotus/ui/globalWidget/custom_loading.dart';
+import 'package:lotus/ui/screen/auth_Screens/vreify_phone_screen.dart';
+import 'package:lotus/ui/widget/custom_dialog.dart';
+import 'Phone_Verify_Provider/phone_auth_provider.dart';
 import 'auth_provider.dart';
 
 class LoginProvider extends GetxController {
+  final PhoneVerifyPhoneProvider _verifyPhoneProvider = Get.put(PhoneVerifyPhoneProvider());
+
   AuthProvider _authProvider = AuthProvider();
   final GlobalKey<FormState> globalKeyLogin = GlobalKey<FormState>();
   TextEditingController usernameController;
@@ -28,21 +33,60 @@ class LoginProvider extends GetxController {
         CustomLoading(),
       );
 
-
-
-
       globalKeyLogin.currentState.save();
-      var dataResponse = await loginRepo.loginRepo(
+      UserInfo dataResponse = await loginRepo.loginRepo(
         LoginModel(usernameController.text, passwordController.text, dToken),
       );
       print('dataResponse.typeUser ::::: ${dataResponse}');
 
       if (dataResponse != null) {
+
         _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
         _authProvider.saveUserInfoStorage(dataResponse);
         passwordController.clear();
-        usernameController.clear();
+        // usernameController.clear();
+
+
+        if(dataResponse.status == false){
+
+          Get.dialog(
+            OkDialog(
+              title: "حسابك غير مفعل",
+              body: "رجاء قم بتأكيد رقمك",
+              buttonName: "تفعيل!",
+
+              onTapOk: () {
+
+                Get.back();
+
+                _verifyPhoneProvider.verifyPhoneNumber(usernameController.text).then((val) {
+
+
+                  print("VALue => Id :::: $val");
+
+                  if (val != null ) {
+
+                    print("SEND Code Is Done !!!");
+
+                    Get.back();
+
+
+                    Get.to(PhoneVerificationScreen("${usernameController.text}"));
+
+                  }
+
+
+                });
+
+              },
+            ),
+          );
+
+        }
+
       }
+
+
     }
   }
 
@@ -53,10 +97,11 @@ class LoginProvider extends GetxController {
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    passwordController.dispose();
-    usernameController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   passwordController.dispose();
+  //   usernameController.dispose();
+  //   super.onClose();
+  // }
+
 }

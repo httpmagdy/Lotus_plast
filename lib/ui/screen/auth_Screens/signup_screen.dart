@@ -79,8 +79,10 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         CustomTextField(
                           hint: "رقم الموبايل",
-                          errorMessage:
-                          "يجب ادخال رقم الموبايل",
+                          errorMessage: "يجب ادخال رقم الموبايل",
+                          shortCondition: 11,
+                          shortMessage: "يجب ادخال رقم هاتف صحيح",
+                          validPhoneMessage: "يجب ادخال رقم هاتف صحيح",
                           controller: _registerProvider.phoneController,
                           keyboardType: TextInputType.phone,
                           onComplete: () {
@@ -291,6 +293,7 @@ class SignUpScreen extends StatelessWidget {
 
                         CustomTextField(
                           hint: "رقم البطاقة",
+
                           controller:
                               _registerProvider.identificationController,
                           onComplete: () {
@@ -362,6 +365,7 @@ class SignUpScreen extends StatelessWidget {
 
                               if(value != null){
 
+
                                 print("MAKE => Verify !!!");
 
                                  _verifyPhoneProvider.verifyPhoneNumber(_registerProvider.phoneController.text).then((val) {
@@ -372,6 +376,8 @@ class SignUpScreen extends StatelessWidget {
                                       if (val != null ) {
 
                                         print("SEND Code Is Done !!!");
+                                        Get.back();
+
 
                                         Get.to(PhoneVerificationScreen("${_registerProvider.phoneController.text}"));
 
