@@ -63,25 +63,31 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(
                             height: ScreenHelper.screenHeight(context, 26),
                           ),
-                          CustomTextField(
-                            hint: "كلمة المرور",
-                            suffixIcon: _loginProvider.passwordSecure.value
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            onSuffixTap: () {
-                              _loginProvider.passwordSecure.value =  !_loginProvider.passwordSecure.value;
-                            },
-                            isSecure: _loginProvider.passwordSecure.value,
-                            controller: _loginProvider.passwordController,
-                            shortMessage:
-                                "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
-                            shortCondition: 6,
-                            errorMessage: "يجب ادخال كلمة السر",
+                          GetX<LoginProvider>(
+                            init: LoginProvider(),
+                            builder: (controller) =>  CustomTextField(
+                              hint: "كلمة المرور",
+
+                              suffixIcon: controller.passwordSecure.value
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+
+                              onSuffixTap: () {
+                                controller.passwordSecure.value = !controller.passwordSecure.value;
+                              },
+
+                              isSecure: controller.passwordSecure.value,
+                              controller: controller.passwordController,
+                              shortMessage:
+                                  "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
+                              shortCondition: 6,
+                              errorMessage: "يجب ادخال كلمة السر",
 //                          prefixIcon: "assets/img/person.png",
-                            onComplete: () {
-                              node.unfocus();
-                              _loginProvider.login();
-                            },
+                              onComplete: () {
+                                node.unfocus();
+                                controller.login();
+                              },
+                            ),
                           ),
                           SizedBox(
                             height: ScreenHelper.screenHeight(context, 25),

@@ -47,14 +47,16 @@ class ShowProductsScreen extends StatelessWidget {
               onTap: () async{
 
                 final status = await Permission.storage.request();
+
                 if(status.isGranted){
+
                   final externalDir = await getExternalStorageDirectory();
 
-                  final id = await FlutterDownloader.enqueue(
+                  await FlutterDownloader.enqueue(
                     url:
                     "https://firebasestorage.googleapis.com/v0/b/storage-3cff8.appspot.com/o/2020-05-29%2007-18-34.mp4?alt=media&token=841fffde-2b83-430c-87c3-2d2fd658fd41",
                     savedDir: externalDir.path,
-                    fileName: "download",
+                    fileName: "products",
                     showNotification: true,
                     openFileFromNotification: true,
                   );

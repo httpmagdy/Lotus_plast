@@ -94,6 +94,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autovalidateMode:AutovalidateMode.onUserInteraction,
       maxLines: widget.maxLines,
       onEditingComplete: widget.onComplete,
       onTap: widget.onTap,

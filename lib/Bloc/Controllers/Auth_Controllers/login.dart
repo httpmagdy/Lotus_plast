@@ -15,7 +15,7 @@ class LoginProvider extends GetxController {
   final GlobalKey<FormState> globalKeyLogin = GlobalKey<FormState>();
   TextEditingController usernameController;
   TextEditingController passwordController;
-  RxBool passwordSecure = false.obs;
+  RxBool passwordSecure = true.obs;
 
   // RxInt userType = 0.obs;
 
@@ -46,8 +46,8 @@ class LoginProvider extends GetxController {
         passwordController.clear();
         // usernameController.clear();
 
-
-        if(dataResponse.status == false){
+        if(dataResponse.data.phoneVerify == 0){
+          Get.back();
 
           Get.dialog(
             OkDialog(
@@ -61,7 +61,6 @@ class LoginProvider extends GetxController {
 
                 _verifyPhoneProvider.verifyPhoneNumber(usernameController.text).then((val) {
 
-
                   print("VALue => Id :::: $val");
 
                   if (val != null ) {
@@ -69,7 +68,6 @@ class LoginProvider extends GetxController {
                     print("SEND Code Is Done !!!");
 
                     Get.back();
-
 
                     Get.to(PhoneVerificationScreen("${usernameController.text}"));
 

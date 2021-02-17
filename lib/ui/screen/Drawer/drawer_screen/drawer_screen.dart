@@ -3,7 +3,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/screen/Static_Screens/about_screen/about_screen.dart';
 import 'package:lotus/ui/screen/Static_Screens/call_us_screen/call_us_screen.dart';
-import 'package:lotus/ui/screen/Static_Screens/certificates_screen/Certificates_screen.dart';
 import 'package:lotus/ui/screen/Static_Screens/plivacy_screen/plivacy_screen.dart';
 import 'package:lotus/ui/screen/Static_Screens/terms_of_warranty_screen/Terms_of_warranty_screen.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
@@ -11,6 +10,7 @@ import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:get/get.dart';
 
 import '../../auth_Screens/welcome_screen.dart';
+import '../../../../Bloc/Controllers/logout_provider.dart';
 
 class EndDrawer extends StatelessWidget {
   final GetStorage logged = GetStorage();
@@ -103,15 +103,21 @@ class EndDrawer extends StatelessWidget {
                     SizedBox(
                       height: ScreenHelper.screenHeight(context, 60),
                     ),
-                    TabisDrawer(
-                      icon: "assets/img/icons/aicon7.png",
-                      text: "تسجيل الخروج",
-                      sizePadding: -10,
-                      press: () async {
-                        await logged.remove('typeUser');
+                    GetBuilder<LogoutProvider>(
+                      init: LogoutProvider(),
+                      builder: (controller) => TabisDrawer(
+                        icon: "assets/img/icons/aicon7.png",
+                        text: "تسجيل الخروج",
+                        sizePadding: -10,
+                        press: () async {
 
-                        Get.offAll(WelcomeScreen());
-                      },
+                          await controller.logout().whenComplete(() async {
+                            await logged.remove('typeUser');
+                            Get.offAll(WelcomeScreen());
+                          });
+
+                        },
+                      ),
                     ),
                   ],
                 ),

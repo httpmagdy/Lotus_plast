@@ -92,62 +92,66 @@ class SignUpScreen extends StatelessWidget {
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 18),
                         ),
-                        CustomTextField(
-                          hint: "كلمة المرور",
-                          suffixIcon: _registerProvider.passwordSecure.value
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          onSuffixTap: () {
-                            _registerProvider.passwordSecure.value =
-                                !_registerProvider.passwordSecure.value;
-                          },
-                          isSecure: _registerProvider.passwordSecure.value,
-                          controller: _registerProvider.passwordController,
-                          shortMessage:
-                              "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
-                          shortCondition: 6,
-                          errorMessage: "يجب ادخال كلمة السر",
+                        GetX<RegisterProvider>(
+                          builder: (controller) =>  CustomTextField(
+                            hint: "كلمة المرور",
+                            suffixIcon: controller.passwordSecure.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            onSuffixTap: () {
+                              controller.passwordSecure.value =
+                                  !controller.passwordSecure.value;
+                            },
+                            isSecure: controller.passwordSecure.value,
+                            controller: controller.passwordController,
+                            shortMessage:
+                                "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
+                            shortCondition: 6,
+                            errorMessage: "يجب ادخال كلمة السر",
 //                          prefixIcon: "assets/img/person.png",
-                          onComplete: () {
-                            node.unfocus();
-                            // submit(); .............//////////////////
-                          },
+                            onComplete: () {
+                              node.nextFocus();
+                              // submit(); .............//////////////////
+                            },
+                          ),
                         ),
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 18),
                         ),
-                        CustomTextField(
-                          hint: "تاكيد كلمة السر",
-                          suffixIcon:
-                              _registerProvider.confirmPasswordSecure.value
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                          onSuffixTap: () {
-                            _registerProvider.confirmPasswordSecure.value =
-                                !_registerProvider.confirmPasswordSecure.value;
-                          },
-                          isSecure: _registerProvider.passwordSecure.value,
-                          controller:
-                              _registerProvider.confirmPasswordController,
-                          validator: (String value) {
-                            if (value.isEmpty) {
-                              return "يجب ادخال كلمة السر";
-                            } else if (value !=
-                                _registerProvider.passwordController.text) {
-                              return "كلمتان السر غير متطابقتان";
-                            } else {
-                              return null;
-                            }
-                          },
-                          shortMessage:
-                              "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
-                          shortCondition: 6,
-                          errorMessage: "يجب ادخال كلمة السر",
+                        GetX<RegisterProvider>(
+                          builder: (controller) => CustomTextField(
+                            hint: "تاكيد كلمة السر",
+                            suffixIcon:
+                            controller.confirmPasswordSecure.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                            onSuffixTap: () {
+                              controller.confirmPasswordSecure.value =
+                                  !controller.confirmPasswordSecure.value;
+                            },
+                            isSecure: controller.confirmPasswordSecure.value,
+                            controller:
+                            controller.confirmPasswordController,
+                            validator: (String value) {
+                              if (value.isEmpty) {
+                                return "يجب ادخال كلمة السر";
+                              } else if (value !=
+                                  controller.passwordController.text) {
+                                return "كلمتان السر غير متطابقتان";
+                              } else {
+                                return null;
+                              }
+                            },
+                            shortMessage:
+                                "يجب الا تقل كلمة المرور عن ستة احرف او ارقام",
+                            shortCondition: 6,
+                            errorMessage: "يجب ادخال كلمة السر",
 //                          prefixIcon: "assets/img/person.png",
-                          onComplete: () {
-                            node.unfocus();
-                            // submit(); .......................................
-                          },
+                            onComplete: () {
+                              node.unfocus();
+                              // submit(); .......................................
+                            },
+                          ),
                         ),
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 18),

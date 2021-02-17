@@ -44,7 +44,7 @@ class WelcomeScreen extends StatelessWidget {
               )),
           Padding(
             padding: EdgeInsets.only(
-              bottom: ScreenHelper.screenHeight(context, 130),
+              bottom: 100,
               left: ScreenHelper.screenWidth(context, 30),
               right: ScreenHelper.screenWidth(context, 30),
             ),
@@ -57,7 +57,8 @@ class WelcomeScreen extends StatelessWidget {
                   },
                   width: ScreenHelper.screenSize(context).width,
                   text: "تسجيل الدخول",
-                )),
+                ),
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(

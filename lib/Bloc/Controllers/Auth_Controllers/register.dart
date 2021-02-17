@@ -16,8 +16,8 @@ class RegisterProvider extends GetxController {
   TextEditingController stateController;
   TextEditingController cityController;
 
-  RxBool passwordSecure = false.obs;
-  RxBool confirmPasswordSecure = false.obs;
+  RxBool passwordSecure = true.obs;
+  RxBool confirmPasswordSecure = true.obs;
   RxInt typeId = 0.obs;
 
   // RxInt userType = 0.obs;
@@ -61,7 +61,6 @@ class RegisterProvider extends GetxController {
       );
 
       if (dataResponse != null) {
-
          // _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
         _authProvider.saveUserInfoStorage(dataResponse);
 
