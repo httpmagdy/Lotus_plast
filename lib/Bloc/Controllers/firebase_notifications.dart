@@ -11,7 +11,7 @@ import 'dart:io';
 
 
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
-  print("dataaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+  print("onBack ${message}");
 }
 
 class PushNotificationManger {

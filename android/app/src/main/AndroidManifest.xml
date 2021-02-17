@@ -15,7 +15,7 @@
 
     <!-- has been added .Application for FCB firebase -->
     <application
-        android:name=".Application"
+        android:name=".com.creazyidea.lotus_plast.Application"
         android:label="lotus_plast"
         android:icon="@mipmap/ic_launcher">
         <provider
