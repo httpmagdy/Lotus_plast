@@ -97,7 +97,7 @@ class _HomeCustomerState extends State<HomeCustomer>
                   await controller.homeCustomerProvider();
                 },
                 child: ListView(
-                  physics: BouncingScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
                     const SizedBox(height: 15),
                     CustomText(

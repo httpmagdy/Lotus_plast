@@ -88,7 +88,7 @@ class _HomeInspectorState extends State<HomeInspector>
                   await controller.homeInspector();
                 },
                 child: ListView(
-                  physics: BouncingScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
                     const SizedBox(height: 15),
                     CustomText(

@@ -94,36 +94,36 @@ class PushNotificationManger extends GetxController{
         //
         // print("DECODING DATA ::::::::::::::::::::::::::::::::::::: ${ddd.address}");
       },
-      // onResume: (Map<String, dynamic> message) async {
-      //   print('onResume =============================');
-      //   // showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} on resume");
-      //
-      //   print('onResume ==== ? $message');
-      //   print('onResume =============================');
-      //
-      //   // showNotification(body: "اشعار جديد?", title: "onResume");
-      //
-      //   // Get.dialog(OkDialog(title: "On Resume", body: "on Resume Message..",onTapOk: (){
-      //   //   Get.back();
-      //   // },) );
-      // },
+      onResume: (Map<String, dynamic> message) async {
+        print('onResume =============================');
+        // showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} on resume");
+
+        print('onResume ==== ? $message');
+        print('onResume =============================');
+
+        // showNotification(body: "اشعار جديد?", title: "onResume");
+
+        // Get.dialog(OkDialog(title: "On Resume", body: "on Resume Message..",onTapOk: (){
+        //   Get.back();
+        // },) );
+      },
       onBackgroundMessage: myBackgroundMessageHandler,
 
 
-     // onLaunch: (Map<String, dynamic> message) async {
-     // //   showNotification(body: "اشعار جديد", title: "onLaunch");
-     //    print('onLaunch ===--------------=============');
-     //    print('onLaunch ==== ? $message');
-     //
-     //    // showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} on Launch");
-     //
-     //
-     //   // Get.dialog(OkDialog(title: "On Launch", body: "on Launch Message..",onTapOk: (){
-     //    //
-     //    //   Get.back();
-     //    //
-     //    // }));
-     //  },
+     onLaunch: (Map<String, dynamic> message) async {
+     //   showNotification(body: "اشعار جديد", title: "onLaunch");
+        print('onLaunch ===--------------=============');
+        print('onLaunch ==== ? $message');
+
+        // showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} on Launch");
+
+
+       // Get.dialog(OkDialog(title: "On Launch", body: "on Launch Message..",onTapOk: (){
+        //
+        //   Get.back();
+        //
+        // }));
+      },
 
     );
     // _firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true));

@@ -101,7 +101,7 @@ class _HomeScreenPlumberState extends State<HomeScreenPlumber>
                   await controller.homePlumberProvider();
                 },
                 child: ListView(
-                  physics: BouncingScrollPhysics(),
+                  physics: AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.symmetric(
