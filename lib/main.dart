@@ -12,6 +12,7 @@ import 'ui/screen/Inspector/home_inspector.dart';
 import 'ui/screen/Plumber/home_screen.dart';
 import 'ui/screen/auth_Screens/welcome_screen.dart';
 import 'Bloc/Controllers/firebase_notifications.dart';
+import 'Bloc/Controllers/local_notifications_provider.dart';
 import 'ui/screen/verify_screen.dart';
 import 'utils/constants.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
@@ -29,6 +30,7 @@ void main() async {
   app(box, logged);
   runApp(MyApp());
 }
+
 
 var homeScreen;
 
@@ -94,14 +96,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final PushNotificationManger _pushNotificationManger =
-      PushNotificationManger();
+  final PushNotificationManger _pushNotificationManger = Get.put(PushNotificationManger());
   // StreamSubscription subscription;
 
   @override
   void initState() {
     _pushNotificationManger.configureCallback();
-    _pushNotificationManger.localNotification();
+    localNotification();
     // subscription = Connectivity().onConnectivityChanged.listen(showConnectivty);
 
     super.initState();

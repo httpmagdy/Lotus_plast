@@ -41,11 +41,12 @@ dependencies:
   firebase_analytics:
   connectivity:
   flutter_local_notifications:
+#  workmanager:
   firebase_auth:
-  sms_autofill:
+#  sms_autofill:
   firebase_core:
   pin_code_fields:
-  flare_flutter:
+#  flare_flutter:
   path_provider:
   flutter_downloader:
 

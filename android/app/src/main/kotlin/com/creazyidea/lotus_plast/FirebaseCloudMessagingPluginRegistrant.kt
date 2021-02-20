@@ -1,4 +1,4 @@
-package com.creazyidea.lotus_plast.com.creazyidea.lotus_plast;
+package com.creazyidea.lotus_plast
 
 import io.flutter.plugin.common.PluginRegistry
 import io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin

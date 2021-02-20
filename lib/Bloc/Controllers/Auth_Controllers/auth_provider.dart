@@ -28,8 +28,8 @@ class AuthProvider {
     return _token;
   }
 
-  getUserTypeVerified() {
-    var typeUser = userInfoStorage.read("typeUser");
+  getUserTypeVerified() async{
+    var typeUser = await userInfoStorage.read("typeUser");
 
     print('typeUser Verified ::::: $typeUser');
 
@@ -42,21 +42,17 @@ class AuthProvider {
     } else {}
   }
 
-  void getUserType(int type, int isActive) {
-    print('dataResponse.typeUser ::::: ${type}');
-
-    print('isActive... $isActive');
+  void getUserType(int type, int isActivePhone) {
+    print('dataResponse.typeUser ::::: $type');
 
     var phoneVerify = userInfoStorage.read("phoneVerify");
 
-    if (isActive == 0 && phoneVerify == 0) {
+    print('isActive... $isActivePhone');
+    print('phoneVerify... $phoneVerify');
 
-     //TODO: //////////////////////////
+    if (isActivePhone == 1 || phoneVerify == 1) {
 
-      print('Is Not Active ::::: Please Verify your Phone... $isActive');
-    } else {
-
-      print('Verify Phone Successful... $isActive');
+      print('Verify Phone Successful... $isActivePhone');
 
       if (type == 0) {
         Get.offAll(HomeScreenPlumber());
@@ -65,6 +61,12 @@ class AuthProvider {
       } else if (type == 2) {
         Get.offAll(HomeInspector());
       } else {}
+
+
+    } else {
+      //TODO: //////////////////////////
+
+      print('Is Not Active ::::: Please Verify your Phone... $isActivePhone');
 
     }
   }
@@ -83,5 +85,18 @@ class AuthProvider {
     userInfoStorage.write('apiToken', userInfo.data.apiToken);
 
     print('API TOKENNNNNNNNNNN >>>>>>>>>> $howToOpen');
+  }
+
+  Future<void> deleteUserInfoStorage() async {
+    await userInfoStorage.remove('idUser');
+    await userInfoStorage.remove('name');
+    await userInfoStorage.remove('phone');
+    await userInfoStorage.remove('city');
+    await userInfoStorage.remove('state');
+    await userInfoStorage.remove('identificationNumber');
+    await userInfoStorage.remove('phoneVerify');
+    await userInfoStorage.remove('typeUser');
+    await userInfoStorage.remove('code');
+    await userInfoStorage.remove('apiToken');
   }
 }

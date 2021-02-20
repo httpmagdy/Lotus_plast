@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
 
-customSnackBar({@required String title, @required String body}) {
+customSnackBar({@required String title, @required String body, bool errorMessage = false}) {
   return Get.snackbar(
     '', '',
     titleText: CustomText(
@@ -14,7 +14,9 @@ customSnackBar({@required String title, @required String body}) {
       text: '$body',
       color: Colors.white,
     ),
-    backgroundColor: Colors.black.withOpacity(0.45),
+    // backgroundColor: Colors.black.withOpacity(0.45),
+    backgroundColor: errorMessage ? Colors.red.withOpacity(0.45) :Colors.black.withOpacity(0.45),
+
     // barBlur: 0.8,
   );
 }

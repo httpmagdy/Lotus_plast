@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus/Bloc/Controllers/Auth_Controllers/login.dart';
 import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
 import 'package:lotus/ui/widget/circle_button.dart';
 import 'package:lotus/ui/widget/custom_text_field.dart';
 import 'package:lotus/utils/constants.dart';
@@ -37,13 +36,21 @@ class LoginScreen extends StatelessWidget {
                           ),
                           Text(
                             "تسجيل الدخول",
-                            style: Theme.of(context).textTheme.headline1.copyWith(
-                                fontSize: ScreenHelper.screenFont(context, 25)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline1
+                                .copyWith(
+                                    fontSize:
+                                        ScreenHelper.screenFont(context, 25)),
                           ),
                           Text(
                             "ادخل رقم الموبايل وكلمة السر",
-                            style: Theme.of(context).textTheme.subtitle2.copyWith(
-                                fontSize: ScreenHelper.screenFont(context, 16)),
+                            style: Theme.of(context)
+                                .textTheme
+                                .subtitle2
+                                .copyWith(
+                                    fontSize:
+                                        ScreenHelper.screenFont(context, 16)),
                           ),
                           SizedBox(
                             height: ScreenHelper.screenHeight(context, 18),
@@ -65,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                           GetX<LoginProvider>(
                             init: LoginProvider(),
-                            builder: (controller) =>  CustomTextField(
+                            builder: (controller) => CustomTextField(
                               hint: "كلمة المرور",
 
                               suffixIcon: controller.passwordSecure.value
@@ -73,7 +80,8 @@ class LoginScreen extends StatelessWidget {
                                   : Icons.visibility,
 
                               onSuffixTap: () {
-                                controller.passwordSecure.value = !controller.passwordSecure.value;
+                                controller.passwordSecure.value =
+                                    !controller.passwordSecure.value;
                               },
 
                               isSecure: controller.passwordSecure.value,
@@ -97,8 +105,8 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding:
-                    EdgeInsets.only(bottom: ScreenHelper.screenHeight(context, 20)),
+                    padding: EdgeInsets.only(
+                        bottom: ScreenHelper.screenHeight(context, 20)),
                     child: Align(
                       alignment: Alignment.bottomCenter,
                       child: InkWell(
@@ -107,18 +115,26 @@ class LoginScreen extends StatelessWidget {
                           },
                           child: RichText(
                             text: TextSpan(
-                              style: Theme.of(context).textTheme.subtitle2.copyWith(
-                                  color: ConstColors.GREY_COLOR,
-                                  fontSize: ScreenHelper.screenFont(context, 15)),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle2
+                                  .copyWith(
+                                      color: ConstColors.GREY_COLOR,
+                                      fontSize:
+                                          ScreenHelper.screenFont(context, 15)),
                               children: <TextSpan>[
                                 TextSpan(
                                   text: 'ليس لديك حساب ؟  ',
                                 ),
                                 TextSpan(
                                   text: 'إنشاء حساب',
-                                  style: Theme.of(context).textTheme.subtitle1.copyWith(
-                                      color: ConstColors.MAIN_COLOR,
-                                      fontSize: ScreenHelper.screenFont(context, 15)),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1
+                                      .copyWith(
+                                          color: ConstColors.MAIN_COLOR,
+                                          fontSize: ScreenHelper.screenFont(
+                                              context, 15)),
                                 )
                               ],
                             ),
@@ -129,7 +145,6 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
           ),
-
           Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: ScreenHelper.screenWidth(context, 25),
@@ -140,14 +155,11 @@ class LoginScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   CircleButton(
-                    onTap: () async{
-
+                    onTap: () async {
                       node.unfocus();
-                     await _loginProvider.login();
+                      await _loginProvider.login();
                       // Get.back();
                       // Get.back();
-
-
                     },
                   ),
                 ],

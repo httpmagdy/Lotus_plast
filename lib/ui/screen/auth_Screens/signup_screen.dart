@@ -34,8 +34,8 @@ List<UserType> types = [
 class SignUpScreen extends StatelessWidget {
   final RegisterProvider _registerProvider = Get.put(RegisterProvider());
   final StatusProvider _statusProvider = Get.put(StatusProvider());
-  final PhoneVerifyPhoneProvider _verifyPhoneProvider =
-      Get.put(PhoneVerifyPhoneProvider());
+  // final PhoneVerifyPhoneProvider _verifyPhoneProvider =
+  //     Get.put(PhoneVerifyPhoneProvider());
 
   @override
   Widget build(BuildContext context) {
@@ -86,14 +86,14 @@ class SignUpScreen extends StatelessWidget {
                           controller: _registerProvider.phoneController,
                           keyboardType: TextInputType.phone,
                           onComplete: () {
-                            node.unfocus();
+                            node.nextFocus();
                           },
                         ),
                         SizedBox(
                           height: ScreenHelper.screenHeight(context, 18),
                         ),
                         GetX<RegisterProvider>(
-                          builder: (controller) =>  CustomTextField(
+                          builder: (controller) => CustomTextField(
                             hint: "كلمة المرور",
                             suffixIcon: controller.passwordSecure.value
                                 ? Icons.visibility_off
@@ -121,17 +121,15 @@ class SignUpScreen extends StatelessWidget {
                         GetX<RegisterProvider>(
                           builder: (controller) => CustomTextField(
                             hint: "تاكيد كلمة السر",
-                            suffixIcon:
-                            controller.confirmPasswordSecure.value
-                                    ? Icons.visibility_off
-                                    : Icons.visibility,
+                            suffixIcon: controller.confirmPasswordSecure.value
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                             onSuffixTap: () {
                               controller.confirmPasswordSecure.value =
                                   !controller.confirmPasswordSecure.value;
                             },
                             isSecure: controller.confirmPasswordSecure.value,
-                            controller:
-                            controller.confirmPasswordController,
+                            controller: controller.confirmPasswordController,
                             validator: (String value) {
                               if (value.isEmpty) {
                                 return "يجب ادخال كلمة السر";
@@ -148,8 +146,7 @@ class SignUpScreen extends StatelessWidget {
                             errorMessage: "يجب ادخال كلمة السر",
 //                          prefixIcon: "assets/img/person.png",
                             onComplete: () {
-                              node.unfocus();
-                              // submit(); .......................................
+                              node.nextFocus();
                             },
                           ),
                         ),
@@ -357,33 +354,39 @@ class SignUpScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  CircleButton(
-                    onTap: () async {
-                      node.unfocus();
+                  GetBuilder<PhoneVerifyPhoneProvider>(
+                    init: PhoneVerifyPhoneProvider(),
+                    // dispose: (state) {
+                    //   PhoneVerifyPhoneProvider().smsController.dispose();
+                    // },
+                    builder: (controller) => CircleButton(
+                      onTap: () async {
+                        node.unfocus();
 
-                      await _registerProvider.register().then((value) {
-                        if (value != null) {
-                          print("MAKE => Verify !!!");
+                        await _registerProvider.register().then((value) {
+                          if (value != null) {
+                            print("MAKE => Verify !!!");
 
-                          _verifyPhoneProvider
-                              .verifyPhoneNumber(
-                                  _registerProvider.phoneController.text)
-                              .then((val) {
-                            print("VALue => Id :::: $val");
+                            controller
+                                .verifyPhoneNumber(
+                                    _registerProvider.phoneController.text)
+                                .then((val) {
+                              print("VALue => Id :::: $val");
 
-                            if (val != null) {
-                              print("SEND Code Is Done !!!");
-                              Get.back();
+                              if (val != null) {
+                                print("SEND Code Is Done !!!");
+                                Get.back();
 
-                              Get.to(PhoneVerificationScreen(
-                                  "${_registerProvider.phoneController.text}"));
-                            }
-                          });
-                        } else {
-                          print("NOT => Sign Up !!!");
-                        }
-                      });
-                    },
+                                Get.to(PhoneVerificationScreen(
+                                    "${_registerProvider.phoneController.text}"));
+                              }
+                            });
+                          } else {
+                            print("NOT => Sign Up !!!");
+                          }
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),

@@ -9,7 +9,8 @@ import 'Phone_Verify_Provider/phone_auth_provider.dart';
 import 'auth_provider.dart';
 
 class LoginProvider extends GetxController {
-  final PhoneVerifyPhoneProvider _verifyPhoneProvider = Get.put(PhoneVerifyPhoneProvider());
+  final PhoneVerifyPhoneProvider _verifyPhoneProvider =
+      Get.put(PhoneVerifyPhoneProvider());
 
   AuthProvider _authProvider = AuthProvider();
   final GlobalKey<FormState> globalKeyLogin = GlobalKey<FormState>();
@@ -24,11 +25,10 @@ class LoginProvider extends GetxController {
   Future login() async {
     String dToken = await _authProvider.getDeviceToken();
 
-    print('dToken In Login ::::: ${dToken}');
+    print('dToken In Login ::::: $dToken');
 
     if (!globalKeyLogin.currentState.validate()) {
     } else {
-
       Get.dialog(
         CustomLoading(),
       );
@@ -37,16 +37,16 @@ class LoginProvider extends GetxController {
       UserInfo dataResponse = await loginRepo.loginRepo(
         LoginModel(usernameController.text, passwordController.text, dToken),
       );
-      print('dataResponse.typeUser ::::: ${dataResponse}');
+      print('dataResponse.typeUser ::::: $dataResponse');
 
       if (dataResponse != null) {
-
-        _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
+        _authProvider.getUserType(
+            dataResponse.typeUser, dataResponse.data.phoneVerify);
         _authProvider.saveUserInfoStorage(dataResponse);
         passwordController.clear();
         // usernameController.clear();
 
-        if(dataResponse.data.phoneVerify == 0){
+        if (dataResponse.data.phoneVerify == 0) {
           Get.back();
 
           Get.dialog(
@@ -54,37 +54,29 @@ class LoginProvider extends GetxController {
               title: "حسابك غير مفعل",
               body: "رجاء قم بتأكيد رقمك",
               buttonName: "تفعيل!",
-
+              image: "assets/img/cobone.png",
               onTapOk: () {
-
                 Get.back();
 
-                _verifyPhoneProvider.verifyPhoneNumber(usernameController.text).then((val) {
-
+                _verifyPhoneProvider
+                    .verifyPhoneNumber(usernameController.text)
+                    .then((val) {
                   print("VALue => Id :::: $val");
 
-                  if (val != null ) {
-
+                  if (val != null) {
                     print("SEND Code Is Done !!!");
 
                     Get.back();
 
-                    Get.to(PhoneVerificationScreen("${usernameController.text}"));
-
+                    Get.to(
+                        PhoneVerificationScreen("${usernameController.text}"));
                   }
-
-
                 });
-
               },
             ),
           );
-
         }
-
       }
-
-
     }
   }
 
@@ -95,11 +87,11 @@ class LoginProvider extends GetxController {
     super.onInit();
   }
 
-  // @override
-  // void onClose() {
-  //   passwordController.dispose();
-  //   usernameController.dispose();
-  //   super.onClose();
-  // }
+  @override
+  void onClose() {
+    passwordController.dispose();
+    usernameController.dispose();
+    super.onClose();
+  }
 
 }

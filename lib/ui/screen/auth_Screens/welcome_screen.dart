@@ -25,12 +25,12 @@ class WelcomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        "حساب جديد",
+                        "انضم الينا",
                         style: Theme.of(context).textTheme.headline1.copyWith(
                             fontSize: ScreenHelper.screenFont(context, 16)),
                       ),
                       Text(
-                        "هذا النص يمكن استبدالة باي نص اخر",
+                        "قم بتسجيل الدخول او انشئ حساب جديد",
                         textAlign: TextAlign.center,
                         textDirection: TextDirection.rtl,
                         style: Theme.of(context).textTheme.subtitle1.copyWith(

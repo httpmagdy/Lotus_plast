@@ -1,26 +1,54 @@
-import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/home_customer_tabs_model.dart';
-import '../../ui/widget/custom_dialog.dart';
 import 'dart:io';
+import 'local_notifications_provider.dart';
+
+// Future<dynamic> myBackgroundMessageHandler( message) {
+//
+//   print("on Background = = = = = == = === = = == = = ==> 1111111}");
+//   print("onBack ${message["data"]["body"]}");
+//   print("onBack ${message["data"]["title"]}");
+//
+//   showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]}");
+// }
 
 
+Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
 
-Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) {
-  print("onBack ${message}");
+  if (message['data'] != null) {
+    final data = message['data'];
+
+    final title = data['title'];
+    final body = data['body'];
+
+    await _showNotificationWithDefaultSound(title, body);
+  }
+
+  return Future<void>.value();
 }
 
-class PushNotificationManger {
+Future _showNotificationWithDefaultSound(String title, String message) async {
+  var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'channel_id', 'channel_name', 'channel_description',
+      importance: Importance.max, priority: Priority.high);
+  var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  var platformChannelSpecifics = NotificationDetails(iOS:iOSPlatformChannelSpecifics, android: androidPlatformChannelSpecifics, );
+  await flutterLocalNotificationsPlugin.show(
+    0,
+    '$title',
+    '$message',
+    platformChannelSpecifics,
+    payload: 'Default_Sound',
+  );
+}
+
+class PushNotificationManger extends GetxController{
   // single tone
-  PushNotificationManger._();
-  factory PushNotificationManger() => _instance;
-  static PushNotificationManger _instance = PushNotificationManger._();
-
-
+  // PushNotificationManger._();
+  // factory PushNotificationManger() => _instance;
+  // static PushNotificationManger _instance = PushNotificationManger._();
 
   // Future onDidReceiveLocalNotification(
   //     int id, String title, String body, String payload) async {
@@ -29,45 +57,9 @@ class PushNotificationManger {
   //   Get.dialog(OkDialog(title: title, body: body,));
   // }
 
-  showNotification({title, body}) async {
-    var android = AndroidNotificationDetails(
-        'channel id', 'channel NAME', 'CHANNEL DESCRIPTION',
-        priority: Priority.high, importance: Importance.max);
-    var iOS = IOSNotificationDetails();
-    var platform = NotificationDetails(android: android, iOS: iOS);
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      '$title',
-      '$body',
-      platform,
-      payload: 'AndroidCoding.in',
-    );
-  }
-
-  Future onSelectNotification(String payload) {
-    debugPrint("payload : $payload");
-    print("============");
-  }
-
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =  FlutterLocalNotificationsPlugin();
-
-  void localNotification() {
-    // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
-    const AndroidInitializationSettings android =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    final IOSInitializationSettings iOS = IOSInitializationSettings(
-        // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-        );
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-      android: android,
-      iOS: iOS,
-    );
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
-  }
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
 
 
   void configureCallback() {
@@ -76,61 +68,68 @@ class PushNotificationManger {
       _firebaseMessaging
           .requestNotificationPermissions(IosNotificationSettings());
     }
+
     _firebaseMessaging.configure(
 
       onMessage: (Map<String, dynamic> message) async {
         // If APP Is Opend.
-        showNotification(body: "اشعار جديد", title: "onMessage");
+      showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} ");
 
         // print('onMessage ==== ? ${message}');
 
-        print('onMessage ==== ? ${message["data"]["body"]}');
+        // var data = jsonDecode("$message");
 
-        Allprview extractData = Allprview.fromJson(message["data"]["body"]);
+        print("DATA :::::::: DOWN");
+        // print("DATA :::::::: $data");
 
-        print("on Messa==== ?>>> ${extractData.address}");
+        print('onMessage ==== ? ${message}');
+
+        // Allprview extractData = Allprview.fromJson(message["data"]["body"]);
+
+        // print("on Messa==== ?>>> ${extractData.address}");
 
         // print('onMessage ==== 222222? ${message["data"]["body"]["pulmber_phone"]}');
 
-        // var data = json.decode("$message");
         // Allprview ddd = Allprview.fromJson(message["data"]["body"]);
         //
         // print("DECODING DATA ::::::::::::::::::::::::::::::::::::: ${ddd.address}");
-
-        showNotification(body: "اشعار جديد", title: "onMessage");
-
-        // Get.dialog(OkDialog(title: "On Message", body: "on Message..",onTapOk: (){
-        //   Get.back();
-        // },) );
       },
       // onResume: (Map<String, dynamic> message) async {
       //   print('onResume =============================');
+      //   // showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} on resume");
       //
-      //   // print('onResume ==== ? $message');
+      //   print('onResume ==== ? $message');
       //   print('onResume =============================');
       //
-      //   // showNotification(body: "اشعار جديد", title: "onResume");
+      //   // showNotification(body: "اشعار جديد?", title: "onResume");
       //
-      //   Get.dialog(OkDialog(title: "On Resume", body: "on Resume Message..",onTapOk: (){
-      //     Get.back();
-      //   },) );
-      //
-      //
+      //   // Get.dialog(OkDialog(title: "On Resume", body: "on Resume Message..",onTapOk: (){
+      //   //   Get.back();
+      //   // },) );
       // },
       onBackgroundMessage: myBackgroundMessageHandler,
-     //  onLaunch: (Map<String, dynamic> message) async {
+
+
+     // onLaunch: (Map<String, dynamic> message) async {
      // //   showNotification(body: "اشعار جديد", title: "onLaunch");
+     //    print('onLaunch ===--------------=============');
      //    print('onLaunch ==== ? $message');
      //
-     //    // showNotification(body: "اشعار جديد", title: "onLaunch");
+     //    // showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} on Launch");
      //
-     //    // Get.dialog(OkDialog(title: "On Launch", body: "on Launch Message..",onTapOk: (){
+     //
+     //   // Get.dialog(OkDialog(title: "On Launch", body: "on Launch Message..",onTapOk: (){
      //    //
      //    //   Get.back();
      //    //
      //    // }));
      //  },
+
     );
+    // _firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true));
+    // _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
+    //   print("Settings registered: $settings");
+    // });
   }
 
   void _serialiseAndNavigate(Map<String, dynamic> message) {
@@ -147,4 +146,11 @@ class PushNotificationManger {
       // If there's no view it'll just open the app on the first view
     }
   }
+
+
 }
+
+
+// {notification: {title: "FMC", body: "noty"}, data: {click_action: FLUTTER_NOTIFICATION_CLICK, message: message}}
+
+

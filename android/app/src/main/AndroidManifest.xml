@@ -12,10 +12,11 @@
 <!--    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+<!--    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>-->
 
     <!-- has been added .Application for FCB firebase -->
     <application
-        android:name=".com.creazyidea.lotus_plast.Application"
+        android:name=".Application"
         android:label="lotus_plast"
         android:icon="@mipmap/ic_launcher">
         <provider
@@ -27,7 +28,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths"/>
         </provider>
-
+<!--        <receiver android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationBootReceiver">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.BOOT_COMPLETED"/>-->
+<!--                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCAJyGep7H7biytZ9_YgRLa0eb0d5sQ7OY"/>
         <activity
@@ -45,6 +51,12 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+<!--            <meta-data-->
+<!--                android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"-->
+<!--                android:value="true" />-->
+            <meta-data
+                android:name="com.google.firebase.messaging.default_notification_channel_id"
+                android:value="@string/default_notification_channel_id" />
             <!-- Displays an Android View that continues showing the launch screen
                  Drawable until Flutter paints its first frame, then this splash
                  screen fades out. A splash screen is useful to avoid any visual
@@ -54,6 +66,11 @@
               android:name="io.flutter.embedding.android.SplashScreenDrawable"
               android:resource="@drawable/launch_background"
               />
+            <intent-filter>
+            <action android:name="com.google.firebase.MESSAGING_EVENT" />
+        </intent-filter>
+
+
             <intent-filter>
                 <action android:name="FLUTTER_NOTIFICATION_CLICK" />
                 <category android:name="android.intent.category.DEFAULT" />
