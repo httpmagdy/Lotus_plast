@@ -5,7 +5,6 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'ui/screen/auth_Screens/vreify_phone_screen.dart';
 import 'ui/onboarding/onboarding_screen.dart';
 import 'ui/screen/Customer/home_customer.dart';
 import 'ui/screen/Inspector/home_inspector.dart';
@@ -13,7 +12,6 @@ import 'ui/screen/Plumber/home_screen.dart';
 import 'ui/screen/auth_Screens/welcome_screen.dart';
 import 'Bloc/Controllers/firebase_notifications.dart';
 import 'Bloc/Controllers/local_notifications_provider.dart';
-import 'ui/screen/verify_screen.dart';
 import 'utils/constants.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 
@@ -80,16 +78,6 @@ app(box, logged) async {
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
 
-// app()async{
-//   var _seen =  await box.read("onBoarding");
-//   print("BOOOOOOOOOOOOOOOOOOOOOOOX :: $_seen");
-//
-//   if(_seen == null){
-//     return OnBoardingScreen();
-//   }else if(_seen == true){
-//     return WelcomeScreen();
-//   }
-// }
 class MyApp extends StatefulWidget {
   @override
   _MyAppState createState() => _MyAppState();
@@ -108,26 +96,9 @@ class _MyAppState extends State<MyApp> {
     super.initState();
   }
 
-  // showConnectivty(ConnectivityResult result) {
-  //   bool hasIntenet = result != ConnectivityResult.none;
-
-  //   if (hasIntenet) {
-  //     return 'u have internet';
-  //   } else {
-  //     return 'u have no internet';
-  //   }
-  // }
-
-  // @override
-  // void dispose() {
-  //   super.dispose();
-  //   subscription.cancel();
-  // }
   @override
   Widget build(BuildContext context) {
-    // print("BOOOOOOOOOOOOOOOOOOOOOOOX :: ${box.read("onBoarding")}");
     return GetMaterialApp(
-      // builder: DevicePreview.appBuilder,
       debugShowCheckedModeBanner: false,
       locale: Locale('ar', 'AE'),
       title: 'Lutas',
@@ -157,52 +128,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-// class ConnectivtyPage extends StatefulWidget {
-//   @override
-//   _ConnectivtyPageState createState() => _ConnectivtyPageState();
-// }
-
-// class _ConnectivtyPageState extends State<ConnectivtyPage> {
-//   StreamSubscription subscription;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     subscription = Connectivity().onConnectivityChanged.listen(showConnectivty);
-//   }
-
-//   @override
-//   void dispose() {
-//     super.dispose();
-//     subscription.cancel();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Center(
-//         child: FlatButton(
-//             onPressed: () async {
-//               var result = await Connectivity().checkConnectivity();
-//               var f = showConnectivty(result);
-//               print(f);
-//             },
-//             child: Text('Connectivty')),
-//       ),
-//     );
-//   }
-
-//   showConnectivty(ConnectivityResult result) {
-//     bool hasIntenet = result != ConnectivityResult.none;
-
-//     if (hasIntenet) {
-//       return 'u have internet';
-//     } else {
-//       return 'u have no internet';
-//     }
-//   }
-// }
-
-
-
