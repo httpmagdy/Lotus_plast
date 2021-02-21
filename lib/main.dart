@@ -47,7 +47,7 @@ app(box, logged) async {
 
     if (_logged != null) {
 
-      print("(main) verify is $_isVerify ");
+      print("(main) verify is ISSSSSSSSSSSSSSSSS $_isVerify ");
 
       if(_isVerify == 0){
 
@@ -68,8 +68,7 @@ app(box, logged) async {
       }
 
     } else {
-      print(
-          'NOT AUTH ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ $_logged');
+      print('NOT AUTH ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ $_logged');
       homeScreen = WelcomeScreen();
     }
   }

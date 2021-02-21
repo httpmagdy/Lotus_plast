@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:lotus/Bloc/Controllers/Inspector/home_inspector_provider.dart';
 import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
+import 'package:lotus/ui/screen/Inspector/ReportPreview_inspector.dart';
+import 'package:lotus/ui/screen/Inspector/details_inspector_preview.dart';
 import 'package:lotus/ui/widget/custom_appBar.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/utils/constants.dart';
+import '../../../Bloc/Controllers/notifications_page_provider.dart';
+import 'package:get/get.dart';
 
 class NotificationScreen extends StatelessWidget {
+
+  final NotificationsPageProvider n = Get.put(NotificationsPageProvider());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,90 +23,112 @@ class NotificationScreen extends StatelessWidget {
         transparent: false,
         isHome: false,
       ),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        padding: EdgeInsets.only(top: 10, left: 15, right: 15),
-        children: [
-          NotificationCard(),
-          NotificationCard(),
-          NotificationCard(),
-        ],
+      body: GetX<NotificationsPageProvider>(
+        // init: NotificationsPageProvider(),
+        builder: (controller) => controller.loading.value ? CustomLoading(bg: Colors.white,) : RefreshIndicator(
+          color: ConstColors.ORANGE_COLOR,
+          onRefresh: () async {
+            await controller.fetchNotifications();
+          },
+          child: ListView.builder(
+            itemCount: controller.myNotifications.length,
+            physics: AlwaysScrollableScrollPhysics(),
+            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+            itemBuilder: (context, index) => NotificationCard(id: controller.myNotifications[index].data.data.id,time: controller.myNotifications[index].data.data.time,title: controller.myNotifications[index].data.data.title,body: controller.myNotifications[index].data.data.body,),
+          ),
+        ),
       ),
     );
   }
 }
 
 class NotificationCard extends StatelessWidget {
+  final HomeInspectorProvider _inspectorProvider = Get.find();
+
+  final String title, body, time;
+  final int id;
+  NotificationCard({this.title, this.body,this.time, this.id});
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        vertical: ScreenHelper.screenWidth(context, 6),
-      ),
-      decoration: BoxDecoration(
-        color: ConstColors.ULTRA_GREY_COLOR,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Stack(
-        alignment: Alignment.bottomLeft,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15,
-              vertical: 15,
-            ),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: ConstColors.WHITE.withOpacity(.8),
-                  // backgroundImage: AssetImage("assets/img/tab4.png"),
-                  child: Icon(
-                    Icons.notifications_none_sharp,
-                    size: 24,
-                    color: ConstColors.ORANGE_COLOR,
+    return GestureDetector(
+      onTap: (){
+
+        var goTo = _inspectorProvider.getInspectById(id);
+        print(goTo.id);
+        Get.to(ReportPreviewInspector(goTo));
+
+      },
+      child: Container(
+        margin: EdgeInsets.symmetric(
+          vertical: ScreenHelper.screenWidth(context, 6),
+        ),
+        decoration: BoxDecoration(
+          color: ConstColors.ULTRA_GREY_COLOR,
+          borderRadius: BorderRadius.circular(8),
+        ),
+
+        child: Stack(
+          alignment: Alignment.bottomLeft,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 15,
+              ),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: ConstColors.WHITE.withOpacity(.8),
+                    // backgroundImage: AssetImage("assets/img/tab4.png"),
+                    child: Icon(
+                      Icons.notifications_none_sharp,
+                      size: 24,
+                      color: ConstColors.ORANGE_COLOR,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: ScreenHelper.screenWidth(context, 12),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: ScreenHelper.screenSize(context).width * .65,
-                      child: CustomText(
-                        text: "اشعار جديد",
-                        fontW: FW.semibold,
-                        fontSize: 12,
+                  SizedBox(
+                    width: ScreenHelper.screenWidth(context, 12),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: ScreenHelper.screenSize(context).width * .65,
+                        child: CustomText(
+                          text: "$title",
+                          fontW: FW.semibold,
+                          fontSize: 12,
+                        ),
                       ),
-                    ),
-                    Container(
-                      width: ScreenHelper.screenSize(context).width * .65,
-                      padding: EdgeInsets.only(bottom: 8),
-                      child: CustomText(
-                        text:
-                            "يوجد  معاينة جديدة في منم عاينة جديدة ف جديدة ف جديدة في منمع اينة جمنم عاينة جديدة في منطقة قريبة منك ",
-                        // fontSize: 12,
-                        color: ConstColors.TEXT_GREY2,
+                      Container(
+                        width: ScreenHelper.screenSize(context).width * .65,
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: CustomText(
+                          text:
+                              "$body",
+                          // fontSize: 12,
+                          color: ConstColors.TEXT_GREY2,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenHelper.screenHeight(context, 7),
-              vertical: ScreenHelper.screenWidth(context, 4),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: ScreenHelper.screenHeight(context, 7),
+                vertical: ScreenHelper.screenWidth(context, 4),
+              ),
+              child: CustomText(
+                text: "$time",
+                color: ConstColors.TEXT_GREY2.withOpacity(.5),
+                fontSize: 10,
+              ),
             ),
-            child: CustomText(
-              text: " 09:20 AM ",
-              color: ConstColors.TEXT_GREY2.withOpacity(.5),
-              fontSize: 10,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

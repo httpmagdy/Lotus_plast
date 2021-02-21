@@ -254,8 +254,12 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       hasError = false;
                     });
 
+
+
                     await _verifyPhoneProvider
                         .verifyDonning(smsController.text);
+
+
 
                     // Get.back();
 

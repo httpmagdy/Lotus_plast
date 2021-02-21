@@ -16,8 +16,8 @@
 
     <!-- has been added .Application for FCB firebase -->
     <application
-        android:name=".Application"
-        android:label="lotus_plast"
+        android:name="com.creazyidea.lotus_plast.Application"
+        android:label="Lotus"
         android:icon="@mipmap/ic_launcher">
         <provider
             android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"

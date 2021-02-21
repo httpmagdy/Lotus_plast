@@ -57,9 +57,6 @@ class _ReportPreviewInspectorState extends State<ReportPreviewInspector> {
 
     var node = FocusScope.of(context);
 
-    print(
-        "::::::::::: widget.data.pulmberName :::::: ${widget.data.customerPhone}");
-
     return Scaffold(
       appBar: customAppBar(
           context: context,

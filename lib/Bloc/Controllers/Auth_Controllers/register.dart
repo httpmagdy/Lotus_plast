@@ -62,7 +62,7 @@ class RegisterProvider extends GetxController {
 
       if (dataResponse != null) {
          // _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
-        _authProvider.saveUserInfoStorage(dataResponse);
+        _authProvider.saveUserInfoStorage(userInfo: dataResponse);
 
       }
 

@@ -27,4 +27,5 @@ class ApiKey {
   static const String callusURL = 'callus';
   static const String verifyPhoneURL = 'verify_phone';
   static const String logoutURL = 'logout';
+  static const String myNotificationsURL = 'mynotifications';
 }

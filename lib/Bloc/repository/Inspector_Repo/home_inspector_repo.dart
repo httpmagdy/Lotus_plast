@@ -13,7 +13,7 @@ class HomeInspectorRepo extends NetworkService {
       );
 
       print(' HomeInspectorModel =================== :::: ${_request.statusCode}');
-      print(' HomeInspectorModel :::: ${_request.data}');
+      // print(' HomeInspectorModel :::: ${_request.data}');
 
       return HomeInspectorModel.fromJson(_request.data);
 

@@ -2,7 +2,6 @@ import 'package:get/get.dart';
 import 'package:lotus/Bloc/models/home_inspector_model.dart';
 import 'package:lotus/Bloc/repository/Inspector_Repo/home_inspector_repo.dart';
 
-
 class HomeInspectorProvider extends GetxController {
   HomeInspectorRepo  _homeInspectorRepo= HomeInspectorRepo();
   var stillPreviews = List<Complete>().obs;
@@ -15,6 +14,15 @@ class HomeInspectorProvider extends GetxController {
   }
 
   RxBool homeLoading = true.obs;
+
+  getInspectById(id){
+    Complete to = stillPreviews?.firstWhere((e) => e.id == id);
+
+   print("TTTTTTo :::: $to");
+
+   // return to;
+    return to;
+  }
 
   Future homeInspector() async {
     try {
@@ -37,7 +45,7 @@ class HomeInspectorProvider extends GetxController {
       homeLoading(false);
 
       // update();
-      print(' homeLoading  :::: ${homeLoading.value} ');
+      // print(' homeLoading  :::: ${homeLoading.value} ');
       print(' LEEEEEEEENTH all Damage :::: ${stillPreviews.length} ');
       print(' LEEEEEEEENTH all Preview :::: ${completePreview.length} ');
 

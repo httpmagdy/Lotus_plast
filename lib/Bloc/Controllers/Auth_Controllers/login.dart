@@ -40,9 +40,12 @@ class LoginProvider extends GetxController {
       print('dataResponse.typeUser ::::: $dataResponse');
 
       if (dataResponse != null) {
+
         _authProvider.getUserType(
-            dataResponse.typeUser, dataResponse.data.phoneVerify);
-        _authProvider.saveUserInfoStorage(dataResponse);
+            dataResponse.typeUser, dataResponse.data.phoneVerify,
+        );
+
+        _authProvider.saveUserInfoStorage(userInfo: dataResponse);
         passwordController.clear();
         // usernameController.clear();
 
@@ -68,13 +71,13 @@ class LoginProvider extends GetxController {
 
                     Get.back();
 
-                    Get.to(
-                        PhoneVerificationScreen("${usernameController.text}"));
+                    Get.to(PhoneVerificationScreen("${usernameController.text}"));
                   }
                 });
               },
             ),
           );
+
         }
       }
     }

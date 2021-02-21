@@ -27,7 +27,7 @@ class SliderAddsController extends GetxController{
         sliderElement.add(item);
       }
 
-      print(' SLIDERRRRRRRRRRR data :::: ${sliderElement.length}  ${sliderElement} ');
+      // print(' SLIDERRRRRRRRRRR data :::: ${sliderElement.length} ');
 
     } finally {
       // print(' finally data :::: ${sliderElement.length}  ${sliderElement} ');

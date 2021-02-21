@@ -71,7 +71,10 @@ class AuthProvider {
     }
   }
 
-  void saveUserInfoStorage(UserInfo userInfo) {
+  void saveUserInfoStorage({UserInfo userInfo}) {
+
+    print("SAVED DATA :::: ${userInfo.data.name} ============================ SAVE");
+
     userInfoStorage.write('idUser', userInfo.data.id);
     userInfoStorage.write('name', userInfo.data.name);
     userInfoStorage.write('phone', userInfo.data.phone);

@@ -78,8 +78,7 @@ class _HomeInspectorState extends State<HomeInspector>
           // init: HomeInspectorProvider(),
           // initState: (state) => HomeCategoryCustomerProvider().homeCustomerProvider(),
           builder: (controller) {
-        print(
-            ' controller.homeLoading.value  ;;;;;;;;  ${controller.homeLoading.value}');
+
         return controller.homeLoading.value
             ? CustomLoading(bg: ConstColors.WHITE)
             : RefreshIndicator(

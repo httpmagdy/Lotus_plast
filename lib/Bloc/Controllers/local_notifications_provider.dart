@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get/get.dart';
+import 'package:lotus/ui/screen/Notification/notification_screen.dart';
 
 showNotification({title, body}) async {
   var android = AndroidNotificationDetails(
@@ -18,6 +20,8 @@ showNotification({title, body}) async {
 
 Future onSelectNotification(String payload) {
   debugPrint("payload : $payload");
+  Get.to(NotificationScreen());
+
   print("============");
 }
 
