@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:lotus/ui/screen/Notification/notification_screen.dart';
 import 'dart:io';
 import 'Inspector/home_inspector_provider.dart';
+import 'Notifications_Management/notifications_page_provider.dart';
 import 'local_notifications_provider.dart';
 
 // Future<dynamic> myBackgroundMessageHandler( message) {
@@ -68,7 +69,8 @@ class PushNotificationManger extends GetxController{
   //   Get.dialog(OkDialog(title: title, body: body,));
   // }
 
-  final HomeInspectorProvider _homeInspectorProvider = Get.put(HomeInspectorProvider());
+  // final HomeInspectorProvider _homeInspectorProvider = Get.put(HomeInspectorProvider());
+  final NotificationsPageProvider _notificationsPageProvider = Get.put(NotificationsPageProvider());
 
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
@@ -107,6 +109,7 @@ class PushNotificationManger extends GetxController{
           // print(goTo.id);
           // Get.to(ReportPreviewInspector(goTo));
 
+        _notificationsPageProvider.fetchNotifications();
           Get.to(NotificationScreen());
 
 
@@ -127,6 +130,7 @@ class PushNotificationManger extends GetxController{
         print('onLaunch ===--------------=============');
         print('onLaunch ==== ? $message');
 
+        _notificationsPageProvider.fetchNotifications();
         Get.to(NotificationScreen());
 
      },

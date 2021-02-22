@@ -3,6 +3,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:lotus/Bloc/Controllers/AddMaintenance/damage_types.dart';
 import 'package:lotus/Bloc/Controllers/Customer/home_provider_customer.dart';
 import 'package:lotus/Bloc/Controllers/Inspector/send_rate_preview_preview.dart';
+import 'package:lotus/Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
 import 'package:lotus/Bloc/Controllers/slider_adds_controller.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/globalWidget/NoSomethingYet.dart';
@@ -40,7 +41,8 @@ class _HomeCustomerState extends State<HomeCustomer>
 
   final SendRatePreviewProvider _sendRatePreviewProvider =
       Get.put(SendRatePreviewProvider());
-
+  final NotificationsPageProvider _notificationsPage =
+  Get.put(NotificationsPageProvider());
   final List<Widget> myTabs = [
     Tab(
       child: CustomText(

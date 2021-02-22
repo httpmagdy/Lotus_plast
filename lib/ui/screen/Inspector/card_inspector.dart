@@ -41,7 +41,6 @@ class CardInspector extends StatelessWidget {
     }
 
 
-    print('activation::::::::::::::: $activation');
 
     return GestureDetector(
       onTap: onTap,

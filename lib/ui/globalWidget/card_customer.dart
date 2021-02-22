@@ -23,7 +23,6 @@ class CardCustomer extends StatelessWidget {
   Widget build(BuildContext context) {
     var activation = data.statusActive;
 
-    print('activation::::::::::::::: $activation');
 
     // Widget activationStatus() {
     //   if (activation == 0) {

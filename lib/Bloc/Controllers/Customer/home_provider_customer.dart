@@ -17,6 +17,15 @@ class HomeCategoryCustomerProvider extends GetxController {
     super.onInit();
   }
 
+  getPreviewById(id){
+    Allprview to = allPreview?.firstWhere((e) => e.id == id);
+
+    print("TTTTTTo :::: $to");
+
+    // return to;
+    return to;
+  }
+
   RxBool homeLoading = true.obs;
 
   NetworkService _networkService = NetworkService();

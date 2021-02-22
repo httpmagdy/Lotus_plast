@@ -12,10 +12,13 @@ class GetGiftsProvider extends GetxController {
 
   var nuOfMaintenance = 0.obs;
   var listOfGifts = List<Gift>().obs;
+  RxBool status = true.obs;
 
   GetGiftsRepo _getGiftsRepo = GetGiftsRepo();
 
   Future getGiftsProvider() async {
+
+    status(true);
 
     GetGifts _data = await _getGiftsRepo.getGiftsRepo();
 
@@ -25,6 +28,9 @@ class GetGiftsProvider extends GetxController {
       listOfGifts.add(item);
       // update();
     }
+
+    status(false);
+
 
 
     print('get Gifts Repo => statusCode : ${nuOfMaintenance}');

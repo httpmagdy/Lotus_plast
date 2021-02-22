@@ -4,6 +4,7 @@ import 'package:lotus/Services/network_services.dart';
 import 'package:lotus/utils/constants.dart';
 import '../../ui/globalWidget/custom_loading.dart';
 import 'Auth_Controllers/auth_provider.dart';
+import '../../Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
 
 class LogoutProvider extends GetxController {
   // @override
@@ -11,9 +12,11 @@ class LogoutProvider extends GetxController {
   //   fetchPrivacy();
   //   super.onInit();
   // }
+  NotificationsPageProvider _notificationsPageProvider = Get.find();
   AuthProvider _authProvider = AuthProvider();
 
   NetworkService _networkService = NetworkService();
+
 
   Future logout() async {
     // loading(true);
@@ -30,7 +33,7 @@ class LogoutProvider extends GetxController {
       print(' fetchAbout === :::: ${_request.data} ');
 
       await _authProvider.deleteUserInfoStorage();
-
+       _notificationsPageProvider.myNotifications.clear();
       // privacyText.value = _request.data["text"];
       // loading(false);
 

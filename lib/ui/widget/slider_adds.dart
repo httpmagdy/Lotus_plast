@@ -28,7 +28,7 @@ class SliderAdds extends StatelessWidget {
         // onPageChanged: callbackFunction,
         scrollDirection: Axis.horizontal,
       ),
-      itemCount: slider.length,
+      itemCount: slider?.length,
       itemBuilder: (context, index, realIndex) => AspectRatio(
         aspectRatio: 3,
         child: ClipRRect(

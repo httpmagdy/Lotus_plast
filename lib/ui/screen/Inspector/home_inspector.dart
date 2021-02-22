@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lotus/Bloc/Controllers/Inspector/home_inspector_provider.dart';
+import 'package:lotus/Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
 import 'package:lotus/Bloc/Controllers/slider_adds_controller.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/globalWidget/NoSomethingYet.dart';
@@ -26,6 +27,9 @@ class _HomeInspectorState extends State<HomeInspector>
       Get.put(SliderAddsController());
 
   final HomeInspectorProvider home = Get.put(HomeInspectorProvider());
+
+  final NotificationsPageProvider _notificationsPage =
+  Get.put(NotificationsPageProvider());
 
   final List<Widget> myTabs = [
     Tab(

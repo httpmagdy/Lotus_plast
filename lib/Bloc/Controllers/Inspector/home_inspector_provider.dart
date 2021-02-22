@@ -15,7 +15,7 @@ class HomeInspectorProvider extends GetxController {
 
   RxBool homeLoading = true.obs;
 
-  getInspectById(id){
+  getInspectById(id) {
     Complete to = stillPreviews?.firstWhere((e) => e.id == id);
 
    print("TTTTTTo :::: $to");

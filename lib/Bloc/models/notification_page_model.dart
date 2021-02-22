@@ -58,12 +58,15 @@ class DataData {
     this.clickAction,
     this.id,
     this.time,
+    this.type
   });
 
   final String title, time;
   final String body;
   final String clickAction;
+  final String type;
   final int id;
+
 
   factory DataData.fromJson(Map<String, dynamic> json) => DataData(
     title: json["title"] == null ? null : json["title"],
@@ -71,5 +74,6 @@ class DataData {
     body: json["body"] == null ? null : json["body"],
     clickAction: json["click_action"] == null ? null : json["click_action"],
     id: json["id"] == null ? null : json["id"],
+    type: json["type"] == null ? null : json["type"],
   );
 }

@@ -71,21 +71,22 @@ class AuthProvider {
     }
   }
 
-  void saveUserInfoStorage({UserInfo userInfo}) {
+  Future<void> saveUserInfoStorage({UserInfo userInfo}) async{
 
+    print("SAVED DATA :::: userInfo ============================ SAVE");
     print("SAVED DATA :::: ${userInfo.data.name} ============================ SAVE");
 
-    userInfoStorage.write('idUser', userInfo.data.id);
-    userInfoStorage.write('name', userInfo.data.name);
-    userInfoStorage.write('phone', userInfo.data.phone);
-    userInfoStorage.write('city', userInfo.data.city);
-    userInfoStorage.write('state', userInfo.data.state);
-    userInfoStorage.write(
+  await  userInfoStorage.write('idUser', userInfo.data.id);
+  await    userInfoStorage.write('name', userInfo.data.name);
+  await  userInfoStorage.write('phone', userInfo.data.phone);
+  await userInfoStorage.write('city', userInfo.data.city);
+  await  userInfoStorage.write('state', userInfo.data.state);
+  await   userInfoStorage.write(
         'identificationNumber', userInfo.data.identificationNumber);
-    userInfoStorage.write('phoneVerify', userInfo.data.phoneVerify);
-    userInfoStorage.write('typeUser', userInfo.typeUser);
-    userInfoStorage.write('code', userInfo.data.code);
-    userInfoStorage.write('apiToken', userInfo.data.apiToken);
+  await userInfoStorage.write('phoneVerify', userInfo.data.phoneVerify);
+  await  userInfoStorage.write('typeUser', userInfo.typeUser);
+  await  userInfoStorage.write('code', userInfo.data.code);
+  await  userInfoStorage.write('apiToken', userInfo.data.apiToken);
 
     print('API TOKENNNNNNNNNNN >>>>>>>>>> $howToOpen');
   }

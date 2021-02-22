@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/home_inspector_provider.dart';
+import 'package:lotus/Bloc/Controllers/Notifications_Management/notify_manage.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/screen/Inspector/ReportPreview_inspector.dart';
-import 'package:lotus/ui/screen/Inspector/details_inspector_preview.dart';
 import 'package:lotus/ui/widget/custom_appBar.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/utils/constants.dart';
-import '../../../Bloc/Controllers/notifications_page_provider.dart';
+import '../../../Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
 import 'package:get/get.dart';
 
 class NotificationScreen extends StatelessWidget {
-
   final NotificationsPageProvider n = Get.put(NotificationsPageProvider());
 
   @override
@@ -25,38 +22,62 @@ class NotificationScreen extends StatelessWidget {
       ),
       body: GetX<NotificationsPageProvider>(
         // init: NotificationsPageProvider(),
-        builder: (controller) => controller.loading.value ? CustomLoading(bg: Colors.white,) : RefreshIndicator(
-          color: ConstColors.ORANGE_COLOR,
-          onRefresh: () async {
-            await controller.fetchNotifications();
-          },
-          child: ListView.builder(
-            itemCount: controller.myNotifications.length,
-            physics: AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.only(top: 10, left: 15, right: 15),
-            itemBuilder: (context, index) => NotificationCard(id: controller.myNotifications[index].data.data.id,time: controller.myNotifications[index].data.data.time,title: controller.myNotifications[index].data.data.title,body: controller.myNotifications[index].data.data.body,),
-          ),
-        ),
+        builder: (controller) {
+          print("4  controller.loading.value ${controller.loading.value}");
+       return   controller.loading.value
+              ? CustomLoading(
+            bg: Colors.white,
+          )
+              : RefreshIndicator(
+            color: ConstColors.ORANGE_COLOR,
+            onRefresh: () async {
+              await controller.fetchNotifications();
+            },
+            child: controller.status.value == false ? Center(child: CustomText(text: "ليس لديك اشعارات حاليا !",color: ConstColors.GREY_COLOR,),) : ListView.builder(
+              itemCount: controller.myNotifications.length,
+              physics: AlwaysScrollableScrollPhysics(),
+              padding: EdgeInsets.only(top: 10, left: 15, right: 15),
+              itemBuilder: (context, index) => NotificationCard(
+                id: controller.myNotifications[index].data.data.id,
+                time: controller.myNotifications[index].data.data.time,
+                title: controller.myNotifications[index].data.data.title,
+                body: controller.myNotifications[index].data.data.body,
+                notifyType: controller.myNotifications[index].data.data.type,
+              ),
+            ),
+          );
+        }
       ),
     );
   }
 }
 
 class NotificationCard extends StatelessWidget {
-  final HomeInspectorProvider _inspectorProvider = Get.find();
+  // final HomeInspectorProvider _inspectorProvider = Get.find();
 
-  final String title, body, time;
+  final String title, body, time, notifyType;
   final int id;
-  NotificationCard({this.title, this.body,this.time, this.id});
+
+  NotificationCard({this.title, this.body, this.time, this.id, this.notifyType});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () async{
 
-        var goTo = _inspectorProvider.getInspectById(id);
-        print(goTo.id);
-        Get.to(ReportPreviewInspector(goTo));
+        print("notifyType //===========($notifyType)");
+
+
+        print("Im Clicdddddddd +++");
+        await NotifyManage().notifyManage(id: id, notifyType: notifyType);
+        print("Im Clicdddddddd ====");
+
+
+
+        // var goTo = _inspectorProvider.getInspectById(id);a
+        // print(goTo.id);
+        //
+        // Get.to(ReportPreviewInspector(goTo));
 
       },
       child: Container(
@@ -67,7 +88,6 @@ class NotificationCard extends StatelessWidget {
           color: ConstColors.ULTRA_GREY_COLOR,
           borderRadius: BorderRadius.circular(8),
         ),
-
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
@@ -105,8 +125,7 @@ class NotificationCard extends StatelessWidget {
                         width: ScreenHelper.screenSize(context).width * .65,
                         padding: EdgeInsets.only(bottom: 8),
                         child: CustomText(
-                          text:
-                              "$body",
+                          text: "$body",
                           // fontSize: 12,
                           color: ConstColors.TEXT_GREY2,
                         ),

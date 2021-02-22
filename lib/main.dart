@@ -38,7 +38,7 @@ app(box, logged) async {
   var _isVerify = await logged.read("phoneVerify");
 
   print("Sen On Boarding :: $_seen");
-  print("Is Logged :: $_logged");
+  print("Is Logged :::: typeUser :::: $_logged");
 
   if (_seen == null) {
     homeScreen = OnBoardingScreen();

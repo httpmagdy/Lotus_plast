@@ -105,11 +105,13 @@ class PhoneVerifyPhoneProvider extends GetxController {
     if (authResult != null) {
         print("Successfully signed in UID: ${credential}");
 
-         _authProvider.saveUserInfoStorage();
-        await _authProvider.getUserTypeVerified();
+         // _authProvider.saveUserInfoStorage();
         await _verifyPhoneRepo.verifyCodeRepo();
 
-        // customSnackBar(title: "نجحت العملبه", body: "تم التأكيد بنجاح");
+        await _authProvider.getUserTypeVerified();
+
+
+      // customSnackBar(title: "نجحت العملبه", body: "تم التأكيد بنجاح");
     } else {
       customSnackBar(title: "خطأ", body: "رجاء تأكد من ادخال الرمز المرسل لك", errorMessage: true);
     }

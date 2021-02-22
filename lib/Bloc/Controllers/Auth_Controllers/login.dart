@@ -45,7 +45,7 @@ class LoginProvider extends GetxController {
             dataResponse.typeUser, dataResponse.data.phoneVerify,
         );
 
-        _authProvider.saveUserInfoStorage(userInfo: dataResponse);
+     await _authProvider.saveUserInfoStorage(userInfo: dataResponse);
         passwordController.clear();
         // usernameController.clear();
 

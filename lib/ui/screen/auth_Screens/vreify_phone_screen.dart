@@ -260,7 +260,6 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                         .verifyDonning(smsController.text);
 
 
-
                     // Get.back();
 
                   }

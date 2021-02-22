@@ -4,6 +4,7 @@ import 'package:lotus/Bloc/Controllers/Gifts_Controller/exchange_gift_provider.d
 import 'package:lotus/Bloc/Controllers/Gifts_Controller/get_gifts_provider.dart';
 import 'package:lotus/Bloc/models/getgifts_model.dart' as giftModel;
 import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/globalWidget/custom_loading.dart';
 import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
 import 'package:lotus/ui/widget/custom_appBar.dart';
 import 'package:lotus/ui/widget/custom_dialog.dart';
@@ -20,7 +21,7 @@ class GiftsPage extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(context: context, isHome: false),
       body: GetX<GetGiftsProvider>(
-        builder: (controller) => Column(
+        builder: (controller) => controller.status.value == true ? CustomLoading(bg: Colors.white) : Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(height: 30),
