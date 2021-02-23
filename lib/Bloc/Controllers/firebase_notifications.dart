@@ -18,6 +18,9 @@ import 'local_notifications_provider.dart';
 
 Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
   print("BG-----------------(my Background Message Handler)--------------------");
+  print("BG-----------------(my Background Message Handler)--------------------");
+  print("BG-----------------(my Background Message Handler)--------------------");
+  print("BG-----------------(my Background Message Handler)--------------------");
   //
   // if (message['data'] != null) {
   //   final data = message['data'];
@@ -95,32 +98,18 @@ class PushNotificationManger extends GetxController{
       },
       onResume: (Map<String, dynamic> message) async {
         print('onResume =============================');
-        // showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} on resume");
 
         print('onResume ==== ? $message');
         print('onResume =============================');
         print('onResume =============================');
 
-        // CustomLoading(bg: ConstColors.WHITE);
-
-        // _notificationsPageProvider.fetchNotifications();
-
-          // var goTo = _homeInspectorProvider.getInspectById(id);
-          // print(goTo.id);
-          // Get.to(ReportPreviewInspector(goTo));
-
         _notificationsPageProvider.fetchNotifications();
           Get.to(NotificationScreen());
 
-
         print('onResume =============================');
         print('onResume =============================');
 
-        // showNotification(body: "اشعار جديد?", title: "onResume");
 
-        // Get.dialog(OkDialog(title: "On Resume", body: "on Resume Message..",onTapOk: (){
-        //   Get.back();
-        // },) );
       },
       onBackgroundMessage: myBackgroundMessageHandler,
 
