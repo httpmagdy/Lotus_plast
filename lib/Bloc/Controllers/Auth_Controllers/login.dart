@@ -13,7 +13,7 @@ class LoginProvider extends GetxController {
       Get.put(PhoneVerifyPhoneProvider());
 
   AuthProvider _authProvider = AuthProvider();
-  final GlobalKey<FormState> globalKeyLogin = GlobalKey<FormState>();
+  final GlobalKey<FormState> globalKeyLoginn = GlobalKey<FormState>();
   TextEditingController usernameController;
   TextEditingController passwordController;
   RxBool passwordSecure = true.obs;
@@ -27,25 +27,25 @@ class LoginProvider extends GetxController {
 
     print('dToken In Login ::::: $dToken');
 
-    if (!globalKeyLogin.currentState.validate()) {
+    if (!globalKeyLoginn.currentState.validate()) {
     } else {
       Get.dialog(
         CustomLoading(),
       );
 
-      globalKeyLogin.currentState.save();
+      globalKeyLoginn.currentState.save();
       UserInfo dataResponse = await loginRepo.loginRepo(
         LoginModel(usernameController.text, passwordController.text, dToken),
       );
       print('dataResponse.typeUser ::::: $dataResponse');
 
       if (dataResponse != null) {
-
         _authProvider.getUserType(
-            dataResponse.typeUser, dataResponse.data.phoneVerify,
+          dataResponse.typeUser,
+          dataResponse.data.phoneVerify,
         );
 
-     await _authProvider.saveUserInfoStorage(userInfo: dataResponse);
+        await _authProvider.saveUserInfoStorage(userInfo: dataResponse);
         passwordController.clear();
         // usernameController.clear();
 
@@ -71,13 +71,13 @@ class LoginProvider extends GetxController {
 
                     Get.back();
 
-                    Get.to(PhoneVerificationScreen("${usernameController.text}"));
+                    Get.to(
+                        PhoneVerificationScreen("${usernameController.text}"));
                   }
                 });
               },
             ),
           );
-
         }
       }
     }
@@ -96,5 +96,4 @@ class LoginProvider extends GetxController {
     usernameController.dispose();
     super.onClose();
   }
-
 }

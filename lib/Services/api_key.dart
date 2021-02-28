@@ -28,4 +28,6 @@ class ApiKey {
   static const String verifyPhoneURL = 'verify_phone';
   static const String logoutURL = 'logout';
   static const String myNotificationsURL = 'mynotifications';
+  static const String resetpasswordURL = 'resetpassword';
+  static const String phonecheckURL = 'phonecheck';
 }

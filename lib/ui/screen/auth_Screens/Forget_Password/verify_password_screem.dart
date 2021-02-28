@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lotus/Bloc/Controllers/Auth_Controllers/Phone_Verify_Provider/phone_auth_provider.dart';
+import 'package:lotus/Bloc/Controllers/Forget_Password/Verify_Password_provider.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/widget/custom_button.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
@@ -10,20 +11,19 @@ import 'package:lotus/ui/widget/header.dart';
 import 'package:lotus/utils/constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-class PhoneVerificationScreen extends StatefulWidget {
+class VerifyPasswordScreen extends StatefulWidget {
   final String phoneNumber;
 
-  PhoneVerificationScreen(this.phoneNumber);
+  VerifyPasswordScreen(this.phoneNumber);
 
   @override
-  _PhoneVerificationScreenState createState() =>
-      _PhoneVerificationScreenState();
+  _VerifyPasswordScreenState createState() => _VerifyPasswordScreenState();
 }
 
-class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
+class _VerifyPasswordScreenState extends State<VerifyPasswordScreen> {
   var onTapRecognizer;
-  PhoneVerifyPhoneProvider _verifyPhoneProvider =
-      Get.put(PhoneVerifyPhoneProvider());
+  VerifyPasswordByPhoneProvider _verifyPassword =
+      Get.put(VerifyPasswordByPhoneProvider());
 
   // TextEditingController textEditingController = TextEditingController();
 
@@ -253,8 +253,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                       hasError = false;
                     });
 
-                    await _verifyPhoneProvider
-                        .verifyDonning(smsController.text);
+                    await _verifyPassword.verifyDonning(smsController.text);
 
                     // Get.back();
 

@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:lotus/Bloc/Controllers/Auth_Controllers/login.dart';
 import 'package:lotus/helpers/screen_helper.dart';
 import 'package:lotus/ui/widget/circle_button.dart';
+import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:lotus/ui/widget/custom_text_field.dart';
 import 'package:lotus/utils/constants.dart';
 import '../../widget/header.dart';
+import 'Forget_Password/forget_password_scren.dart';
 import 'signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -27,7 +29,7 @@ class LoginScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         horizontal: ScreenHelper.screenWidth(context, 31)),
                     child: Form(
-                      key: _loginProvider.globalKeyLogin,
+                      key: _loginProvider.globalKeyLoginn,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -98,7 +100,21 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: ScreenHelper.screenHeight(context, 25),
+                            height: ScreenHelper.screenHeight(context, 20),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.only(right: 10, bottom: 20),
+                            child: InkWell(
+                              onTap: () {
+                                Get.to(ForgrtPasswordScreen());
+                              },
+                              child: CustomText(
+                                  color: ConstColors.GREY_COLOR,
+                                  text: "هل نسيت كلمه السر !",
+                                  fontSize:
+                                      ScreenHelper.screenFont(context, 14)),
+                            ),
                           ),
                         ],
                       ),

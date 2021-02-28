@@ -9,6 +9,7 @@ import 'ui/onboarding/onboarding_screen.dart';
 import 'ui/screen/Customer/home_customer.dart';
 import 'ui/screen/Inspector/home_inspector.dart';
 import 'ui/screen/Plumber/home_screen.dart';
+import 'ui/screen/auth_Screens/Forget_Password/forget_password_scren.dart';
 import 'ui/screen/auth_Screens/welcome_screen.dart';
 import 'Bloc/Controllers/firebase_notifications.dart';
 import 'Bloc/Controllers/local_notifications_provider.dart';
@@ -20,7 +21,7 @@ void main() async {
   await Firebase.initializeApp();
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
-  );
+      );
   GetStorage box = GetStorage("onBoarding");
   GetStorage logged = GetStorage();
 
@@ -28,7 +29,6 @@ void main() async {
   app(box, logged);
   runApp(MyApp());
 }
-
 
 var homeScreen;
 
@@ -42,21 +42,15 @@ app(box, logged) async {
 
   if (_seen == null) {
     homeScreen = OnBoardingScreen();
-
   } else if (_seen == true) {
-
     if (_logged != null) {
-
       print("(main) verify is ISSSSSSSSSSSSSSSSS $_isVerify ");
 
-      if(_isVerify == 0){
-
+      if (_isVerify == 0) {
         homeScreen = WelcomeScreen();
 
         print(" In file (main) verify is No $_isVerify ");
-
-      }else{
-
+      } else {
         if (_logged == 0) {
           homeScreen = HomeScreenPlumber();
         } else if (_logged == 1) {
@@ -64,11 +58,10 @@ app(box, logged) async {
         } else if (_logged == 2) {
           homeScreen = HomeInspector();
         } else {}
-
       }
-
     } else {
-      print('NOT AUTH ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ $_logged');
+      print(
+          'NOT AUTH ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ $_logged');
       homeScreen = WelcomeScreen();
     }
   }
@@ -83,7 +76,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  final PushNotificationManger _pushNotificationManger = Get.put(PushNotificationManger());
+  final PushNotificationManger _pushNotificationManger =
+      Get.put(PushNotificationManger());
   // StreamSubscription subscription;
 
   @override
@@ -118,12 +112,8 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
 
-      // home: NavigationScreen(),
-      // home: VerifyScreen(),
-      // home: ReportDamageScreen(),
       home: homeScreen,
-      // home:PhoneVerificationScreen("+20 01092341428"),
-      // home: CustomLoading(),
+      // home: ForgrtPasswordScreen(),
     );
   }
 }
