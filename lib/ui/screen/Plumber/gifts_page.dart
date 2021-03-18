@@ -193,16 +193,19 @@ class CardGi extends StatelessWidget {
                           await exchangeGiftProvider.exchangeGift().then((value) {
                             Get.back();
                             if(value.status == true){
-                              Get.dialog(
-                                OkDialog(
-                                  title: ' تم اختيار هديتك بنجاح ',
-                                  body: 'سيتم التواصل معك في خلال 24 ساعه ',
-                                  image: 'assets/img/okicon.png',
-                                  onTapOk: () {
-                                    Get.back();
-                                  },
-                                ),
-                              );
+                                _getGiftsProvider.getGiftsProvider().whenComplete(() {
+                                  Get.dialog(
+                                    OkDialog(
+                                      title: ' تم اختيار هديتك بنجاح ',
+                                      body: 'سيتم التواصل معك في خلال 24 ساعه ',
+                                      image: 'assets/img/okicon.png',
+                                      onTapOk: () {
+                                        Get.back();
+                                      },
+                                    ),
+                                  );
+                                });
+
                             }else{
                               Get.dialog(
                                 OkDialog(

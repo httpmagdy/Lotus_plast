@@ -134,6 +134,7 @@ class ChangePasswordScreen extends StatelessWidget {
                         body: "يمكنك الان تجربه تسجيل الدخول",
                         image: "${value.message}",
                         buttonName: "تسجيل الدخول",
+
                         onTapOk: () {
                           Get.back();
                         },

@@ -2,31 +2,71 @@ import 'package:get/get.dart';
 import 'package:lotus/Services/api_key.dart';
 import 'package:lotus/Services/network_services.dart';
 
-class TermsOfWarrantyProvider extends GetxController {
+class CertificatesProvider extends GetxController {
   @override
   void onInit() {
-    fetchTermsOfWarranty();
+    fetchCertificates();
     super.onInit();
   }
 
-  RxString text = ''.obs;
   RxBool loading = true.obs;
+
+  RxList images = List<Datum>().obs;
 
   NetworkService _networkService = NetworkService();
 
-  Future fetchTermsOfWarranty() async {
+  Future fetchCertificates() async {
     loading(true);
     try {
-      var _request = await _networkService.get(url: ApiKey.gettermsWarrantyURL);
+      var _request = await _networkService.get(url: ApiKey.getcertificatesUrl);
 
       print(' Status Code :::: ${_request.statusCode} ');
-      print(' fetchAbout === :::: ${_request.data} ');
+      print(' fetchCertificates === :::: ${_request.data} ');
 
-      text.value = _request.data["text"];
+      ImgModel data = ImgModel.fromJson(_request.data);
+
+      for(var item in data.data){
+
+        images.add(item);
+
+      }
 
       loading(false);
     } catch (e) {
-      print('fetchAbout ==? $e');
+      print('fetchCertificates ==? $e');
     }
   }
+}
+
+
+class ImgModel {
+  ImgModel({
+    this.status,
+    this.data,
+  });
+
+  final bool status;
+  final List<Datum> data;
+
+  factory ImgModel.fromJson(Map<String, dynamic> json) => ImgModel(
+    status: json["status"] == null ? null : json["status"],
+    data: json["data"] == null ? null : List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+  );
+
+}
+
+class Datum {
+  Datum({
+    this.id,
+    this.image,
+  });
+
+  final int id;
+  final String image;
+
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+    id: json["id"] == null ? null : json["id"],
+    image: json["image"] == null ? null : json["image"],
+  );
+
 }

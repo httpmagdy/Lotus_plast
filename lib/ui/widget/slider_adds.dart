@@ -43,5 +43,3 @@ class SliderAdds extends StatelessWidget {
     );
   }
 }
-
-

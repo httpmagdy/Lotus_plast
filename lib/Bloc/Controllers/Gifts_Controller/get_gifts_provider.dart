@@ -19,6 +19,7 @@ class GetGiftsProvider extends GetxController {
   Future getGiftsProvider() async {
 
     status(true);
+    listOfGifts.clear();
 
     GetGifts _data = await _getGiftsRepo.getGiftsRepo();
 

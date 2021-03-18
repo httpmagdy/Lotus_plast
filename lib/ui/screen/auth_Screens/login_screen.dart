@@ -100,20 +100,20 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: ScreenHelper.screenHeight(context, 20),
+                            height: ScreenHelper.screenHeight(context, 10),
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.only(right: 10, bottom: 20),
+                                const EdgeInsets.only(right: 10, bottom: 40),
                             child: InkWell(
                               onTap: () {
                                 Get.to(ForgrtPasswordScreen());
                               },
                               child: CustomText(
-                                  color: ConstColors.GREY_COLOR,
+                                  color: ConstColors.MAIN_COLOR,
                                   text: "هل نسيت كلمه السر !",
                                   fontSize:
-                                      ScreenHelper.screenFont(context, 14)),
+                                      ScreenHelper.screenFont(context, 12)),
                             ),
                           ),
                         ],

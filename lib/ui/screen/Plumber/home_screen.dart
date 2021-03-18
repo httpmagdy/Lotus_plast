@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:lotus/Bloc/Controllers/AddMaintenance/damage_types.dart';
+import 'package:lotus/Bloc/Controllers/Gifts_Controller/get_gifts_provider.dart';
 import 'package:lotus/Bloc/Controllers/Inspector/send_rate_preview_preview.dart';
 import 'package:lotus/Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
 import 'package:lotus/Bloc/Controllers/Plumber/home_provider_plumber.dart';
@@ -47,6 +48,8 @@ class _HomeScreenPlumberState extends State<HomeScreenPlumber>
 
   final NotificationsPageProvider _notificationsPage =
       Get.put(NotificationsPageProvider());
+  final GetGiftsProvider _getGiftsProvider = Get.put(GetGiftsProvider());
+
 
   final List<Widget> myTabs = [
     Tab(

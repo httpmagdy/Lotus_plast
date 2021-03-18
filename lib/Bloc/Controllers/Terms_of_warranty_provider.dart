@@ -17,7 +17,7 @@ class TermsOfWarrantyProvider extends GetxController {
   Future fetchTermsOfWarranty() async {
     loading(true);
     try {
-      var _request = await _networkService.get(url: ApiKey.privacyURL);
+      var _request = await _networkService.get(url: ApiKey.gettermsWarrantyURL);
 
       print(' Status Code :::: ${_request.statusCode} ');
       print(' fetchAbout === :::: ${_request.data} ');

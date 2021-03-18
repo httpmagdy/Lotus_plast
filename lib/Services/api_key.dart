@@ -30,4 +30,7 @@ class ApiKey {
   static const String myNotificationsURL = 'mynotifications';
   static const String resetpasswordURL = 'resetpassword';
   static const String phonecheckURL = 'phonecheck';
+  static const String gettermsWarrantyURL = 'getterms_warranty';
+  static const String getcertificatesUrl = 'getcertificates';
+  static const String termsAndConditionsesUrl = 'getterms';
 }

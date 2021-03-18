@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:lotus/helpers/screen_helper.dart';
+import 'package:lotus/ui/screen/Static_Screens/Certificates_screen.dart';
 import 'package:lotus/ui/screen/Static_Screens/about_screen/about_screen.dart';
 import 'package:lotus/ui/screen/Static_Screens/call_us_screen/call_us_screen.dart';
-import 'package:lotus/ui/screen/Static_Screens/certificates_screen/Certificates_screen.dart';
 import 'package:lotus/ui/screen/Static_Screens/plivacy_screen/plivacy_screen.dart';
-import 'package:lotus/ui/screen/Static_Screens/terms_of_warranty_screen/Terms_of_warranty_screen.dart';
+import 'package:lotus/ui/screen/Static_Screens/terms_and_conditions.dart';
+import 'package:lotus/ui/screen/Static_Screens/terms_of_warranty_screen.dart';
 import 'package:lotus/ui/widget/custom_text.dart';
 import 'package:get/get.dart';
 import '../../auth_Screens/welcome_screen.dart';
@@ -37,7 +38,9 @@ class EndDrawer extends StatelessWidget {
                       icon: "assets/img/icons/aicon1.png",
                       text: "الشروط والاحكام",
                       sizePadding: -10,
-                      press: null,
+                      press: (){
+                        Get.to(TermsAndConditionsScreen());
+                      },
                     ),
                     SizedBox(
                       height: ScreenHelper.screenHeight(context, 60),

@@ -1,0 +1,6 @@
+flutter_native_splash:
+  image: assets/img/splash.png
+  color: "A4E423"
+  android_disable_fullscreen: true
+  # flutter pub run flutter_native_splash:create
+  # flutter clean

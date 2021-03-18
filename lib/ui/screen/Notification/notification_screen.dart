@@ -65,19 +65,7 @@ class NotificationCard extends StatelessWidget {
     return GestureDetector(
       onTap: () async{
 
-        print("notifyType //===========($notifyType)");
-
-
-        print("Im Clicdddddddd +++");
         await NotifyManage().notifyManage(id: id, notifyType: notifyType);
-        print("Im Clicdddddddd ====");
-
-
-
-        // var goTo = _inspectorProvider.getInspectById(id);a
-        // print(goTo.id);
-        //
-        // Get.to(ReportPreviewInspector(goTo));
 
       },
       child: Container(
