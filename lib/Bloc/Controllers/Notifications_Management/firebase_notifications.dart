@@ -2,8 +2,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:lotus/ui/screen/Notification/notification_screen.dart';
 import 'dart:io';
-import 'Inspector/home_inspector_provider.dart';
-import 'Notifications_Management/notifications_page_provider.dart';
+import '../Inspector/home_inspector_provider.dart';
+import 'notifications_page_provider.dart';
 import 'local_notifications_provider.dart';
 
 // Future<dynamic> myBackgroundMessageHandler( message) {
@@ -15,24 +15,24 @@ import 'local_notifications_provider.dart';
 //   showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]}");
 // }
 
-
-Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
-  print("BG-----------------(my Background Message Handler)--------------------");
-  print("BG-----------------(my Background Message Handler)--------------------");
-  print("BG-----------------(my Background Message Handler)--------------------");
-  print("BG-----------------(my Background Message Handler)--------------------");
-  //
-  // if (message['data'] != null) {
-  //   final data = message['data'];
-  //
-  //   final title = data['title'];
-  //   final body = data['body'];
-  //
-  //   await _showNotificationWithDefaultSound(title, body);
-  // }
-  //
-  // return Future<void>.value();
-}
+//
+// Future<dynamic> myBackgroundMessageHandler(Map<String, dynamic> message) async {
+//   print("BG-----------------(my Background Message Handler)--------------------");
+//   print("BG-----------------(my Background Message Handler)--------------------");
+//   print("BG-----------------(my Background Message Handler)--------------------");
+//   print("BG-----------------(my Background Message Handler)--------------------");
+//   //
+//   // if (message['data'] != null) {
+//   //   final data = message['data'];
+//   //
+//   //   final title = data['title'];
+//   //   final body = data['body'];
+//   //
+//   //   await _showNotificationWithDefaultSound(title, body);
+//   // }
+//   //
+//   // return Future<void>.value();
+// }
 
 // Future _showNotificationWithDefaultSound(String title, String message) async {
 //
@@ -111,7 +111,7 @@ class PushNotificationManger extends GetxController{
 
 
       },
-      onBackgroundMessage: myBackgroundMessageHandler,
+      // onBackgroundMessage: myBackgroundMessageHandler,
 
 
      onLaunch: (Map<String, dynamic> message) async {
