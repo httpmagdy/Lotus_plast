@@ -1,30 +1,22 @@
 import 'package:barcode_scan/barcode_scan.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 
 class QrProvider extends GetxController {
   // @override
   // void onInit() {
   //   scanQR() ;    super.onInit();
   // }
-  var _scanQrCode ;
+  var _scanQrCode;
   get scanQrCode => this._scanQrCode;
 
-  Future<void>  scanQR() async {
-    await BarcodeScanner.scan().then((value){
+  Future<void> scanQR() async {
+    await BarcodeScanner.scan().then((value) {
       print('_scanQrCode :::::::: ${value.rawContent}');
-      _scanQrCode=value.rawContent;
+      _scanQrCode = value.rawContent;
       update();
-
     });
-
   }
-
 }
-
-
-
 
 //   Future<void> scanQR() async {
 //     String barcodeScanRes;

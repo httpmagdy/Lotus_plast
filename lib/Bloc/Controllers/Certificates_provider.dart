@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+
+import '../../Services/api_key.dart';
+import '../../Services/network_services.dart';
 
 class CertificatesProvider extends GetxController {
   @override
@@ -25,10 +26,8 @@ class CertificatesProvider extends GetxController {
 
       ImgModel data = ImgModel.fromJson(_request.data);
 
-      for(var item in data.data){
-
+      for (var item in data.data) {
         images.add(item);
-
       }
 
       loading(false);
@@ -37,7 +36,6 @@ class CertificatesProvider extends GetxController {
     }
   }
 }
-
 
 class ImgModel {
   ImgModel({
@@ -49,10 +47,11 @@ class ImgModel {
   final List<Datum> data;
 
   factory ImgModel.fromJson(Map<String, dynamic> json) => ImgModel(
-    status: json["status"] == null ? null : json["status"],
-    data: json["data"] == null ? null : List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
-  );
-
+        status: json["status"] == null ? null : json["status"],
+        data: json["data"] == null
+            ? null
+            : List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+      );
 }
 
 class Datum {
@@ -65,8 +64,7 @@ class Datum {
   final String image;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["id"] == null ? null : json["id"],
-    image: json["image"] == null ? null : json["image"],
-  );
-
+        id: json["id"] == null ? null : json["id"],
+        image: json["image"] == null ? null : json["image"],
+      );
 }

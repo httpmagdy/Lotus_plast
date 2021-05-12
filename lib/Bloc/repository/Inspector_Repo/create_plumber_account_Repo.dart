@@ -1,6 +1,6 @@
-import 'package:lotus/Bloc/models/get_plumber_account_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
+import '../../models/get_plumber_account_model.dart';
 
 class CreatePlumberAccountRepo extends NetworkService {
   Future<GePlumberAccountModel> createAccountRepo({
@@ -16,10 +16,8 @@ class CreatePlumberAccountRepo extends NetworkService {
       },
     );
 
-    print( ' Repo ========> statusCode : ${_request.data} ::::::::::::::');
-
+    print(' Repo ========> statusCode : ${_request.data} ::::::::::::::');
 
     return GePlumberAccountModel.fromJson(_request.data);
-
   }
 }

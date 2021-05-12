@@ -1,9 +1,8 @@
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../Services/api_key.dart';
+import '../../Services/network_services.dart';
+import '../models/message_model.dart';
 
 class ScanPlumberCouponQrRepo extends NetworkService {
-
   Future<MessageScan> scanCouponQrRepo({
     qrCode,
   }) async {
@@ -24,7 +23,4 @@ class ScanPlumberCouponQrRepo extends NetworkService {
 
     return MessageScan.fromJson(_request.data);
   }
-
 }
-
-

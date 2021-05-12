@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-// Dart Packages
-import 'dart:async';
+
 import '../../helpers/screen_helper.dart';
 
 // Flutter packages

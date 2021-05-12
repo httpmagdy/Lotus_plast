@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+
+import '../../Services/api_key.dart';
+import '../../Services/network_services.dart';
 
 class PrivacyProvider extends GetxController {
   @override

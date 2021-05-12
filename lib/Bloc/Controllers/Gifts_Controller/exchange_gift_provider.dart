@@ -1,16 +1,14 @@
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Bloc/repository/Gifts_Repo/exchange_gift_repo.dart';
+
+import '../../models/message_model.dart';
+import '../../repository/Gifts_Repo/exchange_gift_repo.dart';
 
 class ExchangeGiftProvider extends GetxController {
-
-
   RxInt imageId = 0.obs;
 
   ExchangeGiftRepo _giftRepo = ExchangeGiftRepo();
 
   Future<Message> exchangeGift() async {
-
     var _data = await _giftRepo.exchangeGiftRepo(imageId.value);
 
     return _data;

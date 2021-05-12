@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/home_inspector_provider.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/send_rate_preview_preview.dart';
-import 'package:lotus/Bloc/models/home_inspector_model.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/globalWidget/rating_bar_w.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../Bloc/models/home_inspector_model.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/rating_bar_w.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_text.dart';
 
 class DetailsInspectorPreview extends StatelessWidget {
   // final SendRatePreviewProvider _sendRatePreviewProvider =

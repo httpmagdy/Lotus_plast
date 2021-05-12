@@ -1,9 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/screen/auth_Screens/Forget_Password/change_password_screen.dart';
-import 'package:lotus/ui/screen/auth_Screens/Forget_Password/verify_password_screem.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
+
+import '../../../ui/globalWidget/custom_snack_bar.dart';
+import '../../../ui/screen/auth_Screens/Forget_Password/change_password_screen.dart';
+import '../../../ui/screen/auth_Screens/Forget_Password/verify_password_screem.dart';
+import '../../../ui/widget/custom_dialog.dart';
 
 class VerifyPasswordByPhoneProvider extends GetxController {
   final FirebaseAuth _auth = FirebaseAuth.instance;

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/screen/auth_Screens/login_screen.dart';
-import 'package:lotus/ui/screen/auth_Screens/welcome_screen.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
+
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
+import '../../../ui/globalWidget/custom_loading.dart';
+import '../../models/message_model.dart';
 
 class CreateNewPassProvider extends GetxController {
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();

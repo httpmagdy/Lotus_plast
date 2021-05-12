@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Bloc/repository/Inspector_Repo/send_report_preview_repo.dart';
+
+import '../../models/message_model.dart';
+import '../../repository/Inspector_Repo/send_report_preview_repo.dart';
 
 class SendReportPreviewInspectorProvider extends GetxController {
   TextEditingController desController;

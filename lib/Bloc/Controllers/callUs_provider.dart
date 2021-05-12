@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/repository/callUs_repo.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
+
+import '../../ui/globalWidget/custom_loading.dart';
+import '../repository/callUs_repo.dart';
 
 class CallUsProvider extends GetxController {
   final GlobalKey<FormState> globalKey = GlobalKey<FormState>();
@@ -13,40 +14,37 @@ class CallUsProvider extends GetxController {
   final CallUSRepo _repo = CallUSRepo();
 
   Future<MessageCallUS> callUS() async {
-try{
-  if (!globalKey.currentState.validate()) {
-  } else {
-    Get.dialog(
-      CustomLoading(loadingText: "جار ارسال رسالتك"),
-    );
+    try {
+      if (!globalKey.currentState.validate()) {
+      } else {
+        Get.dialog(
+          CustomLoading(loadingText: "جار ارسال رسالتك"),
+        );
 
-    globalKey.currentState.save();
+        globalKey.currentState.save();
 
-    MessageCallUS dataResponse = await _repo.callUsRepo(
+        MessageCallUS dataResponse = await _repo.callUsRepo(
+          name: nameController.text,
+          phone: phoneController.text,
+          message: messageController.text,
+        );
 
-      name: nameController.text,
-      phone: phoneController.text,
-      message: messageController.text,
+        print('dataResponse.typeUser ::::: ${nameController.text}');
+        print('dataResponse.typeUser ::::: ${phoneController.text}');
+        print('dataResponse.typeUser ::::: ${messageController.text}');
+        print('dataResponse.typeUser ::::: ${dataResponse}');
 
-    );
+        nameController.clear();
+        phoneController.clear();
+        messageController.clear();
 
-    print('dataResponse.typeUser ::::: ${nameController.text}');
-    print('dataResponse.typeUser ::::: ${phoneController.text}');
-    print('dataResponse.typeUser ::::: ${messageController.text}');
-    print('dataResponse.typeUser ::::: ${dataResponse}');
+        Get.back();
 
-  nameController.clear();
-  phoneController.clear();
-  messageController.clear();
-
-    Get.back();
-
-    return dataResponse;
-
-  }
-}catch(e){
-  print("Call us $e");
-}
+        return dataResponse;
+      }
+    } catch (e) {
+      print("Call us $e");
+    }
   }
 
   @override

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/Bloc/models/home_inspector_model.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/rating_bar_w.dart';
-import 'package:lotus/ui/globalWidget/row_icon_text.dart';
-import 'package:lotus/ui/globalWidget/status.dart';
 
-import 'package:lotus/utils/constants.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
+import '../../../Bloc/models/home_inspector_model.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/rating_bar_w.dart';
+import '../../globalWidget/row_icon_text.dart';
+import '../../globalWidget/status.dart';
 
 class CardInspector extends StatelessWidget {
   final onTap;
@@ -22,11 +21,10 @@ class CardInspector extends StatelessWidget {
   Widget build(BuildContext context) {
     var activation = data.statusActive;
 
-
     Widget activationStatus() {
       if (activation == 0) {
         return StatusW(activation);
-      } else if(activation == 2) {
+      } else if (activation == 2) {
         if (data.isRating) {
           return RatingBarWidget(
             rate: data.rate,
@@ -34,13 +32,10 @@ class CardInspector extends StatelessWidget {
         } else {
           return StatusW(activation);
         }
-      }else if(activation == 1){
+      } else if (activation == 1) {
         return StatusW(0);
-
       }
     }
-
-
 
     return GestureDetector(
       onTap: onTap,

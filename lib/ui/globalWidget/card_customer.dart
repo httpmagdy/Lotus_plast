@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/rating_bar_w.dart';
-import 'package:lotus/ui/globalWidget/row_icon_text.dart';
-import 'package:lotus/ui/globalWidget/status.dart';
-import 'package:lotus/ui/screen/details_preview.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/utils/constants.dart';
+import '../../helpers/screen_helper.dart';
+import 'rating_bar_w.dart';
+import 'row_icon_text.dart';
+import 'status.dart';
+import '../screen/details_preview.dart';
+import '../widget/custom_dialog.dart';
+import '../../utils/constants.dart';
 import '../../Bloc/models/home_customer_tabs_model.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
+import '../widget/custom_text.dart';
 
 class CardCustomer extends StatelessWidget {
   final onTap;
@@ -22,7 +22,6 @@ class CardCustomer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var activation = data.statusActive;
-
 
     // Widget activationStatus() {
     //   if (activation == 0) {

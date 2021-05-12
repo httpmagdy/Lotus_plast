@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:lotus/Bloc/Controllers/AddMaintenance/damage_types.dart';
-import 'package:lotus/Bloc/Controllers/Gifts_Controller/get_gifts_provider.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/send_rate_preview_preview.dart';
-import 'package:lotus/Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/home_provider_plumber.dart';
-import 'package:lotus/Bloc/Controllers/slider_adds_controller.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/NoSomethingYet.dart';
-import 'package:lotus/ui/globalWidget/card_customer.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/globalWidget/customer_card_maintenance.dart';
-import 'package:lotus/ui/globalWidget/gift_box.dart';
-import 'package:lotus/ui/screen/Drawer/drawer_screen/drawer_screen.dart';
-import 'package:lotus/ui/screen/Plumber/points.dart';
-import 'package:lotus/ui/screen/Plumber/reserve_preview_plumber.dart';
-import 'package:lotus/ui/screen/Products/show_products_screen.dart';
-import 'package:lotus/ui/screen/ReportADamage/report_a_damage.dart';
-import 'package:lotus/ui/widget/card_menu.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/slider_adds.dart';
-import 'package:lotus/utils/constants.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
+import '../../../Bloc/Controllers/AddMaintenance/damage_types.dart';
+import '../../../Bloc/Controllers/Gifts_Controller/get_gifts_provider.dart';
+import '../../../Bloc/Controllers/Inspector/send_rate_preview_preview.dart';
+import '../../../Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
+import '../../../Bloc/Controllers/Plumber/home_provider_plumber.dart';
+import '../../../Bloc/Controllers/slider_adds_controller.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/NoSomethingYet.dart';
+import '../../globalWidget/card_customer.dart';
+import '../../globalWidget/custom_loading.dart';
+import '../../globalWidget/custom_snack_bar.dart';
+import '../../globalWidget/customer_card_maintenance.dart';
+import '../../globalWidget/gift_box.dart';
+import '../../widget/card_menu.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/slider_adds.dart';
+import '../Drawer/drawer_screen/drawer_screen.dart';
+import '../Products/show_products_screen.dart';
+import '../ReportADamage/report_a_damage.dart';
 import '../details_maintenance.dart';
 import '../details_preview.dart';
-import '../../globalWidget/custom_snack_bar.dart';
+import 'points.dart';
+import 'reserve_preview_plumber.dart';
 
 class HomeScreenPlumber extends StatefulWidget {
   @override
@@ -49,7 +49,6 @@ class _HomeScreenPlumberState extends State<HomeScreenPlumber>
   final NotificationsPageProvider _notificationsPage =
       Get.put(NotificationsPageProvider());
   final GetGiftsProvider _getGiftsProvider = Get.put(GetGiftsProvider());
-
 
   final List<Widget> myTabs = [
     Tab(

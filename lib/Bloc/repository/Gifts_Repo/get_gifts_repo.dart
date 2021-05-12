@@ -1,18 +1,14 @@
-import 'package:lotus/Bloc/models/getgifts_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
+import '../../models/getgifts_model.dart';
 
-class GetGiftsRepo extends NetworkService{
-
-  Future<GetGifts> getGiftsRepo() async{
-
+class GetGiftsRepo extends NetworkService {
+  Future<GetGifts> getGiftsRepo() async {
     var _request = await get(url: ApiKey.getGiftsURL, hasHeader: true);
 
     print('get Gifts Repo => statusCode : ${_request.statusCode}');
     print('addMaintenanceRepo => data : ${_request.data}');
 
     return GetGifts.fromJson(_request.data);
-
   }
-
 }

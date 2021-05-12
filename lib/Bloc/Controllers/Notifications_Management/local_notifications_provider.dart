@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
-import 'package:lotus/ui/screen/Notification/notification_screen.dart';
+
+import '../../../ui/screen/Notification/notification_screen.dart';
 
 showNotification({title, body}) async {
   var android = AndroidNotificationDetails(
@@ -25,31 +26,23 @@ Future onSelectNotification(String payload) {
   print("============");
 }
 
-FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =  FlutterLocalNotificationsPlugin();
+FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 void localNotification() {
   // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
   const AndroidInitializationSettings android =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
   final IOSInitializationSettings iOS = IOSInitializationSettings(
-    // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
-  );
-  final InitializationSettings initializationSettings =
-  InitializationSettings(
+      // onDidReceiveLocalNotification: onDidReceiveLocalNotification,
+      );
+  final InitializationSettings initializationSettings = InitializationSettings(
     android: android,
     iOS: iOS,
   );
   flutterLocalNotificationsPlugin.initialize(initializationSettings,
       onSelectNotification: onSelectNotification);
 }
-
-
-
-
-
-
-
-
 
 //
 //

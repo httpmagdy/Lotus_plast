@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/row_icon_text.dart';
-import 'package:lotus/ui/globalWidget/status.dart';
-import 'package:lotus/ui/screen/details_preview.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/utils/constants.dart';
+
 import '../../Bloc/models/home_customer_tabs_model.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
+import 'row_icon_text.dart';
+import 'status.dart';
 
 class CardCustomerMaintenance extends StatelessWidget {
   final onTap;
@@ -61,9 +59,9 @@ class CardCustomerMaintenance extends StatelessWidget {
                       SizedBox(height: 4),
                       RowIconText(
                         iconName: 'time',
-                        text:'${data.addedTime}',
+                        text: '${data.addedTime}',
                         textColor: ConstColors.TEXT_GREY2,
-                      ) ,
+                      ),
                     ],
                   ),
                   // const SizedBox(width: 80),
@@ -71,7 +69,9 @@ class CardCustomerMaintenance extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      activation == 0 ? StatusW(activation) : StatusW(activation),
+                      activation == 0
+                          ? StatusW(activation)
+                          : StatusW(activation),
                       const SizedBox(height: 4),
                       RowIconText(
                         iconName: 'calendar',
@@ -80,7 +80,6 @@ class CardCustomerMaintenance extends StatelessWidget {
                       ),
                     ],
                   ),
-
                 ],
               ),
             )

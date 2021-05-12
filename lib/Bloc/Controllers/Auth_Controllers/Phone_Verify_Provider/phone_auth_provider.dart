@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/repository/verify_phone_repo.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
+import '../../../repository/verify_phone_repo.dart';
+import '../../../../ui/globalWidget/custom_snack_bar.dart';
+import '../../../../ui/widget/custom_dialog.dart';
 import '../auth_provider.dart';
 
 class PhoneVerifyPhoneProvider extends GetxController {
@@ -86,9 +86,7 @@ class PhoneVerifyPhoneProvider extends GetxController {
         smsCode: sms,
       );
 
-
-     signIn(credential);
-
+      signIn(credential);
     } catch (e) {
       print("Failed credential: " + e.toString());
     }
@@ -96,25 +94,27 @@ class PhoneVerifyPhoneProvider extends GetxController {
 
   //SignIn
   signIn(AuthCredential credential) async {
-    final UserCredential authResult = await _auth.signInWithCredential(credential)
-        .catchError((onError) {
-      customSnackBar(title: "خطأ", body: "حدث خطأ غير متوقع", errorMessage: true);
+    final UserCredential authResult =
+        await _auth.signInWithCredential(credential).catchError((onError) {
+      customSnackBar(
+          title: "خطأ", body: "حدث خطأ غير متوقع", errorMessage: true);
       print('SignIn Error: ${onError.toString()}\n\n');
     });
 
     if (authResult != null) {
-        print("Successfully signed in UID: ${credential}");
+      print("Successfully signed in UID: ${credential}");
 
-         // _authProvider.saveUserInfoStorage();
-        await _verifyPhoneRepo.verifyCodeRepo();
+      // _authProvider.saveUserInfoStorage();
+      await _verifyPhoneRepo.verifyCodeRepo();
 
-        await _authProvider.getUserTypeVerified();
-
+      await _authProvider.getUserTypeVerified();
 
       // customSnackBar(title: "نجحت العملبه", body: "تم التأكيد بنجاح");
     } else {
-      customSnackBar(title: "خطأ", body: "رجاء تأكد من ادخال الرمز المرسل لك", errorMessage: true);
+      customSnackBar(
+          title: "خطأ",
+          body: "رجاء تأكد من ادخال الرمز المرسل لك",
+          errorMessage: true);
     }
   }
-
 }

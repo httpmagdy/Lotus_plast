@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/add_blumber_coupon_qr_provider.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/cobones_plumber_provider.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/scan_coupon_qr_provider.dart';
-import 'package:lotus/Bloc/Controllers/qr_provider.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_radio_list_builder.dart';
-import 'package:lotus/ui/widget/cashing_sheet.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../../../Bloc/Controllers/Plumber/add_blumber_coupon_qr_provider.dart';
+import '../../../Bloc/Controllers/Plumber/cobones_plumber_provider.dart';
+import '../../../Bloc/Controllers/Plumber/scan_coupon_qr_provider.dart';
+import '../../../Bloc/Controllers/qr_provider.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/custom_radio_list_builder.dart';
+import '../../widget/cashing_sheet.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_dialog.dart';
+import '../../widget/custom_text.dart';
 
 class Points extends StatelessWidget {
   final bool haveAppbar;
@@ -75,8 +76,10 @@ class Points extends StatelessWidget {
                     builder: (_qr) => InkWell(
                       onTap: () async {
                         await _qr.scanQR().whenComplete(() {
-                          _scanPlumberCouponQrProvider.qrCode.value = _qr.scanQrCode;
-                          _addPlumberCouponQrProvider.qrCode.value = _scanPlumberCouponQrProvider.qrCode.value;
+                          _scanPlumberCouponQrProvider.qrCode.value =
+                              _qr.scanQrCode;
+                          _addPlumberCouponQrProvider.qrCode.value =
+                              _scanPlumberCouponQrProvider.qrCode.value;
 
                           if (_scanPlumberCouponQrProvider
                               .qrCode.value.isEmpty) {
@@ -95,44 +98,49 @@ class Points extends StatelessWidget {
                                       alignment: Alignment.center,
                                       height: ScreenHelper.screenHeight(
                                           context, 180),
-                                      child: RadioListBuilder(laterPrice: _scanPlumberCouponQrProvider.later.value, nowPrice: _scanPlumberCouponQrProvider.now.value,),
+                                      child: RadioListBuilder(
+                                        laterPrice: _scanPlumberCouponQrProvider
+                                            .later.value,
+                                        nowPrice: _scanPlumberCouponQrProvider
+                                            .now.value,
+                                      ),
                                     ),
                                     buttonName: 'حفظ',
                                     onTapOk: () async {
                                       Get.back();
                                       await _addPlumberCouponQrProvider
                                           .addPlumberCouponQr()
-                                          .then((value) async{
+                                          .then((value) async {
                                         // Get.back();
                                         if (value.status == true) {
-                                          await _cobonesPlumberProvider.getCobones().whenComplete(() {
+                                          await _cobonesPlumberProvider
+                                              .getCobones()
+                                              .whenComplete(() {
                                             Get.dialog(
                                               OkDialog(
-                                                title: 'تم تسجيل كوبوناتك بنجاح',
+                                                title:
+                                                    'تم تسجيل كوبوناتك بنجاح',
                                                 image: 'assets/img/okicon.png',
-                                                body:
-                                                '${value.message}',
+                                                body: '${value.message}',
                                                 onTapOk: () {
                                                   Get.back();
                                                 },
                                               ),
                                             );
                                           });
-
                                         } else {
                                           Get.dialog(
                                             OkDialog(
                                               title: 'فشل اضافه النقاط',
                                               image: 'assets/img/okicon.png',
-                                              body:
-                                              '${value.message}',
+                                              body: '${value.message}',
                                               onTapOk: () {
                                                 Get.back();
                                               },
                                             ),
                                           );
-                                          print('ERRRRRRRR OR ADD POINTS ${value.status}');
-
+                                          print(
+                                              'ERRRRRRRR OR ADD POINTS ${value.status}');
                                         }
                                       });
                                     },
@@ -183,7 +191,6 @@ class Points extends StatelessWidget {
               builder: (controller) => Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
-
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -208,7 +215,6 @@ class Points extends StatelessWidget {
                         colorNum: ConstColors.ORANGE_COLOR,
                         pointNum: '${'${_cobonesPlumberProvider.nowCount}'}',
                         cpText: 'كوبون',
-
                       ),
                     ],
                   ),
@@ -223,7 +229,6 @@ class Points extends StatelessWidget {
                         colorNum: ConstColors.GREEN_COLOR,
                         pointNum: '${_cobonesPlumberProvider.laterValue}',
                         cpText: 'جنيه',
-
                       ),
                       Image.asset(
                         "assets/img/arrows.png",
@@ -277,14 +282,14 @@ class GiftWidget extends StatelessWidget {
   final String icon, pointNum, title, cpText;
   final colorNum;
 
-  const GiftWidget({
-    Key key,
-    @required this.icon,
-    this.pointNum,
-    this.title,
-    this.colorNum,
-    this.cpText
-  }) : super(key: key);
+  const GiftWidget(
+      {Key key,
+      @required this.icon,
+      this.pointNum,
+      this.title,
+      this.colorNum,
+      this.cpText})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

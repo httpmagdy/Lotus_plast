@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/getgifts_model.dart';
-import 'package:lotus/Bloc/repository/Gifts_Repo/get_gifts_repo.dart';
+
+import '../../models/getgifts_model.dart';
+import '../../repository/Gifts_Repo/get_gifts_repo.dart';
 
 class GetGiftsProvider extends GetxController {
-
   @override
   void onInit() {
     getGiftsProvider();
@@ -17,7 +17,6 @@ class GetGiftsProvider extends GetxController {
   GetGiftsRepo _getGiftsRepo = GetGiftsRepo();
 
   Future getGiftsProvider() async {
-
     status(true);
     listOfGifts.clear();
 
@@ -31,8 +30,6 @@ class GetGiftsProvider extends GetxController {
     }
 
     status(false);
-
-
 
     print('get Gifts Repo => statusCode : ${nuOfMaintenance}');
     print('addMaintenanceRepo => data : ${listOfGifts.length}');

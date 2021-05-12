@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Gifts_Controller/exchange_gift_provider.dart';
-import 'package:lotus/Bloc/Controllers/Gifts_Controller/get_gifts_provider.dart';
-import 'package:lotus/Bloc/models/getgifts_model.dart' as giftModel;
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
 
+import '../../../Bloc/Controllers/Gifts_Controller/exchange_gift_provider.dart';
+import '../../../Bloc/Controllers/Gifts_Controller/get_gifts_provider.dart';
+import '../../../Bloc/models/getgifts_model.dart' as giftModel;
+import '../../../helpers/screen_helper.dart';
 import '../../../utils/constants.dart';
-final ExchangeGiftProvider exchangeGiftProvider = Get.put(ExchangeGiftProvider());
+import '../../globalWidget/custom_loading.dart';
+import '../../globalWidget/custom_snack_bar.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_dialog.dart';
+import '../../widget/custom_text.dart';
+
+final ExchangeGiftProvider exchangeGiftProvider =
+    Get.put(ExchangeGiftProvider());
 
 class GiftsPage extends StatelessWidget {
   final GetGiftsProvider _getGiftsProvider = Get.put(GetGiftsProvider());
@@ -21,67 +23,69 @@ class GiftsPage extends StatelessWidget {
     return Scaffold(
       appBar: customAppBar(context: context, isHome: false),
       body: GetX<GetGiftsProvider>(
-        builder: (controller) => controller.status.value == true ? CustomLoading(bg: Colors.white) : Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(height: 30),
-            Container(
-              margin:
-                  const EdgeInsets.only(left: 15, right: 15, bottom: 20, top: 5),
-              padding:
-                  const EdgeInsets.only(left: 25, right: 10, bottom: 15, top: 15),
-              width: ScreenHelper.screenSize(context).width,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: ConstColors.WHITE,
-                // border: Border.all(width: 0.8, color: Colors.grey.shade300),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 8.0,
-                    spreadRadius: 0.4,
-                    offset: Offset(0.1, 2.4),
-                    color: Color(0xff575757).withOpacity(0.16),
-                  ),
-                ],
-              ),
-              child: Row(
+        builder: (controller) => controller.status.value == true
+            ? CustomLoading(bg: Colors.white)
+            : Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Image.asset(
-                    'assets/img/gifthome.png',
-                    width: ScreenHelper.screenWidth(context, 70),
-                    height: ScreenHelper.screenHeight(context, 70),
+                  SizedBox(height: 30),
+                  Container(
+                    margin: const EdgeInsets.only(
+                        left: 15, right: 15, bottom: 20, top: 5),
+                    padding: const EdgeInsets.only(
+                        left: 25, right: 10, bottom: 15, top: 15),
+                    width: ScreenHelper.screenSize(context).width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: ConstColors.WHITE,
+                      // border: Border.all(width: 0.8, color: Colors.grey.shade300),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 8.0,
+                          spreadRadius: 0.4,
+                          offset: Offset(0.1, 2.4),
+                          color: Color(0xff575757).withOpacity(0.16),
+                        ),
+                      ],
+                    ),
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          'assets/img/gifthome.png',
+                          width: ScreenHelper.screenWidth(context, 70),
+                          height: ScreenHelper.screenHeight(context, 70),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CustomText(
+                              text: 'عدد معايناتك',
+                              fontSize: 11,
+                            ),
+                            CustomText(
+                              text:
+                                  '${_getGiftsProvider.nuOfMaintenance}   معاينة ',
+                              fontSize: 12,
+                              fontW: FW.bold,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      CustomText(
-                        text: 'عدد معايناتك',
-                        fontSize: 11,
-                      ),
-                      CustomText(
-                        text: '${_getGiftsProvider.nuOfMaintenance}   معاينة ',
-                        fontSize: 12,
-                        fontW: FW.bold,
-                      ),
-                    ],
-                  ),
+                  Expanded(
+                    child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          return CardGi(_getGiftsProvider.listOfGifts[index]);
+                        },
+                        physics: BouncingScrollPhysics(),
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: 10,
+                            ),
+                        itemCount: _getGiftsProvider.listOfGifts.length),
+                  )
                 ],
               ),
-            ),
-            Expanded(
-              child: ListView.separated(
-                  itemBuilder: (context, index) {
-                    return CardGi(_getGiftsProvider.listOfGifts[index]);
-                  },
-                  physics: BouncingScrollPhysics(),
-                  separatorBuilder: (context, index) => SizedBox(
-                        height: 10,
-                      ),
-                  itemCount: _getGiftsProvider.listOfGifts.length),
-            )
-          ],
-        ),
       ),
     );
   }
@@ -171,7 +175,6 @@ class CardGi extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 10),
-
               FlatButton(
                 color: Colors.white,
                 shape: RoundedRectangleBorder(
@@ -181,32 +184,37 @@ class CardGi extends StatelessWidget {
                 onPressed: () {
                   print('n1 :: ${_getGiftsProvider.nuOfMaintenance.value}');
                   print('gift :: ${gift.number}');
-                  if(_getGiftsProvider.nuOfMaintenance.value < gift.number){
-                    customSnackBar(title: 'لايمكنك الحصول علي هذه المكافئه', body: "عدد معايناتك (${_getGiftsProvider.nuOfMaintenance.value}) اقل من هذه المكافئه ");
-                  }else{
-
+                  if (_getGiftsProvider.nuOfMaintenance.value < gift.number) {
+                    customSnackBar(
+                        title: 'لايمكنك الحصول علي هذه المكافئه',
+                        body:
+                            "عدد معايناتك (${_getGiftsProvider.nuOfMaintenance.value}) اقل من هذه المكافئه ");
+                  } else {
                     Get.dialog(
                       DialogPoint(
                         title: '  قم باختيار هديتك ',
                         child: Center(child: Radio(gift)),
-                        onTapOk: ()async {
-                          await exchangeGiftProvider.exchangeGift().then((value) {
+                        onTapOk: () async {
+                          await exchangeGiftProvider
+                              .exchangeGift()
+                              .then((value) {
                             Get.back();
-                            if(value.status == true){
-                                _getGiftsProvider.getGiftsProvider().whenComplete(() {
-                                  Get.dialog(
-                                    OkDialog(
-                                      title: ' تم اختيار هديتك بنجاح ',
-                                      body: 'سيتم التواصل معك في خلال 24 ساعه ',
-                                      image: 'assets/img/okicon.png',
-                                      onTapOk: () {
-                                        Get.back();
-                                      },
-                                    ),
-                                  );
-                                });
-
-                            }else{
+                            if (value.status == true) {
+                              _getGiftsProvider
+                                  .getGiftsProvider()
+                                  .whenComplete(() {
+                                Get.dialog(
+                                  OkDialog(
+                                    title: ' تم اختيار هديتك بنجاح ',
+                                    body: 'سيتم التواصل معك في خلال 24 ساعه ',
+                                    image: 'assets/img/okicon.png',
+                                    onTapOk: () {
+                                      Get.back();
+                                    },
+                                  ),
+                                );
+                              });
+                            } else {
                               Get.dialog(
                                 OkDialog(
                                   title: 'خطأ',
@@ -218,19 +226,11 @@ class CardGi extends StatelessWidget {
                                 ),
                               );
                             }
-
-
                           });
-
-
-
-
                         },
                       ),
                     );
                   }
-
-
                 },
                 child: CustomText(
                   text: 'صرف المكافئة',
@@ -247,7 +247,6 @@ class CardGi extends StatelessWidget {
 }
 
 class Radio extends StatefulWidget {
-
   final giftModel.Gift gift;
   Radio(this.gift);
 
@@ -278,12 +277,10 @@ class _RadioState extends State<Radio> {
           itemCount: widget.gift.images.length,
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () =>
-                  setState(() {
-                    _value = widget.gift.images[index].id;
-                  exchangeGiftProvider.imageId.value = _value;
-
-                  }),
+              onTap: () => setState(() {
+                _value = widget.gift.images[index].id;
+                exchangeGiftProvider.imageId.value = _value;
+              }),
               child: Container(
                 width: ScreenHelper.screenWidth(context, 60),
                 height: ScreenHelper.screenHeight(context, 60),

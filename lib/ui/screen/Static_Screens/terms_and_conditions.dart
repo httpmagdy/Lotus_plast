@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Terms_and_Conditions_provider.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
+
+import '../../../Bloc/Controllers/Terms_and_Conditions_provider.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../globalWidget/custom_loading.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_text.dart';
 
 class TermsAndConditionsScreen extends StatelessWidget {
-  final TermsAndConditionsProvider _provider = Get.put(TermsAndConditionsProvider());
+  final TermsAndConditionsProvider _provider =
+      Get.put(TermsAndConditionsProvider());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

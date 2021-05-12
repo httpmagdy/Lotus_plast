@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/screen/Plumber/gifts_page.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
+import '../screen/Plumber/gifts_page.dart';
 
 class GiftBox extends StatelessWidget {
   const GiftBox({
@@ -13,9 +13,9 @@ class GiftBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-   onTap: (){
-     Get.to(GiftsPage());
-   },
+      onTap: () {
+        Get.to(GiftsPage());
+      },
       child: Container(
         // margin: const EdgeInsets.only(left: 15, right: 15, bottom: 15, top: 15),
         // padding: const EdgeInsets.only(left: 25, right: 25, bottom: 25, top: 15),

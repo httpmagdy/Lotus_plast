@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/utils/constants.dart';
 
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
 import 'custom_text.dart';
+
 //
 class CustomButton extends StatelessWidget {
   double width;
@@ -66,7 +67,7 @@ class SimpleCustomButton extends StatelessWidget {
   final Function onTap;
   final bgColor;
   final textColor;
-  final bool outlineButton ;
+  final bool outlineButton;
   final Widget child;
   final fontSize;
 
@@ -90,19 +91,22 @@ class SimpleCustomButton extends StatelessWidget {
       child: RaisedButton(
         onPressed: onTap,
         elevation: 0.0,
-        child: child ?? CustomText(
-          text: text,
-          color: outlineButton ? bgColor : textColor ?? ConstColors.WHITE,
-          fontSize:fontSize ?? 14,
-          fontW: FW.bold,
-        ),
+        child: child ??
+            CustomText(
+              text: text,
+              color: outlineButton ? bgColor : textColor ?? ConstColors.WHITE,
+              fontSize: fontSize ?? 14,
+              fontW: FW.bold,
+            ),
         shape: RoundedRectangleBorder(
           side: BorderSide(color: bgColor, width: 2),
           borderRadius: BorderRadius.circular(
             ScreenHelper.screenRadius(context, 40),
           ),
         ),
-        color: outlineButton ? ConstColors.WHITE : bgColor ?? ConstColors.ORANGE_COLOR,
+        color: outlineButton
+            ? ConstColors.WHITE
+            : bgColor ?? ConstColors.ORANGE_COLOR,
         // highlightColor: Colors.black,
       ),
     );

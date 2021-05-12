@@ -1,12 +1,14 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
+import 'package:flutter/material.dart';
+
+import '../../utils/constants.dart';
+import '../widget/custom_text.dart';
 
 class CustomLoading extends StatefulWidget {
   final String loadingText;
   final Color bg;
-  CustomLoading({this.loadingText,this.bg});
+  CustomLoading({this.loadingText, this.bg});
 
   @override
   _CustomLoadingState createState() => _CustomLoadingState();
@@ -69,7 +71,7 @@ class _CustomLoadingState extends State<CustomLoading>
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-     onWillPop: (){},
+      onWillPop: () {},
       child: Scaffold(
         backgroundColor: widget.bg ?? Colors.black45,
         body: Center(
@@ -89,7 +91,7 @@ class _CustomLoadingState extends State<CustomLoading>
               ),
               SizedBox(height: 20),
               CustomText(
-                text:  '${widget.loadingText ?? 'جاري التحميل...'} ',
+                text: '${widget.loadingText ?? 'جاري التحميل...'} ',
                 fontW: FW.semibold,
                 fontSize: 12,
                 color: ConstColors.GREEN_COLOR,

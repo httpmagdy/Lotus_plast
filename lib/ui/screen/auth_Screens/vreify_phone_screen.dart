@@ -1,14 +1,16 @@
 import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Auth_Controllers/Phone_Verify_Provider/phone_auth_provider.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/header.dart';
-import 'package:lotus/utils/constants.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+
+import '../../../Bloc/Controllers/Auth_Controllers/Phone_Verify_Provider/phone_auth_provider.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/header.dart';
 
 class PhoneVerificationScreen extends StatefulWidget {
   final String phoneNumber;

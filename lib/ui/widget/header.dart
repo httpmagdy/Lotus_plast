@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
+
+import '../../helpers/screen_helper.dart';
 
 class Header extends StatelessWidget {
   @override

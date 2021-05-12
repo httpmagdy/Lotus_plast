@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/user_info.dart';
-import 'package:lotus/Bloc/repository/login_repo.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/screen/auth_Screens/vreify_phone_screen.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
+import '../../models/user_info.dart';
+import '../../repository/login_repo.dart';
+import '../../../ui/globalWidget/custom_loading.dart';
+import '../../../ui/screen/auth_Screens/vreify_phone_screen.dart';
+import '../../../ui/widget/custom_dialog.dart';
 import 'Phone_Verify_Provider/phone_auth_provider.dart';
 import 'auth_provider.dart';
 

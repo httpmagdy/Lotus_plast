@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/user_info.dart';
-import 'package:lotus/Bloc/repository/register_repo.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
+import '../../models/user_info.dart';
+import '../../repository/register_repo.dart';
+import '../../../ui/globalWidget/custom_loading.dart';
 import 'auth_provider.dart';
 
 class RegisterProvider extends GetxController {
@@ -25,7 +25,6 @@ class RegisterProvider extends GetxController {
   final RegisterRepo registerRepo = RegisterRepo();
 
   Future register() async {
-
     String dToken = await _authProvider.getDeviceToken();
 
     print('dToken In Register ::::: $dToken');
@@ -39,8 +38,7 @@ class RegisterProvider extends GetxController {
     print('${cityController.text}');
 
     if (!globalKeyRegister.currentState.validate()) {
-    } else{
-
+    } else {
       Get.dialog(
         CustomLoading(),
       );
@@ -61,16 +59,12 @@ class RegisterProvider extends GetxController {
       );
 
       if (dataResponse != null) {
-         // _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
+        // _authProvider.getUserType(dataResponse.typeUser, dataResponse.data.phoneVerify);
         _authProvider.saveUserInfoStorage(userInfo: dataResponse);
-
       }
 
       return dataResponse;
-
     }
-
-
   }
 
   @override

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
 import '../../Bloc/models/home_customer_tabs_model.dart';
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
+import '../widget/custom_appBar.dart';
+import '../widget/custom_text.dart';
 
 class DetailsMaintenance extends StatelessWidget {
   final Allprview data;
@@ -96,9 +97,9 @@ class DetailsMaintenance extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(
-                                    ConstColors.ORANGE_COLOR,
-                                  ),
-                                  strokeWidth: 2,
+                                ConstColors.ORANGE_COLOR,
+                              ),
+                              strokeWidth: 2,
                               value: loadingProgress.expectedTotalBytes != null
                                   ? loadingProgress.cumulativeBytesLoaded /
                                       loadingProgress.expectedTotalBytes

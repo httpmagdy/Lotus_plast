@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Auth_Controllers/register.dart';
-import 'package:lotus/Bloc/Controllers/get_status.dart';
-import 'package:lotus/helpers/screen_helper.dart';
 
+import '../../Bloc/Controllers/Auth_Controllers/register.dart';
+import '../../Bloc/Controllers/get_status.dart';
+import '../../helpers/screen_helper.dart';
 import 'custom_text_field.dart';
 import 'states_dialog.dart';
 

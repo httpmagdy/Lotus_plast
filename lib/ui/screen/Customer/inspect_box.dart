@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/row_icon_text.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/row_icon_text.dart';
+import '../../widget/custom_text.dart';
 
 class InspectBox extends StatelessWidget {
   final onTap;
@@ -50,7 +51,7 @@ class InspectBox extends StatelessWidget {
             ),
             Padding(
               padding:
-              EdgeInsets.only(right: ScreenHelper.screenWidth(context, 65)),
+                  EdgeInsets.only(right: ScreenHelper.screenWidth(context, 65)),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -103,7 +104,7 @@ class InspectBox extends StatelessWidget {
             ),
             Padding(
               padding:
-              EdgeInsets.only(top: ScreenHelper.screenHeight(context, 20)),
+                  EdgeInsets.only(top: ScreenHelper.screenHeight(context, 20)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

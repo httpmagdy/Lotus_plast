@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class OnBoardingModel {
   int id;
   String image;

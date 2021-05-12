@@ -1,10 +1,9 @@
-import 'package:lotus/Bloc/models/user_info.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../Services/api_key.dart';
+import '../../Services/network_services.dart';
+import '../models/user_info.dart';
 
 class RegisterRepo extends NetworkService {
   Future registerRepo(RegisterModel register) async {
-
     var _request = await post(url: ApiKey.registerURL, body: {
       'name': register.name,
       'phone': register.phone,
@@ -19,15 +18,12 @@ class RegisterRepo extends NetworkService {
     print('REGISTER => statusCode : ${_request.statusCode}');
     print('REGISTER => statusCode : ${_request.data}');
 
-
-    if(_request.statusCode >= 200 && _request.statusCode < 300){
+    if (_request.statusCode >= 200 && _request.statusCode < 300) {
       return UserInfo.fromJson(_request.data);
-    }else{
+    } else {
       print('Register Error ...');
       return null;
     }
-
-
   }
 }
 
@@ -37,8 +33,8 @@ class RegisterModel {
       password,
       stateId,
       cityId,
-      identificationNumber, deviceToken;
-
+      identificationNumber,
+      deviceToken;
 
   int typeUser;
 
@@ -51,6 +47,5 @@ class RegisterModel {
     this.identificationNumber,
     this.typeUser,
     this.deviceToken,
-
   });
 }

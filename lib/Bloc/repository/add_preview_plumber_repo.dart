@@ -1,15 +1,9 @@
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../Services/api_key.dart';
+import '../../Services/network_services.dart';
 
 class PreviewPlumberRepo extends NetworkService {
-  Future addPreviewPlumberRepo({
-    lat,
-    lon,
-    address,
-    name,
-    phone,
-    pulmberPhone2
-  }) async {
+  Future addPreviewPlumberRepo(
+      {lat, lon, address, name, phone, pulmberPhone2}) async {
     var _request = await post(
       url: ApiKey.addPlumberPreview,
       hasHeader: true,
@@ -23,7 +17,7 @@ class PreviewPlumberRepo extends NetworkService {
       },
     );
 
-    print( 'ADD Preview Plumber Repo ========> statusCode : ${_request.statusCode} ::::::::::::::');
-
+    print(
+        'ADD Preview Plumber Repo ========> statusCode : ${_request.statusCode} ::::::::::::::');
   }
 }

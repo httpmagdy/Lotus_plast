@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/privacy_controller.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
+
+import '../../../../Bloc/Controllers/privacy_controller.dart';
+import '../../../../helpers/screen_helper.dart';
+import '../../../globalWidget/custom_loading.dart';
+import '../../../widget/custom_appBar.dart';
+import '../../../widget/custom_text.dart';
 
 class PlivacyScreen extends StatelessWidget {
   final PrivacyProvider _privacyProvider = Get.put(PrivacyProvider());

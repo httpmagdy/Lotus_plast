@@ -1,7 +1,8 @@
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/cobones.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
+import '../../models/cobones.dart';
 
 // AddMaintenanceProvider
 
@@ -23,7 +24,7 @@ class CobonesPlumberProvider extends GetxController {
 
   Future getCobones() async {
     var _request =
-    await _networkService.get(url: ApiKey.cobonesURL, hasHeader: true);
+        await _networkService.get(url: ApiKey.cobonesURL, hasHeader: true);
 
     print('cobones ==== Status Code :::: ${_request.statusCode} ');
 
@@ -36,7 +37,6 @@ class CobonesPlumberProvider extends GetxController {
       laterValue.value = _cobonessData.data.laterValue;
       nowCount.value = _cobonessData.data.nowCount;
       nowValue.value = _cobonessData.data.nowValue;
-
     } finally {
       // print(' finally data :::: ${allDamageTypes.length}  ${allDamageTypes} ');
     }

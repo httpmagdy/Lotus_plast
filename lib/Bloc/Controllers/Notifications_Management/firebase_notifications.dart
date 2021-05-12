@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
-import 'package:lotus/ui/screen/Notification/notification_screen.dart';
-import 'dart:io';
-import '../Inspector/home_inspector_provider.dart';
-import 'notifications_page_provider.dart';
+
+import '../../../ui/screen/Notification/notification_screen.dart';
 import 'local_notifications_provider.dart';
+import 'notifications_page_provider.dart';
 
 // Future<dynamic> myBackgroundMessageHandler( message) {
 //
@@ -56,10 +57,7 @@ import 'local_notifications_provider.dart';
 //
 // }
 
-
-
-
-class PushNotificationManger extends GetxController{
+class PushNotificationManger extends GetxController {
   // single tone
   // PushNotificationManger._();
   // factory PushNotificationManger() => _instance;
@@ -73,8 +71,8 @@ class PushNotificationManger extends GetxController{
   // }
 
   // final HomeInspectorProvider _homeInspectorProvider = Get.put(HomeInspectorProvider());
-  final NotificationsPageProvider _notificationsPageProvider = Get.put(NotificationsPageProvider());
-
+  final NotificationsPageProvider _notificationsPageProvider =
+      Get.put(NotificationsPageProvider());
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -86,15 +84,15 @@ class PushNotificationManger extends GetxController{
     }
 
     _firebaseMessaging.configure(
-
       onMessage: (Map<String, dynamic> message) async {
         // If APP Is Opend.
-      showNotification(body: "${message["data"]["body"]}", title: "${message["data"]["title"]} ");
+        showNotification(
+            body: "${message["data"]["body"]}",
+            title: "${message["data"]["title"]} ");
 
         print("DATA :::::::: DOWN");
 
         print('onMessage ==== ? ${message}');
-
       },
       onResume: (Map<String, dynamic> message) async {
         print('onResume =============================');
@@ -104,26 +102,21 @@ class PushNotificationManger extends GetxController{
         print('onResume =============================');
 
         _notificationsPageProvider.fetchNotifications();
-          Get.to(NotificationScreen());
+        Get.to(NotificationScreen());
 
         print('onResume =============================');
         print('onResume =============================');
-
-
       },
       // onBackgroundMessage: myBackgroundMessageHandler,
 
-
-     onLaunch: (Map<String, dynamic> message) async {
-     //   showNotification(body: "اشعار جديد", title: "onLaunch");
+      onLaunch: (Map<String, dynamic> message) async {
+        //   showNotification(body: "اشعار جديد", title: "onLaunch");
         print('onLaunch ===--------------=============');
         print('onLaunch ==== ? $message');
 
         _notificationsPageProvider.fetchNotifications();
         Get.to(NotificationScreen());
-
-     },
-
+      },
     );
     // _firebaseMessaging.requestNotificationPermissions(const IosNotificationSettings(sound: true, badge: true, alert: true));
     // _firebaseMessaging.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
@@ -146,5 +139,3 @@ class PushNotificationManger extends GetxController{
   //   }
   // }
 }
-
-

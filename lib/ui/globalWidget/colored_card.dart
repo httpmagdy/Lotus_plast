@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/row_icon_text.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
+import '../widget/custom_text.dart';
+import 'row_icon_text.dart';
 
 class ColordCard extends StatelessWidget {
   final bgColor;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/utils/constants.dart';
 
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
 import 'custom_text.dart';
 
 class CircleButton extends StatelessWidget {
@@ -26,7 +26,12 @@ class CircleButton extends StatelessWidget {
             Radius.circular(ScreenHelper.screenWidth(context, 30)),
           ),
         ),
-        child: Center(child: CustomText(text: 'دخول',fontW: FW.semibold, color: ConstColors.WHITE,)),
+        child: Center(
+            child: CustomText(
+          text: 'دخول',
+          fontW: FW.semibold,
+          color: ConstColors.WHITE,
+        )),
         // child: Icon(
         //   Icons.arrow_forward,
         //   color: Colors.white,

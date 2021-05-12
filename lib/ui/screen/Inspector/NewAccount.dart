@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/create_plumber_account_provider.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/screen/Plumber/get_user_code_screen.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../Bloc/Controllers/Inspector/create_plumber_account_provider.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/custom_loading.dart';
+import '../../globalWidget/custom_snack_bar.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_dialog.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field.dart';
+import '../Plumber/get_user_code_screen.dart';
 
 class NewAccount extends StatelessWidget {
-
   final CreatePlumberAccountProvider _accountProvider =
-    Get.put(  CreatePlumberAccountProvider());
+      Get.put(CreatePlumberAccountProvider());
   final GlobalKey<FormState> desKey = GlobalKey<FormState>();
 
   @override
@@ -55,28 +55,26 @@ class NewAccount extends StatelessWidget {
                 SizedBox(height: ScreenHelper.screenHeight(context, 30)),
                 SimpleCustomButton(
                   width: ScreenHelper.screenSize(context).width,
-                  onTap: () async{
-
+                  onTap: () async {
                     if (!desKey.currentState.validate()) {
-                    }else{
+                    } else {
                       desKey.currentState.save();
 
                       Get.dialog(
                         CustomLoading(loadingText: 'جار انشاء حساب جديد...'),
                       );
 
-
-                      await _accountProvider.createPlumberAccount().then((value) {
+                      await _accountProvider
+                          .createPlumberAccount()
+                          .then((value) {
                         Get.back();
                         Get.back();
-                        if(value.status){
-
-
+                        if (value.status) {
                           Get.to(GetUserCodeScreen(value));
-                          customSnackBar(title: "حساب جديد", body: "تم انشاء حساب سباك جديد");
-
-
-                        }else{
+                          customSnackBar(
+                              title: "حساب جديد",
+                              body: "تم انشاء حساب سباك جديد");
+                        } else {
                           Get.dialog(
                             OkDialog(
                               title: ' خطأ ',
@@ -88,12 +86,8 @@ class NewAccount extends StatelessWidget {
                             ),
                           );
                         }
-
                       });
-
                     }
-
-
                   },
                   text: 'حفظ',
                   bgColor: ConstColors.GREEN_COLOR,

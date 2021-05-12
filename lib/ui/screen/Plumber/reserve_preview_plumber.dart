@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:lotus/Bloc/Controllers/Maps_Controller/geolocator_u.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/add_preview_plumber_provider.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/home_provider_plumber.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/globalWidget/row_icon_text.dart';
-import 'package:lotus/ui/screen/Maps_Screens/get_u_location.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/utils/constants.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../../../Bloc/Controllers/Maps_Controller/geolocator_u.dart';
+import '../../../Bloc/Controllers/Plumber/add_preview_plumber_provider.dart';
+import '../../../Bloc/Controllers/Plumber/home_provider_plumber.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/custom_loading.dart';
+import '../../globalWidget/custom_snack_bar.dart';
+import '../../globalWidget/row_icon_text.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_dialog.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field.dart';
+import '../Maps_Screens/get_u_location.dart';
 
 class ReservePreviewPlumber extends StatefulWidget {
   @override
@@ -237,7 +238,7 @@ class _ReservePreviewPlumberState extends State<ReservePreviewPlumber> {
                     bgColor: ConstColors.GREEN_COLOR,
                     text: 'ارسل المعاينه',
                     width: ScreenHelper.screenSize(context).width,
-                    onTap: () async{
+                    onTap: () async {
                       if (!globalKeyPreview.currentState.validate()) {
                         print('NOT validate');
                       } else {
@@ -252,11 +253,15 @@ class _ReservePreviewPlumberState extends State<ReservePreviewPlumber> {
                           Get.dialog(
                             CustomLoading(loadingText: 'جار ارسال المعاينه...'),
                           );
-                          await _addPreviewProvider.addPreview(
+                          await _addPreviewProvider
+                              .addPreview(
                             lat: _dataPosition.latitude,
                             lon: _dataPosition.longitude,
-                          ).whenComplete(() {
-                            _homeCategoryPlumberProvider.homePlumberProvider().whenComplete(() {
+                          )
+                              .whenComplete(() {
+                            _homeCategoryPlumberProvider
+                                .homePlumberProvider()
+                                .whenComplete(() {
                               Get.back();
                               Get.back();
 
@@ -270,11 +275,8 @@ class _ReservePreviewPlumberState extends State<ReservePreviewPlumber> {
                                   },
                                 ),
                               );
-
                             });
                           });
-
-
                         }
                       }
                     },

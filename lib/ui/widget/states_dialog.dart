@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
 
+import '../../helpers/screen_helper.dart';
+import 'custom_button.dart';
 import 'custom_text.dart';
 
 class StatesDialog extends StatefulWidget {
@@ -15,7 +14,6 @@ class StatesDialog extends StatefulWidget {
   _StatesDialogState createState() => _StatesDialogState();
 }
 
-
 class _StatesDialogState extends State<StatesDialog> {
   bool state = false;
   int _currentIndex = 0;
@@ -26,11 +24,9 @@ class _StatesDialogState extends State<StatesDialog> {
     return Material(
       color: Colors.white,
       borderRadius: BorderRadius.circular(15),
-
       child: SizedBox(
         width: ScreenHelper.screenSize(context).width * .8,
         height: ScreenHelper.screenSize(context).height * .7,
-
         child: Column(
           children: [
             SizedBox(
@@ -41,7 +37,7 @@ class _StatesDialogState extends State<StatesDialog> {
                 // print(widget.states[0].title);
               },
               child: CustomText(
-               text: widget.title,
+                text: widget.title,
                 fontSize: ScreenHelper.screenFont(context, 20.0),
               ),
             ),
@@ -50,37 +46,37 @@ class _StatesDialogState extends State<StatesDialog> {
             ),
             Expanded(
                 child: Material(
-                  color: Colors.transparent,
-                  child: ListView(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    // children: widget.statesCities
-                    children: widget.states
-                        .map((state) => RadioListTile(
-                              activeColor: Colors.green,
-                              groupValue: _currentIndex,
-                              title: Text(
-                                state.name,
-                                textDirection: TextDirection.rtl,
-                                style: Theme.of(context).textTheme.caption.copyWith(
-                                      fontSize:
-                                          ScreenHelper.screenFont(context, 15),
-                                      fontFamily: 'sst',
-                                    ),
-                              ),
-                              value: state.id,
-                              onChanged: (val) {
-                                print('VALLLLLL ::::: $val');
-                                setState(() {
-                                  _currentIndex = val;
-                                  returnIndex = widget.states
-                                      .indexWhere((element) => element.id == val);
-                                });
-                              },
-                            ))
-                        .toList(),
-                  ),
-                )),
+              color: Colors.transparent,
+              child: ListView(
+                shrinkWrap: true,
+                physics: BouncingScrollPhysics(),
+                // children: widget.statesCities
+                children: widget.states
+                    .map((state) => RadioListTile(
+                          activeColor: Colors.green,
+                          groupValue: _currentIndex,
+                          title: Text(
+                            state.name,
+                            textDirection: TextDirection.rtl,
+                            style: Theme.of(context).textTheme.caption.copyWith(
+                                  fontSize:
+                                      ScreenHelper.screenFont(context, 15),
+                                  fontFamily: 'sst',
+                                ),
+                          ),
+                          value: state.id,
+                          onChanged: (val) {
+                            print('VALLLLLL ::::: $val');
+                            setState(() {
+                              _currentIndex = val;
+                              returnIndex = widget.states
+                                  .indexWhere((element) => element.id == val);
+                            });
+                          },
+                        ))
+                    .toList(),
+              ),
+            )),
             Padding(
               padding: EdgeInsets.only(
                   bottom: ScreenHelper.screenHeight(context, 20),

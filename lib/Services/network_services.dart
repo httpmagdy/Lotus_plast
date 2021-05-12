@@ -1,11 +1,13 @@
 import 'dart:io';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' as getX;
 import 'package:get_storage/get_storage.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/utils/internete_connectivty.dart';
+
+import '../ui/widget/custom_dialog.dart';
+import '../utils/internete_connectivty.dart';
 import 'api_key.dart';
 
 class NetworkService {

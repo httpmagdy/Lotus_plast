@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/ui/widget/header.dart';
-import 'package:lotus/utils/constants.dart';
+
 import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
 import '../../widget/custom_button.dart';
-import './signup_screen.dart';
+import '../../widget/header.dart';
 import 'login_screen.dart';
+import 'signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   @override
@@ -49,15 +50,15 @@ class WelcomeScreen extends StatelessWidget {
               right: ScreenHelper.screenWidth(context, 30),
             ),
             child: Align(
-                alignment: Alignment.bottomCenter,
-                child: SimpleCustomButton(
-                  bgColor: ConstColors.GREEN_COLOR,
-                  onTap: () {
-                    Get.to(LoginScreen(), transition: Transition.leftToRight);
-                  },
-                  width: ScreenHelper.screenSize(context).width,
-                  text: "تسجيل الدخول",
-                ),
+              alignment: Alignment.bottomCenter,
+              child: SimpleCustomButton(
+                bgColor: ConstColors.GREEN_COLOR,
+                onTap: () {
+                  Get.to(LoginScreen(), transition: Transition.leftToRight);
+                },
+                width: ScreenHelper.screenSize(context).width,
+                text: "تسجيل الدخول",
+              ),
             ),
           ),
           Padding(

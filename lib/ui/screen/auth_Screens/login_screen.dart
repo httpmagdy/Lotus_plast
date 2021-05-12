@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Auth_Controllers/login.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/circle_button.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../Bloc/Controllers/Auth_Controllers/login.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../widget/circle_button.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field.dart';
 import '../../widget/header.dart';
 import 'Forget_Password/forget_password_scren.dart';
 import 'signup_screen.dart';

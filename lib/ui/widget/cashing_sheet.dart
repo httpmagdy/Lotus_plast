@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/cobones_plumber_provider.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/when_exchange_coupons.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/utils/constants.dart';
 
+import '../../Bloc/Controllers/Plumber/cobones_plumber_provider.dart';
+import '../../Bloc/Controllers/Plumber/when_exchange_coupons.dart';
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
 import 'custom_button.dart';
 import 'custom_dialog.dart';
 import 'custom_text.dart';
@@ -32,9 +32,8 @@ class _CashingSheetState extends State<CashingSheet> {
   WhenExchangeCouponsProvider _whenExchangeCouponsProvider =
       Get.put(WhenExchangeCouponsProvider());
 
-
   final CobonesPlumberProvider _cobonesPlumberProvider =
-  Get.put(CobonesPlumberProvider());
+      Get.put(CobonesPlumberProvider());
   bool passwordSecure = false;
   String selectError = "محفظه الكترونيه";
 
@@ -203,10 +202,12 @@ class _CashingSheetState extends State<CashingSheet> {
                     Get.back();
                     await _whenExchangeCouponsProvider
                         .exchangeCoupons()
-                        .then((value) async{
+                        .then((value) async {
                       print(' :::::::::::::::::::::::::::::: ${value.status}');
                       if (value.status) {
-                        await  _cobonesPlumberProvider.getCobones().whenComplete(() {
+                        await _cobonesPlumberProvider
+                            .getCobones()
+                            .whenComplete(() {
                           Get.dialog(OkDialog(
                             title: 'تم صرف النقاط بنجاح',
                             image: 'assets/img/okicon.png',
@@ -216,7 +217,6 @@ class _CashingSheetState extends State<CashingSheet> {
                             },
                           ));
                         });
-
                       } else if (value.status == false) {
                         Get.dialog(OkDialog(
                           title: 'فشل صرف النقاط',

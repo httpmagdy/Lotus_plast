@@ -1,8 +1,10 @@
 import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/repository/maintenance_repo.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
+
+import '../../../ui/globalWidget/custom_snack_bar.dart';
+import '../../repository/maintenance_repo.dart';
 
 class AddMaintenanceProvider extends GetxController {
   @override

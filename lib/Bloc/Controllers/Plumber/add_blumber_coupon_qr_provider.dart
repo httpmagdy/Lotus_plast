@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Bloc/repository/add_blumber_coupon_qr_repo.dart';
+
+import '../../models/message_model.dart';
+import '../../repository/add_blumber_coupon_qr_repo.dart';
 
 class AddPlumberCouponQrProvider extends GetxController {
-
   RxString qrCode = ''.obs;
   RxInt statusId = 0.obs;
 
@@ -22,5 +22,4 @@ class AddPlumberCouponQrProvider extends GetxController {
 
     return Message(status: data.status, message: data.message);
   }
-
 }

@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:connectivity/connectivity.dart';
 import 'package:get/get.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
+
+import '../ui/widget/custom_dialog.dart';
 
 class NWConnectivty extends GetxController {
   StreamSubscription subscription;

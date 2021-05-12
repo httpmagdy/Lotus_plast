@@ -1,11 +1,9 @@
-
-
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/sliderAddsModel.dart';
-import 'package:lotus/Bloc/repository/slider_adds_repo.dart';
 
-class SliderAddsController extends GetxController{
+import '../models/sliderAddsModel.dart';
+import '../repository/slider_adds_repo.dart';
 
+class SliderAddsController extends GetxController {
   var sliderElement = List<SliderElement>().obs;
 
   @override
@@ -16,12 +14,9 @@ class SliderAddsController extends GetxController{
 
   SliderAddsRepo _sliderAddsRepo = SliderAddsRepo();
 
-  Future fetchSliderAdds()async {
-
-
-
+  Future fetchSliderAdds() async {
     try {
-      SliderAddsM  _response = await _sliderAddsRepo.sliderRepo();
+      SliderAddsM _response = await _sliderAddsRepo.sliderRepo();
 
       for (var item in _response.slider) {
         sliderElement.add(item);
@@ -32,8 +27,6 @@ class SliderAddsController extends GetxController{
     } finally {
       // print(' finally data :::: ${sliderElement.length}  ${sliderElement} ');
     }
-   // print("sdddddddddddddddddddddddddddddddddddd  ${sliderElement.length}");
-
+    // print("sdddddddddddddddddddddddddddddddddddd  ${sliderElement.length}");
   }
-
 }

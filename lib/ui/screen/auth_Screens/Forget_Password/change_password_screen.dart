@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Forget_Password/create_new_pass_provider.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/ui/widget/header.dart';
-import 'package:lotus/utils/constants.dart';
 
+import '../../../../Bloc/Controllers/Forget_Password/create_new_pass_provider.dart';
+import '../../../../helpers/screen_helper.dart';
+import '../../../../utils/constants.dart';
+import '../../../widget/custom_button.dart';
+import '../../../widget/custom_dialog.dart';
+import '../../../widget/custom_text.dart';
+import '../../../widget/custom_text_field.dart';
+import '../../../widget/header.dart';
 import '../login_screen.dart';
 import '../welcome_screen.dart';
 
@@ -134,7 +134,6 @@ class ChangePasswordScreen extends StatelessWidget {
                         body: "يمكنك الان تجربه تسجيل الدخول",
                         image: "${value.message}",
                         buttonName: "تسجيل الدخول",
-
                         onTapOk: () {
                           Get.back();
                         },

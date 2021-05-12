@@ -1,21 +1,23 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lotus/Bloc/Controllers/AddMaintenance/add_maintenance.dart';
-import 'package:lotus/Bloc/Controllers/AddMaintenance/damage_types.dart';
-import 'package:lotus/Bloc/Controllers/Customer/home_provider_customer.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/home_provider_plumber.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../Bloc/Controllers/AddMaintenance/add_maintenance.dart';
+import '../../../Bloc/Controllers/AddMaintenance/damage_types.dart';
+import '../../../Bloc/Controllers/Customer/home_provider_customer.dart';
+import '../../../Bloc/Controllers/Plumber/home_provider_plumber.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/custom_loading.dart';
+import '../../globalWidget/custom_snack_bar.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_dialog.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field.dart';
 
 class ReportDamage extends StatefulWidget {
   final bool haveAppbar;
@@ -55,7 +57,6 @@ class _ReportDamageState extends State<ReportDamage> {
         print('No image selected.');
       }
     });
-
   }
 
   @override
@@ -183,7 +184,7 @@ class _ReportDamageState extends State<ReportDamage> {
                           left: ScreenHelper.screenWidth(context, 12),
                           child: InkWell(
                             onTap: getImage,
-                            child:  _addMaintenanceProvider.image == null
+                            child: _addMaintenanceProvider.image == null
                                 ? Icon(
                                     Icons.camera_alt_outlined,
                                     size:
@@ -191,7 +192,8 @@ class _ReportDamageState extends State<ReportDamage> {
                                             0.060,
                                     color: ConstColors.FORM_COLOR,
                                   )
-                                : SelectedCameraImage(image:  _addMaintenanceProvider.image),
+                                : SelectedCameraImage(
+                                    image: _addMaintenanceProvider.image),
                           ),
                         ),
                       ],
@@ -219,15 +221,15 @@ class _ReportDamageState extends State<ReportDamage> {
                           body: 'من فضلك اختر نوع العطل',
                         );
                       } else {
-
                         Get.dialog(
-                          CustomLoading(loadingText: 'جار ارسال طلب الصيانه...'),
+                          CustomLoading(
+                              loadingText: 'جار ارسال طلب الصيانه...'),
                         );
 
                         await _addMaintenanceProvider
                             .addMaintenance()
                             .whenComplete(
-                              () async {
+                          () async {
                             if (typeUser == 0) {
                               await _homeCategoryPlumberProvider
                                   .homePlumberProvider();
@@ -251,11 +253,7 @@ class _ReportDamageState extends State<ReportDamage> {
                             );
                           },
                         );
-
                       }
-
-
-
                     }
                   },
                   // outlineButton: true,

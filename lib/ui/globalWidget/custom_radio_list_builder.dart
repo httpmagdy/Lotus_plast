@@ -1,10 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Plumber/add_blumber_coupon_qr_provider.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../Bloc/Controllers/Plumber/add_blumber_coupon_qr_provider.dart';
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
+import '../widget/custom_text.dart';
 
 class RadioModel {
   final String title, subTitle;
@@ -14,9 +14,8 @@ class RadioModel {
 }
 
 class RadioListBuilder extends StatefulWidget {
-
   final int nowPrice, laterPrice;
-  RadioListBuilder({@required this.nowPrice,@required this.laterPrice});
+  RadioListBuilder({@required this.nowPrice, @required this.laterPrice});
 
   @override
   RadioListBuilderState createState() {
@@ -26,14 +25,20 @@ class RadioListBuilder extends StatefulWidget {
 
 class RadioListBuilderState extends State<RadioListBuilder> {
   final AddPlumberCouponQrProvider _addPlumberCouponQrProvider =
-  Get.put(AddPlumberCouponQrProvider());
+      Get.put(AddPlumberCouponQrProvider());
   int value;
 
   @override
   Widget build(BuildContext context) {
     List<RadioModel> radioData = [
-      RadioModel(title: 'الصرف الحالي', subTitle: 'سعر النقطة ${widget.nowPrice} ج.م', id: 0),
-      RadioModel(title: 'النقاط المعلقة', subTitle: 'سعر النقطة ${widget.laterPrice} ج.م', id: 1),
+      RadioModel(
+          title: 'الصرف الحالي',
+          subTitle: 'سعر النقطة ${widget.nowPrice} ج.م',
+          id: 0),
+      RadioModel(
+          title: 'النقاط المعلقة',
+          subTitle: 'سعر النقطة ${widget.laterPrice} ج.م',
+          id: 1),
     ];
     return ListView.builder(
       itemBuilder: (context, index) {
@@ -46,7 +51,8 @@ class RadioListBuilderState extends State<RadioListBuilder> {
               value = id;
               print('ind :::::  $id');
               _addPlumberCouponQrProvider.statusId.value = id;
-              print('statusId === :::::  ${_addPlumberCouponQrProvider.statusId.value}');
+              print(
+                  'statusId === :::::  ${_addPlumberCouponQrProvider.statusId.value}');
             });
           },
           title: CustomText(

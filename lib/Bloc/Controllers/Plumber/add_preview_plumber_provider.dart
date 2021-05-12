@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/repository/add_preview_plumber_repo.dart';
 
+import '../../repository/add_preview_plumber_repo.dart';
 
 class AddPreviewPlumberProvider extends GetxController {
   // var allDamageTypes = List<Datum>();

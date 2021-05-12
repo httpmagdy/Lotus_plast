@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:lotus/Bloc/Controllers/Maps_Controller/geolocator_u.dart';
 
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+import '../../../Bloc/Controllers/Maps_Controller/geolocator_u.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_text.dart';
 
 class GetUserLocation extends StatelessWidget {
   final Completer<GoogleMapController> _controller = Completer();
@@ -34,7 +34,8 @@ class GetUserLocation extends StatelessWidget {
         builder: (_getUserPosition) => GoogleMap(
           mapType: MapType.hybrid,
           initialCameraPosition: CameraPosition(
-            target:  LatLng(_getUserPosition.latitude, _getUserPosition.longitude),
+            target:
+                LatLng(_getUserPosition.latitude, _getUserPosition.longitude),
             zoom: 19.151926040649414,
           ),
           onMapCreated: (GoogleMapController controller) {
@@ -75,8 +76,7 @@ class GetUserLocation extends StatelessWidget {
 class MapDialog extends StatelessWidget {
   final GetUserPosition _getUserPosition = Get.find();
 
-
-final currentAddress;
+  final currentAddress;
 
   MapDialog(this.currentAddress);
 
@@ -104,25 +104,20 @@ final currentAddress;
               margin: EdgeInsets.only(top: 13, bottom: 20),
               width: 60,
               height: 3.8,
-                decoration: BoxDecoration(
-                    color: ConstColors.GREY_COLOR.withOpacity(.2),
-
-                  borderRadius: BorderRadius.circular(50)
-
-                ),
+              decoration: BoxDecoration(
+                  color: ConstColors.GREY_COLOR.withOpacity(.2),
+                  borderRadius: BorderRadius.circular(50)),
             ),
             CustomText(
-              text: 'عنوانك',fontSize: 16,
+              text: 'عنوانك',
+              fontSize: 16,
               fontW: FW.bold,
-              padding: const EdgeInsets.only( bottom: 10),
-
+              padding: const EdgeInsets.only(bottom: 10),
             ),
-
             CustomText(
               text: '$currentAddress',
               // textAlign: TextAlign.start,
             ),
-
             Spacer(),
             SimpleCustomButton(
               outlineButton: true,
@@ -130,16 +125,13 @@ final currentAddress;
               bgColor: ConstColors.GREEN_COLOR,
               width: ScreenHelper.screenSize(context).width,
               onTap: () {
+                if (_getUserPosition.currentAddress == "") {
+                } else {
+                  Get.back();
+                  Get.back();
+                }
 
-
-               if( _getUserPosition.currentAddress == "" ){
-
-               }else {
-                 Get.back();
-                 Get.back();
-               }
-
-             // await  _getUserPosition.saveAddress();
+                // await  _getUserPosition.saveAddress();
                 // // await  _getUserPosition.determinePosition();
                 // print('LLLLOCAAAATHON :::: ${_getUserPosition.currentAddress}');
                 // Get.to(GetUserLocation());
@@ -148,8 +140,6 @@ final currentAddress;
                 // Get.back();
               },
             ),
-
-
           ],
         ),
       ),

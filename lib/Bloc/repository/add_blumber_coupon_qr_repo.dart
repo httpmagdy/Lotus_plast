@@ -1,14 +1,12 @@
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../models/message_model.dart';
+import '../../Services/api_key.dart';
+import '../../Services/network_services.dart';
 
 class AddPlumberCouponQrRepo extends NetworkService {
-
   Future<Message> addCouponQrRepo({
     qrCode,
     status,
   }) async {
-
     var _request = await post(
       url: ApiKey.addPlumberCouponQrURL,
       hasHeader: true,
@@ -27,7 +25,4 @@ class AddPlumberCouponQrRepo extends NetworkService {
 
     return Message.fromJson(_request.data);
   }
-
 }
-
-

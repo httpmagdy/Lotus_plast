@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/home_customer_tabs_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../models/home_customer_tabs_model.dart';
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
 
 class HomeCategoryCustomerProvider extends GetxController {
   var allDamage = List<Allprview>().obs;
@@ -17,7 +17,7 @@ class HomeCategoryCustomerProvider extends GetxController {
     super.onInit();
   }
 
-  getPreviewById(id){
+  getPreviewById(id) {
     Allprview to = allPreview?.firstWhere((e) => e.id == id);
 
     print("TTTTTTo :::: $to");

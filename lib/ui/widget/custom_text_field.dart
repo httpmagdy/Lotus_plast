@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../helpers/screen_helper.dart';
 // Dart Packages
 // Flutter packages
 // Screens
@@ -8,7 +10,6 @@ import 'package:flutter/material.dart';
 // Models
 // Helpers
 import '../../utils/constants.dart';
-import '../../helpers/screen_helper.dart';
 
 class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
@@ -37,33 +38,33 @@ class CustomTextField extends StatefulWidget {
   final double horizentalPadding;
   final colorFocused;
 
-  CustomTextField(
-      {this.onComplete,
-        this.onSuffixTap,
-        this.onTap,
-        this.isTitle = true,
-        this.validator = null,
-        this.shortCondition = 0,
-        this.shortMessage = "",
-        this.keyboardType = TextInputType.text,
-        this.suffixText,
-        this.isSecure = false,
-        this.enabled = true,
-        this.controller,
-        this.errorMessage,
-        this.hint = " ",
-        this.label,
-        this.question = "",
-        this.suffixIcon = null,
-        this.backColor = Colors.transparent,
-        this.suffixIconImage,
-        this.prefixIcon = null,
-        this.maxLines = 1,
-        this.horizentalPadding = 15.0,
-        this.verticalPadding = 0.0,
-        this.colorFocused,
-        this.validPhoneMessage,
-      });
+  CustomTextField({
+    this.onComplete,
+    this.onSuffixTap,
+    this.onTap,
+    this.isTitle = true,
+    this.validator = null,
+    this.shortCondition = 0,
+    this.shortMessage = "",
+    this.keyboardType = TextInputType.text,
+    this.suffixText,
+    this.isSecure = false,
+    this.enabled = true,
+    this.controller,
+    this.errorMessage,
+    this.hint = " ",
+    this.label,
+    this.question = "",
+    this.suffixIcon = null,
+    this.backColor = Colors.transparent,
+    this.suffixIconImage,
+    this.prefixIcon = null,
+    this.maxLines = 1,
+    this.horizentalPadding = 15.0,
+    this.verticalPadding = 0.0,
+    this.colorFocused,
+    this.validPhoneMessage,
+  });
 
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -94,31 +95,31 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      autovalidateMode:AutovalidateMode.onUserInteraction,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       maxLines: widget.maxLines,
       onEditingComplete: widget.onComplete,
       onTap: widget.onTap,
       keyboardType: widget.keyboardType,
       focusNode: focusNode,
       style: Theme.of(context).textTheme.subtitle2.copyWith(
-        color: ConstColors.TEXT_GREY2,
-        fontSize: ScreenHelper.screenFont(context, 17.0),
-      ),
+            color: ConstColors.TEXT_GREY2,
+            fontSize: ScreenHelper.screenFont(context, 17.0),
+          ),
       controller: widget.controller,
       obscureText: widget.isSecure,
       enabled: widget.enabled,
       validator: widget.validator != null
           ? widget.validator
           : (value) {
-        if (value.isEmpty) return widget.errorMessage;
-        if (value.length < widget.shortCondition)
-          return widget.shortMessage;
-        if (value.length != widget.shortCondition)
-          return widget.validPhoneMessage;
-        if (value[0] != "0" || value[1] != "1")
-          return widget.validPhoneMessage;
-        return null;
-      },
+              if (value.isEmpty) return widget.errorMessage;
+              if (value.length < widget.shortCondition)
+                return widget.shortMessage;
+              if (value.length != widget.shortCondition)
+                return widget.validPhoneMessage;
+              if (value[0] != "0" || value[1] != "1")
+                return widget.validPhoneMessage;
+              return null;
+            },
       textDirection: TextDirection.rtl,
       textAlign: TextAlign.right,
       cursorColor: widget.colorFocused ?? ConstColors.ORANGE_COLOR,
@@ -127,20 +128,20 @@ class _CustomTextFieldState extends State<CustomTextField> {
         fillColor: widget.backColor,
         suffixText: widget.suffixText,
         suffixStyle: Theme.of(context).textTheme.subtitle2.copyWith(
-          color: ConstColors.MAIN_COLOR,
-          fontSize: ScreenHelper.screenFont(context, 17.0),
-        ),
+              color: ConstColors.MAIN_COLOR,
+              fontSize: ScreenHelper.screenFont(context, 17.0),
+            ),
         prefixIcon: widget.prefixIcon != null
             ? Padding(
-          padding: const EdgeInsets.only(right: 15, left: 10),
-          child: Image(
-            image: AssetImage(widget.prefixIcon),
-            width: ScreenHelper.screenWidth(context, 18),
-            color: isFocus || widget.controller.text.isNotEmpty
-                ? ConstColors.ORANGE_COLOR
-                : ConstColors.FORM_COLOR,
-          ),
-        )
+                padding: const EdgeInsets.only(right: 15, left: 10),
+                child: Image(
+                  image: AssetImage(widget.prefixIcon),
+                  width: ScreenHelper.screenWidth(context, 18),
+                  color: isFocus || widget.controller.text.isNotEmpty
+                      ? ConstColors.ORANGE_COLOR
+                      : ConstColors.FORM_COLOR,
+                ),
+              )
             : null,
         prefixIconConstraints: BoxConstraints(
             maxWidth: ScreenHelper.screenWidth(context, 40),
@@ -148,29 +149,28 @@ class _CustomTextFieldState extends State<CustomTextField> {
         suffixIcon: widget.suffixIcon == null
             ? null
             : IconButton(
-            onPressed: widget.onSuffixTap,
-            icon: Icon(
-              widget.suffixIcon,
-              color: isFocus || widget.controller.text.isNotEmpty
-                  ? ConstColors.ORANGE_COLOR
-                  : ConstColors.FORM_COLOR,
-              size: ScreenHelper.screenWidth(context, 20.0),
-            )),
+                onPressed: widget.onSuffixTap,
+                icon: Icon(
+                  widget.suffixIcon,
+                  color: isFocus || widget.controller.text.isNotEmpty
+                      ? ConstColors.ORANGE_COLOR
+                      : ConstColors.FORM_COLOR,
+                  size: ScreenHelper.screenWidth(context, 20.0),
+                )),
         contentPadding: EdgeInsets.symmetric(
             vertical: ScreenHelper.screenWidth(context, widget.verticalPadding),
             horizontal:
-            ScreenHelper.screenWidth(context, widget.horizentalPadding)),
+                ScreenHelper.screenWidth(context, widget.horizentalPadding)),
         hintText: "${widget.hint}",
 //                labelText: "${widget.label}",
         hintStyle: Theme.of(context).textTheme.subtitle2.copyWith(
-            fontSize: ScreenHelper.screenFont(context,14.0),
-            color: ConstColors.TEXT_GREY2,
-
-        ),
+              fontSize: ScreenHelper.screenFont(context, 14.0),
+              color: ConstColors.TEXT_GREY2,
+            ),
         labelStyle: Theme.of(context).textTheme.caption.copyWith(
-          // color: Colors.black,
-          fontSize: ScreenHelper.screenFont(context, 14.0),
-        ),
+              // color: Colors.black,
+              fontSize: ScreenHelper.screenFont(context, 14.0),
+            ),
         errorStyle: Theme.of(context).textTheme.subtitle2.copyWith(
             fontSize: ScreenHelper.screenFont(context, 11.0),
             color: Colors.red),
@@ -183,30 +183,30 @@ class _CustomTextFieldState extends State<CustomTextField> {
             //style: BorderStyle.solid,
           ),
         ),
-        disabledBorder:  OutlineInputBorder(
+        disabledBorder: OutlineInputBorder(
           borderRadius:
-          BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
+              BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
           borderSide: BorderSide(
               color: ConstColors.FORM_COLOR,
               width: ScreenHelper.screenWidth(context, 1)),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius:
-          BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
+              BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
           borderSide: BorderSide(
               color: ConstColors.FORM_COLOR,
               width: ScreenHelper.screenWidth(context, 1)),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius:
-          BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
+              BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
           borderSide: BorderSide(
-              color:widget.colorFocused ??  ConstColors.ORANGE_COLOR,
+              color: widget.colorFocused ?? ConstColors.ORANGE_COLOR,
               width: ScreenHelper.screenWidth(context, 1)),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius:
-          BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
+              BorderRadius.circular(ScreenHelper.screenRadius(context, 28.0)),
           borderSide: BorderSide(
               color: Colors.red, width: ScreenHelper.screenWidth(context, 1)),
         ),

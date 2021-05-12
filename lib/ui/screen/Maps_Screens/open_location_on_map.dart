@@ -3,12 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:lotus/Bloc/Controllers/Maps_Controller/geolocator_u.dart';
 
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+import '../../../Bloc/Controllers/Maps_Controller/geolocator_u.dart';
 
 class OpenLocationOnMsp extends StatefulWidget {
   // GetUserPosition _getUserPosition = Get.find();

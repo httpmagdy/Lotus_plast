@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/notification_page_model.dart';
+
+import '../../models/notification_page_model.dart';
 import '../../repository/notification_page_repo.dart';
 
 class NotificationsPageProvider extends GetxController {
-
   @override
   void onInit() {
     fetchNotifications();
@@ -17,7 +17,7 @@ class NotificationsPageProvider extends GetxController {
 
   NotificationsPageRepo repo = NotificationsPageRepo();
 
- Future<void> fetchNotifications() async {
+  Future<void> fetchNotifications() async {
     loading(true);
     try {
       myNotifications.clear();
@@ -26,36 +26,27 @@ class NotificationsPageProvider extends GetxController {
 
       status.value = data?.status;
 
-      if(data.status == false){
-
+      if (data.status == false) {
         print("NO Notifications ::::::::::::::::::::: ${data.status}");
         // myNotifications.clear();
         loading(false);
-
-      }else{
+      } else {
         print("Have Notifications ::::::::::::::::::::: ${data.status}");
 
         // print("data:::: ${data.notifications[0].data.data.title}");
         // myNotifications.clear();
 
-        for(var item in data.notifications){
-
+        for (var item in data.notifications) {
           myNotifications.add(item);
-
         }
-
       }
-
 
       loading(false);
 
       print(" status :::: $status");
-
     } catch (e) {
       print('Fetch Notifications == (ERROR) ==> $e');
     }
-
-
   }
 
   @override
@@ -63,5 +54,4 @@ class NotificationsPageProvider extends GetxController {
     myNotifications.clear();
     super.onClose();
   }
-
 }

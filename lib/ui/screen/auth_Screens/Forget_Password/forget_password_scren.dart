@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Forget_Password/Verify_Password_provider.dart';
-import 'package:lotus/Bloc/Controllers/Forget_Password/check_phone_provider.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_snack_bar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/ui/widget/header.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../../Bloc/Controllers/Forget_Password/Verify_Password_provider.dart';
+import '../../../../Bloc/Controllers/Forget_Password/check_phone_provider.dart';
+import '../../../../helpers/screen_helper.dart';
+import '../../../../utils/constants.dart';
+import '../../../globalWidget/custom_snack_bar.dart';
+import '../../../widget/custom_button.dart';
+import '../../../widget/custom_text.dart';
+import '../../../widget/custom_text_field.dart';
+import '../../../widget/header.dart';
 
 class ForgrtPasswordScreen extends StatefulWidget {
   @override

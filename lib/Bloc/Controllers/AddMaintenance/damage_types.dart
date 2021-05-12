@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
 import '../../models/damage_types_model.dart';
 
 // AddMaintenanceProvider
@@ -31,7 +32,6 @@ class DamageTypesProvider extends GetxController {
         allDamageTypes.add(item);
         // update();
       }
-
     } finally {
       print(' finally data :::: ${allDamageTypes.length}  ${allDamageTypes} ');
     }

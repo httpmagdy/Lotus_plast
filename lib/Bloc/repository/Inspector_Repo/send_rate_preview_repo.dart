@@ -1,9 +1,8 @@
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
+import '../../models/message_model.dart';
 
 class SendRatePreviewRepo extends NetworkService {
-
   Future<Message> sendRateRepo({
     rate,
     previewId,
@@ -18,7 +17,5 @@ class SendRatePreviewRepo extends NetworkService {
     );
 
     return Message.fromJson(_request.data);
-
   }
-
 }

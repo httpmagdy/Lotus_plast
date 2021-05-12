@@ -1,9 +1,10 @@
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/home_inspector_model.dart';
-import 'package:lotus/Bloc/repository/Inspector_Repo/home_inspector_repo.dart';
+
+import '../../models/home_inspector_model.dart';
+import '../../repository/Inspector_Repo/home_inspector_repo.dart';
 
 class HomeInspectorProvider extends GetxController {
-  HomeInspectorRepo  _homeInspectorRepo= HomeInspectorRepo();
+  HomeInspectorRepo _homeInspectorRepo = HomeInspectorRepo();
   var stillPreviews = List<Complete>().obs;
   var completePreview = List<Complete>().obs;
 
@@ -18,15 +19,14 @@ class HomeInspectorProvider extends GetxController {
   getInspectById(id) {
     Complete to = stillPreviews?.firstWhere((e) => e.id == id);
 
-   print("TTTTTTo :::: $to");
+    print("TTTTTTo :::: $to");
 
-   // return to;
+    // return to;
     return to;
   }
 
   Future homeInspector() async {
     try {
-
       completePreview.clear();
       stillPreviews.clear();
       // homeLoading(true);
@@ -40,7 +40,6 @@ class HomeInspectorProvider extends GetxController {
       for (var item in _response.complete) {
         completePreview.add(item);
       }
-
     } finally {
       homeLoading(false);
 

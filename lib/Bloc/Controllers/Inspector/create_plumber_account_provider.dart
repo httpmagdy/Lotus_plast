@@ -1,34 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/get_plumber_account_model.dart';
 
-import 'package:lotus/Bloc/repository/Inspector_Repo/create_plumber_account_Repo.dart';
+import '../../models/get_plumber_account_model.dart';
+import '../../repository/Inspector_Repo/create_plumber_account_Repo.dart';
 
 class CreatePlumberAccountProvider extends GetxController {
-
   TextEditingController nameController;
   TextEditingController phoneController;
-
 
   CreatePlumberAccountRepo _repo = CreatePlumberAccountRepo();
 
   Future<GePlumberAccountModel> createPlumberAccount() async {
-    try{
-
+    try {
       GePlumberAccountModel _data = await _repo.createAccountRepo(
-
         name: nameController.text,
         phone: phoneController.text,
-
       );
       return _data;
-
-    }catch(e){
+    } catch (e) {
       throw e;
     }
-
   }
-
 
   @override
   void onInit() {
@@ -43,6 +35,4 @@ class CreatePlumberAccountProvider extends GetxController {
     phoneController.dispose();
     super.dispose();
   }
-
-
 }

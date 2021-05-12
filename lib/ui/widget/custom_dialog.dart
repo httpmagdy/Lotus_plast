@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:lotus/helpers/screen_helper.dart';
 import 'package:get/get.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
 import 'custom_button.dart';
 import 'custom_text.dart';
 
@@ -123,11 +122,13 @@ class DialogPoint extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // SizedBox(height: ScreenHelper.screenHeight(context, 10)),
-              title!= null?   CustomText(
-                text: title ?? '',
-                fontSize: 20,
-                fontW: FW.bold,
-              ):Container(),
+              title != null
+                  ? CustomText(
+                      text: title ?? '',
+                      fontSize: 20,
+                      fontW: FW.bold,
+                    )
+                  : Container(),
 
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
@@ -136,7 +137,6 @@ class DialogPoint extends StatelessWidget {
 
               SimpleCustomButton(
                 width: ScreenHelper.screenWidth(context, buttonWidth ?? 160),
-
                 bgColor: buttonColor ?? ConstColors.ORANGE_COLOR,
                 text: buttonName ?? 'موافق',
                 onTap: onTapOk,
@@ -208,4 +208,3 @@ class OkDialog extends StatelessWidget {
     );
   }
 }
-

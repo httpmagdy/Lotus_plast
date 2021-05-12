@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/utils/constants.dart';
 
+import '../../helpers/screen_helper.dart';
+import '../../utils/constants.dart';
 import 'custom_text.dart';
 
 class CardMenu extends StatelessWidget {

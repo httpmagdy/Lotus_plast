@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/home_inspector_provider.dart';
-import 'package:lotus/Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
-import 'package:lotus/Bloc/Controllers/slider_adds_controller.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/NoSomethingYet.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/screen/Drawer/drawer_screen/drawer_screen.dart';
-import 'package:lotus/ui/screen/Inspector/ReportPreview_inspector.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/slider_adds.dart';
-import 'package:lotus/utils/constants.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+
+import '../../../Bloc/Controllers/Inspector/home_inspector_provider.dart';
+import '../../../Bloc/Controllers/Notifications_Management/notifications_page_provider.dart';
+import '../../../Bloc/Controllers/slider_adds_controller.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/NoSomethingYet.dart';
+import '../../globalWidget/custom_loading.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/slider_adds.dart';
+import '../Drawer/drawer_screen/drawer_screen.dart';
+import 'ReportPreview_inspector.dart';
 import 'card_inspector.dart';
 import 'details_inspector_preview.dart';
 
@@ -29,7 +30,7 @@ class _HomeInspectorState extends State<HomeInspector>
   final HomeInspectorProvider home = Get.put(HomeInspectorProvider());
 
   final NotificationsPageProvider _notificationsPage =
-  Get.put(NotificationsPageProvider());
+      Get.put(NotificationsPageProvider());
 
   final List<Widget> myTabs = [
     Tab(
@@ -82,7 +83,6 @@ class _HomeInspectorState extends State<HomeInspector>
           // init: HomeInspectorProvider(),
           // initState: (state) => HomeCategoryCustomerProvider().homeCustomerProvider(),
           builder: (controller) {
-
         return controller.homeLoading.value
             ? CustomLoading(bg: ConstColors.WHITE)
             : RefreshIndicator(

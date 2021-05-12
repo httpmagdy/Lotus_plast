@@ -1,13 +1,12 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lotus/ui/screen/auth_Screens/welcome_screen.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
+
 import '../../helpers/screen_helper.dart';
 import '../../utils/constants.dart';
+import '../screen/auth_Screens/welcome_screen.dart';
+import '../widget/custom_text.dart';
 import 'onboarding_item.dart';
 import 'onboarding_model.dart';
 
@@ -51,7 +50,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
               index: i,
             ),
           ),
-
           Padding(
             padding: EdgeInsets.symmetric(
                 vertical: ScreenHelper.screenHeight(context, 30),

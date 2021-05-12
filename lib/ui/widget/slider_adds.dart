@@ -1,7 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:lotus/Bloc/models/sliderAddsModel.dart';
-import 'package:lotus/helpers/screen_helper.dart';
+
+import '../../Bloc/models/sliderAddsModel.dart';
+import '../../helpers/screen_helper.dart';
 
 class SliderAdds extends StatelessWidget {
   final double height;

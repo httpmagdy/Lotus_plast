@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/scan_Coupon_Qr_Provider.dart';
-import 'package:lotus/Bloc/Controllers/qr_provider.dart';
-import 'package:lotus/Bloc/models/get_plumber_account_model.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_radio_list_builder.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../Bloc/Controllers/Inspector/scan_Coupon_Qr_Provider.dart';
+import '../../../Bloc/Controllers/qr_provider.dart';
+import '../../../Bloc/models/get_plumber_account_model.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_dialog.dart';
+import '../../widget/custom_text.dart';
 
 class GetUserCodeScreen extends StatelessWidget {
   final GePlumberAccountModel data;

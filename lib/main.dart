@@ -2,19 +2,19 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+import 'Bloc/Controllers/Notifications_Management/firebase_notifications.dart';
+import 'Bloc/Controllers/Notifications_Management/local_notifications_provider.dart';
 import 'ui/onboarding/onboarding_screen.dart';
 import 'ui/screen/Customer/home_customer.dart';
 import 'ui/screen/Inspector/home_inspector.dart';
 import 'ui/screen/Plumber/home_screen.dart';
-import 'ui/screen/auth_Screens/Forget_Password/forget_password_scren.dart';
 import 'ui/screen/auth_Screens/welcome_screen.dart';
-import 'Bloc/Controllers/Notifications_Management/firebase_notifications.dart';
-import 'Bloc/Controllers/Notifications_Management/local_notifications_provider.dart';
 import 'utils/constants.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

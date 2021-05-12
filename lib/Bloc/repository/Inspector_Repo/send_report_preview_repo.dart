@@ -1,12 +1,12 @@
-import 'package:get_storage/get_storage.dart';
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
-
-import 'package:http/http.dart' as http;
 import 'package:async/async.dart';
-import 'package:path/path.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
+import 'package:path/path.dart';
+
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
+import '../../models/message_model.dart';
 
 class SendReportPreviewInspectorRepo extends NetworkService {
   Future<Message> sendReportPreview({

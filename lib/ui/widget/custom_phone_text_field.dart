@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../helpers/screen_helper.dart';
 // Dart Packages
 // Flutter packages
 // Screens
@@ -8,7 +10,6 @@ import 'package:flutter/material.dart';
 // Models
 // Helpers
 import '../../utils/constants.dart';
-import '../../helpers/screen_helper.dart';
 
 class CustomPhoneTextField extends StatefulWidget {
   final TextEditingController controller;

@@ -1,9 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/repository/add_preview_repo.dart';
-import 'package:lotus/Bloc/repository/maintenance_repo.dart';
 
-import '../Maps_Controller/geolocator_u.dart';
+import '../../repository/add_preview_repo.dart';
 
 // GetUserPosition getUserPosition = GetUserPosition();
 
@@ -26,7 +24,6 @@ class AddPreviewProvider extends GetxController {
   }
 
   final PreviewRepo _previewRepo = PreviewRepo();
-
 
   //  saveAddress(){
   //    addressController.text = _currentAddress;

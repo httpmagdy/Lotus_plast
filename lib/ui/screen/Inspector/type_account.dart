@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/Controllers/Inspector/get_plumber_by_code.dart';
-import 'package:lotus/helpers/screen_helper.dart';
-import 'package:lotus/ui/globalWidget/custom_loading.dart';
-import 'package:lotus/ui/screen/Inspector/NewAccount.dart';
-import 'package:lotus/ui/screen/Plumber/get_user_code_screen.dart';
-import 'package:lotus/ui/widget/custom_appBar.dart';
-import 'package:lotus/ui/widget/custom_button.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
-import 'package:lotus/ui/widget/custom_text.dart';
-import 'package:lotus/ui/widget/custom_text_field.dart';
-import 'package:lotus/utils/constants.dart';
+
+import '../../../Bloc/Controllers/Inspector/get_plumber_by_code.dart';
+import '../../../helpers/screen_helper.dart';
+import '../../../utils/constants.dart';
+import '../../globalWidget/custom_loading.dart';
+import '../../widget/custom_appBar.dart';
+import '../../widget/custom_button.dart';
+import '../../widget/custom_dialog.dart';
+import '../../widget/custom_text.dart';
+import '../../widget/custom_text_field.dart';
+import '../Plumber/get_user_code_screen.dart';
+import 'NewAccount.dart';
 
 class TypeAccount extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +41,6 @@ class TypeAccount extends StatelessWidget {
               outlineButton: true,
               onTap: () {
                 Get.dialog(NewAccount());
-
               },
               text: 'جديد',
               bgColor: ConstColors.GREEN_COLOR,
@@ -55,16 +53,15 @@ class TypeAccount extends StatelessWidget {
   }
 }
 
-
 class DialogCodeUser extends StatelessWidget {
- final GetPlumberByCodeProvider _getPlumberByCodeProvider =Get.put(GetPlumberByCodeProvider());
- final GlobalKey<FormState> desKey = GlobalKey<FormState>();
+  final GetPlumberByCodeProvider _getPlumberByCodeProvider =
+      Get.put(GetPlumberByCodeProvider());
+  final GlobalKey<FormState> desKey = GlobalKey<FormState>();
 
-
- @override
+  @override
   Widget build(BuildContext context) {
     return DialogPoint(
-      buttonWidth: ScreenHelper.screenWidth(context, 230 ),
+      buttonWidth: ScreenHelper.screenWidth(context, 230),
       buttonName: 'حفظ',
       buttonColor: ConstColors.GREEN_COLOR,
       height: ScreenHelper.screenSize(context).height * .7,
@@ -98,38 +95,34 @@ class DialogCodeUser extends StatelessWidget {
           SizedBox(height: ScreenHelper.screenHeight(context, 30)),
         ],
       ),
-      onTapOk: ()async {
+      onTapOk: () async {
         if (!desKey.currentState.validate()) {
-        }else{
+        } else {
           desKey.currentState.save();
 
           Get.dialog(
             CustomLoading(loadingText: 'جار اتمام المعاينه...'),
           );
 
-
           await _getPlumberByCodeProvider.plumberByCode().then((value) {
             Get.back();
             Get.back();
-              if(value.status){
-                Get.to(GetUserCodeScreen(value));
-              }else{
-                Get.dialog(
-                  OkDialog(
-                    title: ' خطأ ',
-                    image: 'assets/img/okicon.png',
-                    body: '${value.message}',
-                    onTapOk: () {
-                      Get.back();
-                    },
-                  ),
-                );
-              }
-
+            if (value.status) {
+              Get.to(GetUserCodeScreen(value));
+            } else {
+              Get.dialog(
+                OkDialog(
+                  title: ' خطأ ',
+                  image: 'assets/img/okicon.png',
+                  body: '${value.message}',
+                  onTapOk: () {
+                    Get.back();
+                  },
+                ),
+              );
+            }
           });
-
         }
-
       },
     );
   }

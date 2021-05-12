@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:lotus/Bloc/repository/when_exchange_coupons_repo.dart';
-import 'package:lotus/ui/widget/custom_dialog.dart';
+
+import '../../repository/when_exchange_coupons_repo.dart';
 
 class WhenExchangeCouponsProvider extends GetxController {
   TextEditingController priceController;

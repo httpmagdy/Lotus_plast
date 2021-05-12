@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lotus/helpers/screen_helper.dart';
 import 'package:get/get.dart';
-import 'package:lotus/ui/screen/Notification/notification_screen.dart';
+
+import '../../helpers/screen_helper.dart';
+import '../screen/Notification/notification_screen.dart';
 
 AppBar customAppBar({
   // String title,

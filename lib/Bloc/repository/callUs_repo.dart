@@ -1,12 +1,9 @@
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+import '../../Services/api_key.dart';
+import '../../Services/network_services.dart';
 
-class CallUSRepo extends NetworkService{
-
-  Future<MessageCallUS> callUsRepo({name, phone, message}) async{
-
-    var _request = await post(url: ApiKey.callusURL,hasHeader: true, body: {
+class CallUSRepo extends NetworkService {
+  Future<MessageCallUS> callUsRepo({name, phone, message}) async {
+    var _request = await post(url: ApiKey.callusURL, hasHeader: true, body: {
       'name': name,
       'phone': phone,
       'message': message,
@@ -16,22 +13,17 @@ class CallUSRepo extends NetworkService{
     print('LOGIN => statusCode : ${_request.data}');
 
     return MessageCallUS.fromJson(_request.data);
-
-
   }
 }
 
-
-class MessageCallUS{
+class MessageCallUS {
   final int status;
   final String message;
 
   MessageCallUS({this.status, this.message});
 
-
   factory MessageCallUS.fromJson(Map<String, dynamic> json) => MessageCallUS(
-    status: json["status"] == null ? null : json["status"],
-    message: json["message"] == null ? null : json["message"],
-  );
-
+        status: json["status"] == null ? null : json["status"],
+        message: json["message"] == null ? null : json["message"],
+      );
 }

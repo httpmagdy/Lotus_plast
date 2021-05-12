@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:lotus/Bloc/models/message_model.dart';
-import 'package:lotus/Bloc/repository/Inspector_Repo/scan_Coupon_Qr_Repo.dart';
+
+import '../../models/message_model.dart';
+import '../../repository/Inspector_Repo/scan_Coupon_Qr_Repo.dart';
 
 class ScanQrInspectorProvider extends GetxController {
-
   // RxString qrCode = ''.obs;
   // RxInt type = 0.obs;
   // RxInt id = 0.obs;
@@ -14,7 +14,6 @@ class ScanQrInspectorProvider extends GetxController {
   ScanQrInspectorRepo _repo = ScanQrInspectorRepo();
 
   Future<Message> scanQrInspector(qrCode) async {
-
     final idUser = _box.read("idUser");
 
     try {

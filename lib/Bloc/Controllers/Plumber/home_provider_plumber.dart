@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lotus/Bloc/models/home_customer_tabs_model.dart';
-import 'package:lotus/Services/api_key.dart';
-import 'package:lotus/Services/network_services.dart';
+
+import '../../../Services/api_key.dart';
+import '../../../Services/network_services.dart';
+import '../../models/home_customer_tabs_model.dart';
 
 class HomeCategoryPlumberProvider extends GetxController {
   var allDamage = List<Allprview>().obs;
@@ -16,7 +16,7 @@ class HomeCategoryPlumberProvider extends GetxController {
     super.onInit();
   }
 
-  getPreviewById(id){
+  getPreviewById(id) {
     Allprview to = allPreview?.firstWhere((e) => e.id == id);
 
     print("TTTTTTo :::: $to");
@@ -42,7 +42,8 @@ class HomeCategoryPlumberProvider extends GetxController {
       // $2y$10$qGzKlYOXqwyC7sfKAYxUf.EYJjfLI2bvsigMht.lhA3GlzEL7SVJ.
 
       print('(((((((((((((_request)))))))))) {$_request}');
-      print(' (((((((((((((_request)))))))))) { Status Code :::: ${_request.statusCode} ');
+      print(
+          ' (((((((((((((_request)))))))))) { Status Code :::: ${_request.statusCode} ');
 
       final _statusData = HomeCustomerModel.fromJson(_request.data);
       for (var item in _statusData.alldamages) {
