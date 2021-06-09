@@ -20,7 +20,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   final PageController _pageController = PageController(initialPage: 0);
 
-  GetStorage box = GetStorage("onBoarding");
+  final GetStorage box = GetStorage();
 
   @override
   void dispose() {
@@ -60,8 +60,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () {
-                      box.write("onBoarding", true);
+                    onTap: () async{
+                     await box.write("onBoarding", true);
+                     var d = box.read('onBoarding');
+                     print("::::::onBoarding::::::::::::::: $d");
                       Get.offAll(WelcomeScreen());
                     },
                     child: Text(
@@ -71,7 +73,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
+                    onTap: ()async {
                       if (_currentPage < 3) {
                         _pageController.animateToPage(
                           _currentPage + 1,
@@ -79,7 +81,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           curve: Curves.easeIn,
                         );
                       } else {
-                        box.write("onBoarding", true);
+                        await box.write("onBoarding", true);
+                        var d = box.read('onBoarding');
+                        print("::::::onBoarding::::::::::::::: $d");
                         Get.offAll(WelcomeScreen());
                       }
                     },

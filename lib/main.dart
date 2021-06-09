@@ -16,14 +16,13 @@ import 'ui/screen/Plumber/home_screen.dart';
 import 'ui/screen/auth_Screens/welcome_screen.dart';
 import 'utils/constants.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   await Firebase.initializeApp();
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
       );
-  await GetStorage.init();
-
   await app();
   runApp(MyApp());
 }
@@ -31,12 +30,16 @@ void main() async {
 var homeScreen;
 
 Future app() async {
-  GetStorage box = GetStorage("onBoarding");
-  GetStorage logged = GetStorage();
+ final GetStorage box = GetStorage();
+final  GetStorage logged = GetStorage();
   var _seen = await box.read("onBoarding");
   var _logged = await logged.read("typeUser");
   var _isVerify = await logged.read("phoneVerify");
 
+  print("Sen On Boarding :: $_seen");
+  print("Sen On Boarding :: $_seen");
+  print("Sen On Boarding :: $_seen");
+  print("Sen On Boarding :: $_seen");
   print("Sen On Boarding :: $_seen");
   print("Is Logged :::: typeUser :::: $_logged");
 
