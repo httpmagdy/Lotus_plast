@@ -1,5 +1,5 @@
 class ApiKey {
-  static const String baseURL = 'https://lotus2.crazyideaco.com/api/';
+  static const String baseURL = 'https://lotusplastapp.com/api/';
   static const String loginURL = 'login';
   static const String registerURL = 'register';
   static const String statesURL = 'states';

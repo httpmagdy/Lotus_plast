@@ -10,7 +10,7 @@ class NotificationsPageProvider extends GetxController {
     super.onInit();
   }
 
-  RxBool loading = true.obs;
+  RxBool loading = false.obs;
 
   var myNotifications = List<Notification>().obs;
   RxBool status = true.obs;

@@ -22,17 +22,17 @@ void main() async {
   await FlutterDownloader.initialize(
       debug: true // optional: set false to disable printing logs to console
       );
-  GetStorage box = GetStorage("onBoarding");
-  GetStorage logged = GetStorage();
-
   await GetStorage.init();
-  app(box, logged);
+
+  await app();
   runApp(MyApp());
 }
 
 var homeScreen;
 
-app(box, logged) async {
+Future app() async {
+  GetStorage box = GetStorage("onBoarding");
+  GetStorage logged = GetStorage();
   var _seen = await box.read("onBoarding");
   var _logged = await logged.read("typeUser");
   var _isVerify = await logged.read("phoneVerify");

@@ -49,6 +49,7 @@ dependencies:
 #  flare_flutter:
   path_provider:
   flutter_downloader:
+  ffi: ^1.0.0
 
 dev_dependencies:
   flutter_native_splash:
