@@ -14,8 +14,9 @@ AppBar customAppBar({
   // bool customBackButton = false,
 }) {
   return AppBar(
-    elevation: 6,
-    toolbarHeight: ScreenHelper.screenHeight(context, 70),
+    elevation: 5,
+    shadowColor: Colors.grey.shade100,
+    toolbarHeight: ScreenHelper.screenHeight(context, 60),
     leading: Center(
       child: Builder(
         builder: (context) => GestureDetector(
@@ -41,8 +42,8 @@ AppBar customAppBar({
 
     title: Image.asset(
       "assets/img/logo.png",
-      height: ScreenHelper.screenHeight(context, 50),
-      width: ScreenHelper.screenWidth(context, 50),
+      height: ScreenHelper.screenHeight(context, 42),
+      width: ScreenHelper.screenWidth(context, 42),
     ),
     actions: [
       Padding(

@@ -62,7 +62,7 @@ class DialogCodeUser extends StatelessWidget {
   Widget build(BuildContext context) {
     return DialogPoint(
       buttonWidth: ScreenHelper.screenWidth(context, 230),
-      buttonName: 'حفظ',
+      buttonName: 'تحقق',
       buttonColor: ConstColors.GREEN_COLOR,
       height: ScreenHelper.screenSize(context).height * .7,
       child: Column(
@@ -101,7 +101,7 @@ class DialogCodeUser extends StatelessWidget {
           desKey.currentState.save();
 
           Get.dialog(
-            CustomLoading(loadingText: 'جار اتمام المعاينه...'),
+            CustomLoading(loadingText: 'جار التحقق من الحساب...'),
           );
 
           await _getPlumberByCodeProvider.plumberByCode().then((value) {

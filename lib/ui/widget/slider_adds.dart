@@ -35,7 +35,7 @@ class SliderAdds extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(6),
           child: Image.network(
-            slider[index].image,
+            slider[index]?.image,
 // height: 60,
             fit: BoxFit.cover,
           ),

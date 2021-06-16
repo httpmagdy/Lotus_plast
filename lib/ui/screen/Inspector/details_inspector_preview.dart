@@ -52,7 +52,7 @@ class DetailsInspectorPreview extends StatelessWidget {
                 children: [
                   RowTextAndText(
                     title: 'اسم السباك',
-                    name: '${data.pulmberPhone}',
+                    name: '${data.pulmberName}',
                   ),
                   data.isRating
                       ? RatingBarWidget(
